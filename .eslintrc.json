@@ -1,0 +1,16 @@
+{
+    "parser": "babel-eslint",
+    "plugins": ["react"],
+    "extends": ["airbnb", "airbnb/hooks"],
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
+    "env": {
+        "browser": true
+    },
+    "rules": {
+        "react/jsx-indent": ["error", 2]
+    }
+}
