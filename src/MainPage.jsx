@@ -1,23 +1,26 @@
-import React, { useState, useCallback } from 'react';
-import {
-  Button, Input, Notification } from 'xsolla-uikit';
+import React, { useState } from 'react';
+import { Button, Input, Notification } from 'xsolla-uikit';
 
 import FormErrors from './components/FormErrors';
 import fonts from './scss/fonts.scss';
 // import logo from './pics/logo.png';
 
 const MainPage = () => {
-  const [email, setEmail] = useState('email@gmail.com');
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSent, setIsSent] = useState(false);
-  const [hasError, setHasError] = useState({ value: false, message: '' });
+  const [email, setEmail] = useState('simple.mail@gmail.com');
   const [formErrors, setFormErrors] = useState({ email: '' });
-  const [isValid, setIsValid] = useState(true);
+  const [isValidForm, setIsValidForm] = useState(true);
+  const [generalState, setGeneralState] = useState({
+    isLoading: false,
+    hasError: false,
+    isSent: false,
+  });
 
   const handleClick = () => {
-    setHasError({ value: false, message: '' });
-    setIsLoading(true);
-    setIsSent(false);
+    setGeneralState({
+      isLoading: true,
+      hasError: false,
+      isSent: false,
+    });
 
     fetch('https://xsolla-revenue-calculator-be.herokuapp.com/RevenueForecast', {
       method: 'POST',
@@ -44,36 +47,34 @@ const MainPage = () => {
       // })
       .then((res) => {
         console.log(`Response headers: ${res.headers}`);
+        setGeneralState({ isLoading: false });
         return res;
       })
       .then((res) => res.json())
       .then((data) => {
-        setIsLoading(false);
-        setHasError({ value: false, message: '' });
-        setIsSent(true);
+        setGeneralState({ hasError: false, isSent: true });
         console.log(data);
       })
       .catch((e) => {
-        setIsLoading(false);
-        setHasError({ value: true, message: e.message });
+        setGeneralState({ isLoading: false, hasError: true });
         console.log(`Error: ${e.message}`);
         console.log(e.response);
       });
   };
 
   const onChange = (e) => {
-    // ывфвфывцвфцв
+    const newValue = e.target.value;
+    const error = newValue.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) ? '' : 'is invalid';
     setEmail(e.target.value);
-    setFormErrors({ email:  email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) ? '' : 'is invalid' });
-    setIsValid(!formErrors.email);
+    setFormErrors({ email: error });
+    setIsValidForm(!error);
   };
-  
 
   return (
     <>
       {/* <img src={logo} /> */}
       <p className={fonts.display}>XPC Form</p>
-      <FormErrors formErrors={formErrors}/>
+      <FormErrors formErrors={formErrors} />
       <Input
         name="basic-input"
         type="email"
@@ -87,17 +88,17 @@ const MainPage = () => {
         type="button"
         appearance="secondary"
         onClick={handleClick}
-        // disabled={
-        //   isValid ? false : true
-        // }
+        disabled={
+          !isValidForm
+        }
         fetching={
-          isLoading ? true : false
+          !!generalState.isLoading
         }
       >
-          Send email
+        Send email
       </Button>
-      { isSent && <Notification appearance="simple" status="success" title="Success!" /> }
-      { hasError.value && <Notification status="error" title="Error" /> }
+      { generalState.isSent && <Notification appearance="simple" status="success" title="Success!" /> }
+      { generalState.hasError && <Notification status="error" title="Error" /> }
     </>
   );
 };
