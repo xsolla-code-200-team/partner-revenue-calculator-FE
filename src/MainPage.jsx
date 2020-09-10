@@ -87,9 +87,9 @@ const MainPage = () => {
         type="button"
         appearance="secondary"
         onClick={handleClick}
-        disabled={
-          isValid ? false : true
-        }
+        // disabled={
+        //   isValid ? false : true
+        // }
         fetching={
           isLoading ? true : false
         }
