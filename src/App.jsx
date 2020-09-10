@@ -6,7 +6,7 @@ import MainPage from './MainPage';
 import styles from './scss/styles.scss';
 
 const App = () => (
-  <div className={styles.content}>
+  <div className={styles.body}>
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
