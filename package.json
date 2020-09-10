@@ -40,6 +40,7 @@
     "sass-loader": "^9.0.3",
     "style-loader": "^1.2.1",
     "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
     "xsolla-uikit": "^2.15.3"
   },
@@ -53,8 +54,7 @@
     "expose-loader": "^1.0.0",
     "nodemon": "^2.0.4",
     "sass": "^1.26.10",
-    "svg-url-loader": "^6.0.0",
-    "webpack-cli": "^3.3.12"
+    "svg-url-loader": "^6.0.0"
   },
   "browserslist": [
     "last 1 versions",
