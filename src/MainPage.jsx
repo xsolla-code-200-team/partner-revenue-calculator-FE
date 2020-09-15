@@ -25,7 +25,7 @@ const MainPage = () => {
       isSent: false,
     });
 
-    fetch('https://xsolla-revenue-calculator-be.herokuapp.com/RevenueForecast', {
+    fetch('https://api-xsolla-revenue-calculator.herokuapp.com/RevenueForecast', {
       method: 'POST',
       body: JSON.stringify({ email }),
       headers: {
