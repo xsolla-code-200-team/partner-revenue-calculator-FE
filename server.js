@@ -13,4 +13,7 @@ app.get("*", function (req, res) {
   res.sendFile(path.join(DIST_DIR, "index.html"));
 });
 
-app.listen(PORT);
+// Listen on port in PORT var
+app.listen(PORT, () => {
+  console.log(`Server started on http://localhost:${PORT}`);
+});

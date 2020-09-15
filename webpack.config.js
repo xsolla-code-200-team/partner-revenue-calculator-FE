@@ -18,7 +18,8 @@ module.exports = (env, argv) => ({
     plugins: [
         new MiniCssPlugin(),
         new HtmlPlugin({
-            template: './src/index.html'
+            template: './src/index.html',
+            favicon: './src/pics/favicon.ico'
         })
     ],
     module: {

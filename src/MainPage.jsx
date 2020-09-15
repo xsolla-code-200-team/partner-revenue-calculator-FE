@@ -1,22 +1,131 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button, Input, Notification } from 'xsolla-uikit';
 
+import InputField from './components/InputField';
+import SelectField from './components/SelectField';
+import CheckboxPlate from './components/CheckboxPlate';
 import FormErrors from './components/FormErrors';
 import ResponseField from './components/ResponseField';
 import fonts from './scss/fonts.scss';
 import styles from './scss/styles.scss';
 
+const genres = [
+  'rpg',
+  'action',
+  'adventure',
+  'simulation',
+  'puzzle',
+  'strategy',
+  'arcade',
+  'casual',
+  'platformer',
+  'racing',
+  'shooter',
+  'other'
+];
+
+const monetization = [
+  'Free2Pay',
+  'Pay2Pay',
+  'Other'
+];
+
+const platforms = [
+  'PC',
+  'Mac',
+  'Android',
+  'iOS',
+  'Web',
+  'Other'
+];
+
+const regions = [ 1, 2, 3, 4, 8, 10, 11, 12, 13, 14 ];
+
+const labels = {
+  email: 'Введите ваш email:',
+  companyName: 'Как называется ваша компания?',
+  productName: 'Как называется ваш продукт?',
+  genres: 'Выберите жанры, к которым относится ваш продукт:',
+  monetization: 'Какая у вашего продукта модель монетизации?',
+  platforms: 'На каких платформах распространяется ваш продукт?',
+  regions: 'На какие региональные рынки вы хотели бы вывести ваш продукт?',
+  sales: 'Предположите количество продаж вашего продукта:',
+  score: 'Как в среднем вы бы оценили ваш продукт?',
+  sendButton: 'Отправить'
+};
+
 const MainPage = () => {
-  const [email, setEmail] = useState('simple.mail@gmail.com');
   const [responseData, setResponseData] = useState({});
-  const [formErrors, setFormErrors] = useState({ email: '' });
-  const [isValidForm, setIsValidForm] = useState(true);
+  const [formErrors, setFormErrors] = useState({});
+  const [isValidForm, setIsValidForm] = useState(false);
   const [generalState, setGeneralState] = useState({
     isLoading: false,
     hasError: false,
     isSent: false,
   });
-  const [nField, setNField] = useState('');
+  const [message, setMessage] = useState('');
+  const [reqData, setReqData] = useState({
+    email: '',
+    companyName: '',
+    productName: '',
+    genres: [],
+    monetization: monetization[0],
+    platforms: [],
+    regions: [],
+    sales: 0,
+    score: 0
+  });
+  
+  const firstRender = useRef(true);
+
+  // 
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+    formValidation();
+  }, [reqData]);
+
+  // too much
+  const formValidation = () => {
+    let errors = {};
+
+    if (!reqData.email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
+      errors.email = 'email is invalid';
+    }
+    if (!reqData.companyName.match(/[A-Za-zА-ЯЁа-яё0-9]+/g)) {
+      errors.companyName = 'skip';
+    }
+    if (!reqData.productName.match(/[A-Za-zА-ЯЁа-яё0-9]+/g)) {
+      errors.productName = 'skip';
+    }
+    if (!reqData.genres.length) {
+      errors.genres = 'skip';
+    }
+    if (!reqData.monetization) {
+      errors.monetization = 'skip';
+    }
+    if (!reqData.platforms.length) {
+      errors.platforms = 'skip';
+    }
+    if (!reqData.regions.length) {
+      errors.regions = 'skip';
+    }
+    if (!Number(reqData.sales) === 0) {
+      errors.sales = 'skip';
+    } else if (Number(reqData.sales) < 0) {
+      errors.sales = 'bad sales';
+    }
+    if (Number(reqData.score) === 0) {
+      errors.score = 'skip';
+    } else if (Number(reqData.score) < 0 || Number(reqData.score) > 10) {
+      errors.score = 'bad score';
+    }
+
+    setFormErrors(errors);
+    setIsValidForm(!Object.keys(errors).length);
+  }
 
   const handleClick = () => {
     setGeneralState({
@@ -25,9 +134,9 @@ const MainPage = () => {
       isSent: false,
     });
 
-    fetch('https://xsolla-revenue-calculator-be.herokuapp.com/RevenueForecast', {
+    fetch('https://api-xsolla-revenue-calculator.herokuapp.com/RevenueForecast', {
       method: 'POST',
-      body: JSON.stringify({ email }),
+      body: JSON.stringify({ ...reqData }),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -50,32 +159,29 @@ const MainPage = () => {
       //   return res;
       // })
       .then((res) => {
-        // console.log(`Response headers: ${res.headers}`);
-        setGeneralState({ isLoading: false });
+        setGeneralState({ ...generalState, isLoading: false });
         return res;
       })
       .then((res) => res.json())
       .then((data) => {
+        console.log(JSON.stringify({ ...reqData }));
         setResponseData(data);
-        // console.log(data);
-        setGeneralState({ hasError: false, isSent: true });
-        setNField('Email was sent.');
+        setGeneralState({ ...generalState, hasError: false, isSent: true });
+        setMessage('Data was sent.');
       })
       .catch((e) => {
-        setGeneralState({ isLoading: false, hasError: true });
-        setNField(e.message);
-        console.log(`Error: ${e.message}`);
-        console.log(e.response);
+        setGeneralState({ ...generalState, isLoading: false, hasError: true });
+        setMessage(e.message);
       });
   };
 
-  const onChange = (e) => {
-    const newValue = e.target.value;
-    const error = newValue.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) ? '' : 'is invalid';
-    setEmail(e.target.value);
-    setFormErrors({ email: error });
-    setIsValidForm(!error);
-  };
+  const handleChangeInput = (e) => {
+    setReqData({ ...reqData, [e.target.name]: e.target.value });
+  }
+
+  const handleChangeFields = (name, value) => {
+    setReqData({ ...reqData, [name]: value });
+  }
 
   return (
     <>
@@ -101,33 +207,72 @@ const MainPage = () => {
             <div className={styles.appMainPartFormView}>
               <div className={styles.appMainPartFormViewQuestions}>
                 <div className={styles.appMainPartFormViewQuestionsForm}>
-                  <p className={fonts.display}>Find your ways to grow</p>
-                  <p className={fonts.title} style={{ marginTop: '1%' }}>Write your email</p>
-                  <FormErrors formErrors={formErrors} />
+                  <InputField
+                  name={'companyName'}
+                  value={reqData.companyName}
+                  onChangeReqData={handleChangeFields}
+                  labelText={labels.companyName}
+                  />
+                  <label className={fonts.title} style={{ marginTop: '1%' }}>{labels.productName}</label>
                   <Input
-                    name="basic-input"
+                    name="productName"
+                    size="sm"
+                    input={{
+                      value: reqData.productName,
+                      onChange: handleChangeInput
+                    }}
+                  />
+                  <p className={fonts.title} style={{ marginTop: '1%' }}>{labels.genres}</p>
+                  <CheckboxPlate name={'genres'} onChangeReqData={handleChangeFields} checkboxes={genres} />
+                  <p className={fonts.title} style={{ marginTop: '1%' }}>{labels.monetization}</p>
+                  <SelectField name={'monetization'} onChangeReqData={handleChangeFields} options={monetization}/>
+                  <p className={fonts.title} style={{ marginTop: '1%' }}>{labels.platforms}</p>
+                  <CheckboxPlate name={'platforms'} onChangeReqData={handleChangeFields} checkboxes={platforms}/>
+                  <p className={fonts.title} style={{ marginTop: '1%' }}>{labels.regions}</p>
+                  <CheckboxPlate name={'regions'} onChangeReqData={handleChangeFields} checkboxes={regions}/>
+                  <p className={fonts.title} style={{ marginTop: '1%' }}>{labels.sales}</p>
+                  <Input
+                    type="number"
+                    name="sales"
+                    size="sm"
+                    input={{
+                      value: reqData.sales,
+                      onChange: handleChangeInput
+                    }}
+                  />
+                  <p className={fonts.title} style={{ marginTop: '1%' }}>{labels.score}</p>
+                  <Input
+                    type="number"
+                    name="score"
+                    size="sm"
+                    input={{
+                      value: reqData.score,
+                      onChange: handleChangeInput
+                    }}
+                  />
+                  <p className={fonts.title} style={{ marginTop: '1%' }}>{labels.email}</p>
+                  <Input
+                    name="email"
                     type="email"
                     size="sm"
                     input={{
-                      value: email,
-                      onChange,
+                      value: reqData.email,
+                      onChange: handleChangeInput,
                     }}
                   />
+                  <FormErrors formErrors={formErrors} />
+                  <p></p>
                   <Button
                     type="button"
                     appearance="secondary"
                     onClick={handleClick}
-                    disabled={
-                                        !isValidForm
-                                    }
-                    fetching={
-                                        generalState.isLoading
-                                    }
+                    disabled={!isValidForm}
+                    fetching={generalState.isLoading}
                   >
-                    Send email
+                    {labels.sendButton}
                   </Button>
-                  { generalState.isSent && <Notification appearance="simple" status="success" title="Success!">{nField}</Notification> }
-                  { generalState.hasError && <Notification status="error" title="Error!">{nField}</Notification> }
+                  { generalState.isSent && <Notification appearance="simple" status="success" title="Success!">{message}</Notification> }
+                  { generalState.hasError && <Notification status="error" title="Error!">{message}</Notification> }
                   { generalState.isSent
                                   && Object.keys(responseData).map((name) => <ResponseField name={name} value={responseData[name]} />)}
                 </div>
@@ -135,17 +280,6 @@ const MainPage = () => {
             </div>
           </section>
         </div>
-        {/* <footer className={styles.appFooter}>
-          <div className={styles.appFooterIcon}>
-            <img
-              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='70' height='70'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath fill='%23FF005B' d='M0 0h70v70H0z'/%3E%3Cpath fill='%23FFF' d='M52.668 44.375c-2.847 0-5.168-2.303-5.168-5.155 0-2.853 2.321-5.157 5.168-5.157a5.157 5.157 0 010 10.313m-.001-7.501c1.286 0 2.333 1.066 2.333 2.354a2.337 2.337 0 01-2.333 2.334 2.34 2.34 0 01-2.355-2.334 2.356 2.356 0 012.355-2.354zM31.562 57.5v-9.375h2.813V57.5h-2.813zm3.75 0v-9.375h2.813V57.5h-2.813zM46.28 16.935l3.096 3.313-4.126 4.44-1.722-1.873 2.378-2.559-3.093-3.317.004-.004-.004-.007 1.74-1.854.004.007 2.381-2.581 1.74 1.852-2.398 2.583zM17.51 34.063l5.616 9.374h-11.25l5.634-9.374zm.16 5.312l-1.42 1.875h2.813l-1.393-1.875zm12.018-24.034l-3.26 3.242 3.26 3.263L27.8 23.75l-3.269-3.264-3.267 3.264-1.888-1.904 3.27-3.263-3.27-3.242 1.888-1.903 3.267 3.261 3.27-3.262 1.887 1.904z'/%3E%3C/g%3E%3C/svg%3E"
-              alt="Xsolla"
-            />
-          </div>
-          <div className={styles.appFooterTitle}>
-            <a className={fonts.display}>DONE BY GROUP CODE 200</a>
-          </div>
-        </footer> */}
         <footer className={styles.appFooter} />
       </div>
     </>

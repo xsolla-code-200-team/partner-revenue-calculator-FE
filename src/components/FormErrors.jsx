@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
 import { Notification } from 'xsolla-uikit';
 
 const FormErrors = ({ formErrors, ...props }) => (
@@ -10,11 +9,9 @@ const FormErrors = ({ formErrors, ...props }) => (
       title={(
         <>
           {Object.keys(formErrors).map((fieldName, i) => {
-            if (formErrors[fieldName]) {
+            if (formErrors[fieldName] !== 'skip') {
               return (
                 <p key={i}>
-                  {fieldName}
-                  {' '}
                   {formErrors[fieldName]}
                 </p>
               );
@@ -26,9 +23,5 @@ const FormErrors = ({ formErrors, ...props }) => (
     />
   </>
 );
-
-// FormErrors.propTypes = {
-//     formErrors: PropTypes.object.isRequired,
-// };
 
 export default FormErrors;

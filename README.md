@@ -1,13 +1,27 @@
-# FE
+# Partner Revenue Calculator
 
 ## Install
 
-В корневой папке проекта:
-### npm install
+### `npm install`
+
+To install the app in the project root folder.
 
 ## Launch
 
-1. Запустить проект:
-### npm run start
+### 1)
 
-2. Открыть в браузере: (http://localhost:9000)
+### `npm run dev`
+
+Runs the app in the development mode.<br>
+Open in browser: (http://localhost:9000).
+
+### 2)
+
+### `npm run build`
+
+Builds the app to the `dist` folder.
+
+### `npm start`
+
+Starts the express server.<br>
+Open in browser: (http://localhost:3002).

@@ -12,9 +12,6 @@ const App = () => (
         <Route exact path="/">
           <MainPage />
         </Route>
-        {/* <Route path="/events/:id/:name">
-          <EventPage /> */}
-        {/* </Route> */}
       </Switch>
     </BrowserRouter>
   </div>
