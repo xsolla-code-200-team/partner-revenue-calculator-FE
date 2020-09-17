@@ -127,3 +127,63 @@ html{
   max-width:50%;
   color:white;
 }
+.appMainPartResult{
+  background-color:#eb002f;
+  //display: none;
+}
+.appMainPartResultForm{
+  width: auto;
+  max-width: 900px;
+  float: none;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  padding:3vw;
+  height:auto;
+}
+.appMainPartResultFormView{
+  background-color:#fafbfc;
+}
+.appMainPartResultFormViewFormTitle{
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  width:100%;
+}
+.appMainPartResultFormViewForm{
+  margin-right: auto;
+  margin-left: auto;
+  padding:3vw;
+  height:650px;
+}
+.appMainPartResultProgressBar{
+
+}
+.appMainPartResultFormViewFormResult{
+
+}
+.ResultsTotal,.ResultsChart{
+  background-color:#00244d;
+  border-radius: 5px;
+  width: auto;
+  max-width: 700px;
+  float: none;
+  display: block;
+  margin: 5px auto 5px auto;
+  padding:3vw;
+  height:auto;
+  color:white;
+}
+.ResultsChartView, .ResultsTotalView{
+
+}
+.ProgressBar{
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  width:100%;
+}
+
+
+
+
