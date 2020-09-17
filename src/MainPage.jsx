@@ -2,9 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Button, Input, Notification } from 'xsolla-uikit';
 import { Link } from 'react-router-dom';
 
-import InputField from './components/InputField';
-import SelectField from './components/SelectField';
-import CheckboxPlate from './components/CheckboxPlate';
+import InputField from './components/inputField/InputField';
+import CheckboxPlate from './components/checkboxPlate/CheckboxPlate';
 import FormErrors from './components/FormErrors';
 import ResponseField from './components/ResponseField';
 import ResultsField from './components/ResultsField';
@@ -43,17 +42,17 @@ const platforms = [
 
 const regions = [ 1, 2, 3, 4, 8, 10, 11, 12, 13, 14 ];
 
-const labels = {
-  email: 'Введите ваш email:',
-  companyName: 'Как называется ваша компания?',
-  productName: 'Как называется ваш продукт?',
-  genres: 'Выберите жанры, к которым относится ваш продукт:',
-  monetization: 'Какая у вашего продукта модель монетизации?',
-  platforms: 'На каких платформах распространяется ваш продукт?',
-  regions: 'На какие региональные рынки вы хотели бы вывести ваш продукт?',
-  sales: 'Предположите количество продаж вашего продукта:',
-  score: 'Как в среднем вы бы оценили ваш продукт?',
-  sendButton: 'Отправить'
+const labelsEng = {
+  email: 'your email',
+  companyName: 'company name',
+  productName: 'product name',
+  genres: 'game genres',
+  monetization: 'monetization',
+  platforms: 'platforms',
+  regions: 'geography of your game',
+  sales: 'month sales',
+  score: 'average cost',
+  sendButton: 'send'
 };
 
 const MainPage = () => {
@@ -75,8 +74,8 @@ const MainPage = () => {
     monetization: monetization[0],
     platforms: [],
     regions: [],
-    sales: 0,
-    score: 0
+    sales: 1,
+    score: 1
   });
 
   const firstRender = useRef(true);
@@ -98,10 +97,10 @@ const MainPage = () => {
       errors.email = 'email is invalid';
     }
     if (!reqData.companyName.match(/[A-Za-zА-ЯЁа-яё0-9]+/g)) {
-      errors.companyName = 'skip';
+      errors.companyName = 'company name is required';
     }
     if (!reqData.productName.match(/[A-Za-zА-ЯЁа-яё0-9]+/g)) {
-      errors.productName = 'skip';
+      errors.productName = 'product name is required';
     }
     if (!reqData.genres.length) {
       errors.genres = 'skip';
@@ -193,17 +192,6 @@ const MainPage = () => {
 
   return (
       <>
-        <div className={styles.body}>
-          <header className={styles.appHeader}>
-            <div className={styles.appHeaderIcon}>
-              <div className={styles.appHeaderIconInfo} />
-              <div className={styles.appHeaderTitle}>
-                <div className={styles.appHeaderTitleInfo}>
-                  <a className={fonts.display}>BI-Simulator</a>
-                </div>
-              </div>
-            </div>
-          </header>
           <div className={styles.appMainPart}>
             <section className={styles.appMainPartForm}>
               <div className={styles.appMainPartFormAbout}>
@@ -219,58 +207,47 @@ const MainPage = () => {
                         name={'companyName'}
                         value={reqData.companyName}
                         onChangeReqData={handleChangeFields}
-                        labelText={labels.companyName}
+                        labelText={labelsEng.companyName}
+                        type={'text'}
+                        placeholder={'super company'}
                     />
-                    <label className={fonts.title} style={{ marginTop: '1%' }}>{labels.productName}</label>
-                    <Input
-                        name="productName"
-                        size="sm"
-                        input={{
-                          value: reqData.productName,
-                          onChange: handleChangeInput
-                        }}
+                    <InputField
+                        name={'productName'}
+                        value={reqData.productName}
+                        onChangeReqData={handleChangeFields}
+                        labelText={labelsEng.productName}
+                        type={'text'}
+                        placeholder={'super game'}
                     />
-                    <p className={fonts.title} style={{ marginTop: '1%' }}>{labels.genres}</p>
-                    <CheckboxPlate name={'genres'} onChangeReqData={handleChangeFields} checkboxes={genres} />
-                    <p className={fonts.title} style={{ marginTop: '1%' }}>{labels.monetization}</p>
-                    <SelectField name={'monetization'} onChangeReqData={handleChangeFields} options={monetization}/>
-                    <p className={fonts.title} style={{ marginTop: '1%' }}>{labels.platforms}</p>
-                    <CheckboxPlate name={'platforms'} onChangeReqData={handleChangeFields} checkboxes={platforms}/>
-                    <p className={fonts.title} style={{ marginTop: '1%' }}>{labels.regions}</p>
-                    <CheckboxPlate name={'regions'} onChangeReqData={handleChangeFields} checkboxes={regions}/>
-                    <p className={fonts.title} style={{ marginTop: '1%' }}>{labels.sales}</p>
-                    <Input
-                        type="number"
-                        name="sales"
-                        size="sm"
-                        input={{
-                          value: reqData.sales,
-                          onChange: handleChangeInput
-                        }}
+                    <CheckboxPlate name={'genres'} onChangeReqData={handleChangeFields} checkboxes={genres} labelText={labelsEng.genres} multipleChoice={true} />
+                    <CheckboxPlate name={'monetization'} onChangeReqData={handleChangeFields} checkboxes={monetization} labelText={labelsEng.monetization} multipleChoice={false} />
+                    <CheckboxPlate name={'platforms'} onChangeReqData={handleChangeFields} checkboxes={platforms} labelText={labelsEng.platforms} multipleChoice={true} />
+                    <CheckboxPlate name={'regions'} onChangeReqData={handleChangeFields} checkboxes={regions} labelText={labelsEng.regions} multipleChoice={true} />
+                    <InputField
+                        name={'sales'}
+                        value={reqData.sales}
+                        onChangeReqData={handleChangeFields}
+                        labelText={labelsEng.sales}
+                        type={'number'}
                     />
-                    <p className={fonts.title} style={{ marginTop: '1%' }}>{labels.score}</p>
-                    <Input
-                        type="number"
-                        name="score"
-                        size="sm"
-                        input={{
-                          value: reqData.score,
-                          onChange: handleChangeInput
-                        }}
+                    <InputField
+                        name={'score'}
+                        value={reqData.score}
+                        onChangeReqData={handleChangeFields}
+                        labelText={labelsEng.score}
+                        type={'number'}
                     />
-                    <p className={fonts.title} style={{ marginTop: '1%' }}>{labels.email}</p>
-                    <Input
-                        name="email"
-                        type="email"
-                        size="sm"
-                        input={{
-                          value: reqData.email,
-                          onChange: handleChangeInput,
-                        }}
+                    <InputField
+                        name={'email'}
+                        value={reqData.email}
+                        onChangeReqData={handleChangeFields}
+                        labelText={labelsEng.email}
+                        type={'email'}
+                        placeholder={'your@email.com'}
                     />
                     <FormErrors formErrors={formErrors} />
                     <p></p>
-                    <Link
+                    {/* <Link
                       to={ResultsField}
                     >
                       <Button
@@ -282,15 +259,30 @@ const MainPage = () => {
                       >
                         {labels.sendButton}
                       </Button>
-                    </Link>
+                    </Link> */}
+                    {/* old button */}
+                    <Button
+                    type="button"
+                    appearance="secondary"
+                    onClick={handleClick}
+                    disabled={!isValidForm}
+                    fetching={generalState.isLoading}
+                    >
+                      {labelsEng.sendButton}
+                    </Button>
+                    { generalState.isSent && <Notification appearance="simple" status="success" title="Success!" >{message}</Notification> }
+                    { generalState.hasError && <Notification status="error" title="Error!" >{message}</Notification> }
+                    { generalState.isSent &&
+                      Object.keys(responseData).map((name) =>
+                        <ResponseField name={name} value={responseData[name]} />) }
+                    {/* end */}
                   </div>
                 </div>
               </div>
-              {generalState.isClicked && <ResultsField TotalRevenue={responseData.totalRevenue} RevenuePerMonth={responseData.revenuePerMonth} isSent={generalState.isSent} Error={message} />}
+              {/* {generalState.isClicked && 
+              <ResultsField TotalRevenue={responseData.totalRevenue} RevenuePerMonth={responseData.revenuePerMonth} isSent={generalState.isSent} Error={message} />} */}
             </section>
           </div>
-          <footer className={styles.appFooter} />
-        </div>
       </>
   );
 };

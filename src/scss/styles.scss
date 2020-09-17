@@ -27,11 +27,16 @@ html{
   padding-right: 40px;
 }
 
+button {
+  outline: none !important;
+}
 
 /*Work with app header*/
 .appHeader{
   background-color: #fff;
   display:flex;
+  // margin-bottom: 32px;
+  padding-bottom: 32px;
 }
 .appHeaderTitle{
   display:flex;
@@ -52,6 +57,18 @@ html{
   height: 100px;
   background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M143.383 78l-2.948-4.971L137.487 78h-4.642l5.126-8.338-4.598-7.436h4.422l2.596 4.378 2.596-4.378h4.466l-4.686 7.436L147.871 78h-4.488zm10.846.353c-3.806 0-5.874-1.672-6.292-4.62h4.136c.264 1.077 1.056 1.561 2.354 1.561 1.254 0 1.804-.417 1.804-1.121 0-.88-1.386-.99-2.97-1.189-2.2-.285-4.796-.77-4.796-3.805 0-2.487 1.958-4.225 5.566-4.225 3.828 0 5.544 1.717 5.94 4.269h-3.938c-.176-.88-.836-1.365-2.046-1.365-1.232 0-1.672.462-1.672 1.078 0 .792 1.078.924 2.97 1.166 2.2.286 4.84.836 4.84 3.806 0 2.552-1.936 4.444-5.896 4.444zm13.31-.022c-4.136 0-6.424-2.157-6.424-6.403v-.395c0-4.335 2.684-6.557 6.446-6.557 3.828 0 6.424 2.289 6.424 6.557v.395c0 4.247-2.552 6.403-6.446 6.403zm.022-3.455c1.474 0 2.442-.99 2.442-2.991v-.353c0-2.09-.88-3.167-2.42-3.167-1.496 0-2.486 1.033-2.486 3.167v.353c0 1.957.99 2.991 2.464 2.991zm12.21 3.125h-4.048V61.06h4.048V78zm6.27 0h-4.048V61.06h4.048V78zm7.348-2.597c1.606 0 2.684-1.275 2.684-2.53v-.77c-.374.287-.946.44-1.716.595-1.1.197-1.518.307-1.914.571-.352.265-.528.573-.528 1.013 0 .747.506 1.121 1.474 1.121zm3.3 2.597l-.44-2.135c-.726 1.43-2.112 2.465-4.488 2.465-2.772 0-4.114-1.32-4.114-3.433 0-1.54.638-2.53 1.672-3.167 1.012-.638 1.936-.814 4.004-1.144 1.936-.265 2.728-.485 2.728-1.299 0-.725-.44-1.231-1.804-1.231-1.408 0-2.09.66-2.134 1.847h-4.07c.198-2.97 2.222-4.927 6.204-4.927 4.224 0 5.742 1.935 5.742 4.883V78h-3.3z' fill='%23011627'/%3E%3Cpath d='M100 .021H0v99.977h100V.021z' fill='%23FF005B'/%3E%3Cpath d='M71.745 52.046c-1.638 0-3.017 1.38-3.017 3.017s1.293 2.93 3.017 2.93a2.907 2.907 0 002.93-2.93c.087-1.638-1.292-3.017-2.93-3.017zm0 9.222c-3.448 0-6.293-2.758-6.293-6.205 0-3.448 2.845-6.206 6.293-6.206a6.18 6.18 0 016.207 6.206c.086 3.447-2.759 6.205-6.207 6.205zM49.279 77.417h-3.276V66.213h3.276v11.204zM54.02 77.417h-3.276V66.213h3.276v11.204zM64.338 28.112l3.19-3.19-2.327-2.326-3.19 3.189-2.328 2.327 4.138 4.137-3.19 3.189 2.328 2.327 5.517-5.516-4.138-4.137zM28.028 55.036l1.552 2.671h-3.104l1.552-2.671zm0-6.206l-6.896 11.894h13.793L28.028 48.83zM42.406 26.13l-2.327-2.327-3.966 3.964-3.965-3.964-2.328 2.327 3.966 3.964-3.966 3.965 2.328 2.327 3.965-3.965 3.966 3.965 2.327-2.327-3.965-3.965 3.965-3.964z' fill='%23F6FAFF'/%3E%3C/svg%3E") no-repeat;
   background-size: cover;
+}
+.appHeaderLogoText {
+  padding: 0 16px 0 16px;
+}
+// tmp...
+.appHeaderLeft {
+  display: flex;
+  align-items: center;
+}
+.appHeaderRight {
+  display: flex;
+  align-items: center;
 }
 
 /*Working with app footer*/
@@ -111,17 +128,61 @@ html{
 }
 .appMainPartFormViewQuestionsForm{
   background-color:#fafbfc;
-  margin-right: auto;
-  margin-left: auto;
-  padding:3vw;
+  // margin-right: auto;
+  // margin-left: auto;
+  // padding:3vw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10%;
 }
-.appMainPartFormViewQuestionsForm input {
-  // width: 256px;
-  margin-bottom: 1%;
+
+// 
+.form-field-label {
+  position: -webkit-sticky;
+  position: sticky;
+  width: 100%;
+  margin-bottom: 8px;
+
+  font-size: 14px;
+  font-family: SpaceMono,Arial,Helvetica Neue,Helvetica,sans-serif;
+  text-transform: uppercase;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  // width: 170px;
+  width: 75%;
 }
-.appMainPartFormViewQuestionsForm button {
-  margin-bottom: 1%;
+
+.form-field-label-text {
+  color: #011627;
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 1;
+  left: 0;
+  margin-right: 0;
+  padding-right: 8px;
+  font-family: Graphiklcg,sans-serif;
+  // font-family: Roboto;
+  // font-weight: 600;
+  font-weight: bold;
+  font-size: 20px;
+  text-transform: uppercase;
+  background-color: #fff;
 }
+
+.form-field-label-string {
+  // opacity: .1;
+  -webkit-box-flex: 1;
+  // -ms-flex: 1 1;
+  flex: 1 1;
+  height: 1px;
+  margin-top: 9px;
+  background-color: currentColor;
+}
+// 
+
 .appMainPartFormAboutTitle{
   text-align:left;
   max-width:50%;
