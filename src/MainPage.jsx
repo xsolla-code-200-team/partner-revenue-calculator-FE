@@ -171,15 +171,11 @@ const MainPage = () => {
           console.log(JSON.stringify({ ...reqData }));
           setResponseData(data);
           console.log(data);
-          setTimeout(() => {
-            setGeneralState({ ...generalState, hasError: false, isSent: true, isClicked: true })
-          }, 3000);
+          setGeneralState({ ...generalState, hasError: false, isSent: true, isClicked: true });
         })
         .catch((e) => {
           setMessage(e.message);
-          setTimeout(() => {
-            setGeneralState({ ...generalState, isLoading: false, hasError: true, isClicked: true })
-          }, 3000);
+          setGeneralState({ ...generalState, isLoading: false, hasError: true, isClicked: true });
         });
   };
 
@@ -271,17 +267,11 @@ const MainPage = () => {
                     >
                       {labelsEng.sendButton}
                     </Button>
-                    { generalState.isSent && <Notification appearance="simple" status="success" title="Success!" >{message}</Notification> }
-                    { generalState.hasError && <Notification status="error" title="Error!" >{message}</Notification> }
-                    { generalState.isSent &&
-                      Object.keys(responseData).map((name) =>
-                        <ResponseField name={name} value={responseData[name]} />) }
-                    {/* end */}
                   </div>
                 </div>
               </div>
-              {/* {generalState.isClicked && 
-              <ResultsField TotalRevenue={responseData.totalRevenue} RevenuePerMonth={responseData.revenuePerMonth} isSent={generalState.isSent} Error={message} />} */}
+              {generalState.isClicked &&
+              <ResultsField isSent={generalState.isSent} Error={message} id={responseData.id}/>} */}
             </section>
           </div>
       </>

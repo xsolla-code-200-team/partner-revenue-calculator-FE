@@ -47,7 +47,7 @@ const ProgressBar = ({ TotalRevenue, RevenuePerMonth, ...props }) => {
         series: [{
             type:'line',
             name: 'Revenue',
-            data: [[0,4],[1,6],[2,12],[3,29]],
+            data: RevenuePerMonth,
         }, {
             type:'spline',
             regression: true ,
@@ -57,7 +57,7 @@ const ProgressBar = ({ TotalRevenue, RevenuePerMonth, ...props }) => {
             },
             name: 'Trendline',
             color: 'rgba(23, 83, 83, .5)',
-            data: [[0,4],[1,6],[2,12],[3,29]]
+            data: RevenuePerMonth
 
         }],
 

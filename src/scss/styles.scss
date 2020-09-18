@@ -215,7 +215,7 @@ button {
   margin-right: auto;
   margin-left: auto;
   padding:3vw;
-  height:650px;
+  height:auto;
 }
 .appMainPartResultProgressBar{
 
@@ -239,6 +239,12 @@ button {
 
 }
 .ProgressBar{
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  width:100%;
+}
+.ProgressBarViewText{
   display:flex;
   align-items:center;
   justify-content: center;
