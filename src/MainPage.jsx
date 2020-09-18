@@ -74,8 +74,8 @@ const MainPage = () => {
     monetization: monetization[0],
     platforms: [],
     regions: [],
-    sales: 1,
-    score: 1
+    sales: '1',
+    score: '1'
   });
 
   const firstRender = useRef(true);
@@ -86,6 +86,7 @@ const MainPage = () => {
       firstRender.current = false;
       return;
     }
+    console.log(reqData);
     formValidation();
   }, [reqData]);
 
