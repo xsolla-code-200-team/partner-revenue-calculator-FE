@@ -271,7 +271,7 @@ const MainPage = () => {
                 </div>
               </div>
               {generalState.isClicked &&
-              <ResultsField isSent={generalState.isSent} Error={message} id={responseData.id}/>} */}
+              <ResultsField isSent={generalState.isSent} Error={message} id={responseData.id}/>}
             </section>
           </div>
       </>
