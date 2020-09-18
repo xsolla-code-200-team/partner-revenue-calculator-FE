@@ -86,7 +86,8 @@ const MainPage = () => {
       firstRender.current = false;
       return;
     }
-    console.log(reqData);
+    // console.log(`произошел рендеррр, а id = ${responseData.id}`);
+    // console.log(reqData);
     formValidation();
   }, [reqData]);
 
@@ -122,7 +123,7 @@ const MainPage = () => {
     }
     if (Number(reqData.score) === 0) {
       errors.score = 'skip';
-    } else if (Number(reqData.score) < 0 || Number(reqData.score) > 10) {
+    } else if (Number(reqData.score) < 0) {
       errors.score = 'bad score';
     }
 
@@ -135,7 +136,7 @@ const MainPage = () => {
       isLoading: true,
       hasError: false,
       isSent: false,
-      isClicked:true,
+      isClicked: false,
     });
 
     fetch('https://api-xsolla-revenue-calculator.herokuapp.com/RevenueForecast', {
@@ -163,25 +164,22 @@ const MainPage = () => {
         //   return res;
         // })
         .then((res) => {
-          setGeneralState({ ...generalState, isLoading: false, isClicked: true });
+          setGeneralState({ ...generalState, isLoading: false });
           return res;
         })
         .then((res) => res.json())
         .then((data) => {
-          console.log(JSON.stringify({ ...reqData }));
+          // console.log(JSON.stringify({ ...reqData }));
           setResponseData(data);
           console.log(data);
           setGeneralState({ ...generalState, hasError: false, isSent: true, isClicked: true });
         })
         .catch((e) => {
+          console.log(e.message);
           setMessage(e.message);
-          setGeneralState({ ...generalState, isLoading: false, hasError: true, isClicked: true });
+          setGeneralState({ ...generalState, isLoading: false, hasError: true });
         });
   };
-
-  const handleChangeInput = (e) => {
-    setReqData({ ...reqData, [e.target.name]: e.target.value });
-  }
 
   const handleChangeFields = (name, value) => {
     setReqData({ ...reqData, [name]: value });
