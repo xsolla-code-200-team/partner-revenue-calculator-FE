@@ -8,14 +8,14 @@ To install the app in the project root folder.
 
 ## Launch
 
-### 1)
+### 1) Development mode
 
 ### `npm run dev`
 
 Runs the app in the development mode.<br>
 Open in browser: (http://localhost:9000).
 
-### 2)
+### 2) Production mode
 
 ### `npm run build`
 
