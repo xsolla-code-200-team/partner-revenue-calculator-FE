@@ -20,7 +20,7 @@ const genres = [
 ];
 
 const monetization = [
-  'Free2Pay',
+  'Free2Play',
   'Pay2Play',
 ];
 
@@ -34,6 +34,13 @@ const platforms = [
 
 const regions = [1, 2, 3, 4, 8, 10, 11, 12, 13, 14];
 
+const releaseDate = [
+  'January-March',
+  'April-June',
+  'July-September',
+  'October-December'
+];
+
 const CalculationForm = ({
   labels, onChangeResponseData, onClick, onChangeErrorMessage, ...props
 }) => {
@@ -43,15 +50,16 @@ const CalculationForm = ({
   });
 
   const [reqData, setReqData] = useState({
-    email: '',
-    companyName: '',
     productName: '',
+    releaseDate: releaseDate[0],
     genres: [],
     monetization: monetization[0],
     platforms: [],
     regions: [],
     sales: '',
-    score: '',
+    cost: '',
+    companyName: '',
+    email: '',
   });
 
   const [isValidForm, setIsValidForm] = useState(false);
@@ -75,6 +83,26 @@ const CalculationForm = ({
     }
     formValidation();
   }, [reqData]);
+
+  const valuesToLowerCase = (obj) => {
+    return Object.keys(obj).reduce((acc, key) => {
+      let value = obj[key];
+      if (key === 'productName' || key === 'companyName' || key === 'email') {
+        //pass
+        acc[key] = value;
+      } else if (Array.isArray(value)) {
+        value = value.map(element => element.toLowerCase());
+        acc[key] = value;
+      // } else if (typeof value === 'object') {
+      //   console.log(`${value} is object`);
+      //   value = valuesToLowerCase(value);
+      //   console.log(value);
+      } else {
+        acc[key] = value.toLowerCase();
+      }
+      return acc;
+    }, {});
+  }
 
   const formValidation = () => {
     let isValid = true;
@@ -120,6 +148,12 @@ const CalculationForm = ({
           errorMessage = 'monetization is required';
         }
         break;
+      case 'releaseDate':
+        if (!inputValue) {
+          hasError = true;
+          errorMessage = 'release date is required';
+        }
+        break;
       case 'platforms':
         if (!inputValue.length) {
           hasError = true;
@@ -141,7 +175,7 @@ const CalculationForm = ({
           errorMessage = 'sales must be positive';
         }
         break;
-      case 'score':
+      case 'cost':
         if (!inputValue) {
           hasError = true;
           errorMessage = "'cost' field is required";
@@ -169,7 +203,7 @@ const CalculationForm = ({
     };
 
     errors[inputName] = errorMessage;
-    console.log(errors);
+    // console.log(errors);
     setFormErrors(errors);
 
     return OutputError;
@@ -182,9 +216,9 @@ const CalculationForm = ({
     });
     updateIsClicked(false);
 
-    fetch('https://api-xsolla-revenue-calculator.herokuapp.com/RevenueForecast', {
+    fetch('https://api-xsolla-revenue-calculator.herokuapp.com/RevenueForecast/Complex', {
       method: 'POST',
-      body: JSON.stringify({ ...reqData }),
+      body: JSON.stringify({ ...valuesToLowerCase(reqData) }),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -213,6 +247,9 @@ const CalculationForm = ({
       .then((data) => {
         // console.log(JSON.stringify({ ...reqData }));
         updateResponseData(data);
+        console.log('reqData:');
+        console.log(valuesToLowerCase(reqData));
+        console.log('resData (POST):');
         console.log(data);
         updateIsClicked(true);
       })
@@ -241,15 +278,7 @@ const CalculationForm = ({
 
   return (
     <div className={styles.appMainPartFormViewQuestionsForm}>
-      <InputField
-        name="companyName"
-        value={reqData.companyName}
-        onChangeReqData={handleChangeFields}
-        labelText={labels.companyName}
-        type="text"
-        placeholder="super company"
-        validation={fieldsValidation}
-      />
+      
       <InputField
         name="productName"
         value={reqData.productName}
@@ -259,10 +288,13 @@ const CalculationForm = ({
         placeholder="super game"
         validation={fieldsValidation}
       />
+      { props.releaseDate }
+      <CheckboxPlate name="releaseDate" onChangeReqData={handleChangeFields} checkboxes={releaseDate} labelText={labels.releaseDate} multipleChoice={false} validation={fieldsValidation} />
       <CheckboxPlate name="genres" onChangeReqData={handleChangeFields} checkboxes={genres} labelText={labels.genres} multipleChoice validation={fieldsValidation} />
       <CheckboxPlate name="monetization" onChangeReqData={handleChangeFields} checkboxes={monetization} labelText={labels.monetization} multipleChoice={false} validation={fieldsValidation} />
       <CheckboxPlate name="platforms" onChangeReqData={handleChangeFields} checkboxes={platforms} labelText={labels.platforms} multipleChoice validation={fieldsValidation} />
       <CheckboxPlate name="regions" onChangeReqData={handleChangeFields} checkboxes={regions} labelText={labels.regions} multipleChoice validation={fieldsValidation} />
+      { props.otherChildren }
       <InputField
         name="sales"
         value={reqData.sales}
@@ -273,12 +305,21 @@ const CalculationForm = ({
         validation={fieldsValidation}
       />
       <InputField
-        name="score"
-        value={reqData.score}
+        name="cost"
+        value={reqData.cost}
         onChangeReqData={handleChangeFields}
-        labelText={labels.score}
+        labelText={labels.cost}
         type="number"
         placeholder="60"
+        validation={fieldsValidation}
+      />
+      <InputField
+        name="companyName"
+        value={reqData.companyName}
+        onChangeReqData={handleChangeFields}
+        labelText={labels.companyName}
+        type="text"
+        placeholder="super company"
         validation={fieldsValidation}
       />
       <InputField

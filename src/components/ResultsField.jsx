@@ -39,7 +39,7 @@ const ResultsField = ({ Error, id, ...props }) => {
       })
       .then((response) => response.json())
       .then((data) => {
-        console.log('data from id:');
+        console.log('resData (GET id):');
         console.log(data);
         setDataInfo(data);
         setIsReadyToShow(true);
@@ -57,7 +57,7 @@ const ResultsField = ({ Error, id, ...props }) => {
         <div className={styles.appMainPartResultForm}>
           <div className={styles.appMainPartResultFormView}>
             <div className={styles.appMainPartResultFormViewForm}>
-              {isReadyToShow && <ResultsForm TotalRevenue={dataInfo.totalRevenue} RevenuePerMonth={dataInfo.revenuePerMonth} />}
+              {isReadyToShow && <ResultsForm TotalRevenue={'-'} RevenuePerMonth={dataInfo.chosenForecast.forecast} />}
             </div>
           </div>
         </div>

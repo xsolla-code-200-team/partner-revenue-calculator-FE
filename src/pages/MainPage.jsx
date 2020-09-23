@@ -1,22 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
+// import from '../components/'
 import CalculationForm from '../components/CalculationForm';
 import ResultsField from '../components/ResultsField';
 import fonts from '../scss/fonts.scss';
 import styles from '../scss/styles.scss';
 
 const labelsEng = {
-  email: 'your email',
-  companyName: 'company name',
+  email: 'email',
+  companyName: 'company or individual name',
   productName: 'product name',
-  genres: 'game genres',
+  genres: 'genres',
   monetization: 'monetization',
   platforms: 'platforms',
-  regions: 'geography of your game',
-  sales: 'first month expected sales',
-  score: 'average product cost',
-  sendButton: 'send',
+  regions: 'distribution regions',
+  sales: 'average first month sales',
+  sales2: 'first month expected sales',
+  cost: 'average product cost',
+  sendButton: 'calculate',
+  releaseDate: 'date of release',
+
 };
 
 const MainPage = () => {
@@ -57,6 +61,7 @@ const MainPage = () => {
                 onClick={handleChangeIsClicked}
                 onChangeErrorMessage={handleChangeMessage}
               />
+              {/* form type choice */}
             </div>
           </div>
           {generalState.isClicked
