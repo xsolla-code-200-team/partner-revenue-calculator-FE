@@ -42,7 +42,7 @@ const releaseDate = [
 ];
 
 const CalculationForm = ({
-  labels, onChangeResponseData, onClick, onChangeErrorMessage, ...props
+  labels, onChangeResponseData, onClick, onChangeErrorMessage, url,  ...props
 }) => {
   const [generalState, setGeneralState] = useState({
     isLoading: false,
@@ -51,15 +51,13 @@ const CalculationForm = ({
 
   const [reqData, setReqData] = useState({
     productName: '',
-    releaseDate: releaseDate[0],
     genres: [],
     monetization: monetization[0],
     platforms: [],
     regions: [],
-    sales: '',
-    cost: '',
     companyName: '',
     email: '',
+    ... props.additionalState
   });
 
   const [isValidForm, setIsValidForm] = useState(false);
@@ -216,7 +214,7 @@ const CalculationForm = ({
     });
     updateIsClicked(false);
 
-    fetch('https://api-xsolla-revenue-calculator.herokuapp.com/RevenueForecast/Complex', {
+    fetch(url, {
       method: 'POST',
       body: JSON.stringify({ ...valuesToLowerCase(reqData) }),
       headers: {
@@ -288,31 +286,42 @@ const CalculationForm = ({
         placeholder="super game"
         validation={fieldsValidation}
       />
-      { props.releaseDate }
-      <CheckboxPlate name="releaseDate" onChangeReqData={handleChangeFields} checkboxes={releaseDate} labelText={labels.releaseDate} multipleChoice={false} validation={fieldsValidation} />
+      { props.isAdvanced &&
+        <CheckboxPlate
+          name="releaseDate"
+          onChangeReqData={handleChangeFields}
+          checkboxes={releaseDate}
+          labelText={labels.releaseDate}
+          multipleChoice={false}
+          validation={fieldsValidation}
+        />
+      }
       <CheckboxPlate name="genres" onChangeReqData={handleChangeFields} checkboxes={genres} labelText={labels.genres} multipleChoice validation={fieldsValidation} />
       <CheckboxPlate name="monetization" onChangeReqData={handleChangeFields} checkboxes={monetization} labelText={labels.monetization} multipleChoice={false} validation={fieldsValidation} />
       <CheckboxPlate name="platforms" onChangeReqData={handleChangeFields} checkboxes={platforms} labelText={labels.platforms} multipleChoice validation={fieldsValidation} />
       <CheckboxPlate name="regions" onChangeReqData={handleChangeFields} checkboxes={regions} labelText={labels.regions} multipleChoice validation={fieldsValidation} />
-      { props.otherChildren }
-      <InputField
-        name="sales"
-        value={reqData.sales}
-        onChangeReqData={handleChangeFields}
-        labelText={labels.sales}
-        type="number"
-        placeholder="1 000 000"
-        validation={fieldsValidation}
-      />
-      <InputField
-        name="cost"
-        value={reqData.cost}
-        onChangeReqData={handleChangeFields}
-        labelText={labels.cost}
-        type="number"
-        placeholder="60"
-        validation={fieldsValidation}
-      />
+      { props.isAdvanced &&
+        <>
+          <InputField
+            name="sales"
+            value={reqData.sales}
+            onChangeReqData={handleChangeFields}
+            labelText={labels.sales}
+            type="number"
+            placeholder="1 000 000"
+            validation={fieldsValidation}
+          />
+          <InputField
+            name="cost"
+            value={reqData.cost}
+            onChangeReqData={handleChangeFields}
+            labelText={labels.cost}
+            type="number"
+            placeholder="60"
+            validation={fieldsValidation}
+          />
+        </>
+      }
       <InputField
         name="companyName"
         value={reqData.companyName}
