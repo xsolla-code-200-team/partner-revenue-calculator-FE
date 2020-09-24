@@ -6,7 +6,7 @@ import { Button } from 'xsolla-uikit';
 import styles from '../scss/styles.scss';
 import fonts from '../scss/fonts.scss';
 
-const ProgressBar = ({ TotalRevenue, RevenuePerMonth, ...props }) => {
+const ProgressBar = ({ TotalRevenue, chosenForecast, anotherForecast, ...props }) => {
   const [generalState, setGeneralState] = useState({
     isPlaced: false,
   });
@@ -22,8 +22,11 @@ const ProgressBar = ({ TotalRevenue, RevenuePerMonth, ...props }) => {
     },
 
     xAxis: {
+      title: {
+        text: 'Month'
+      },
       accessibility: {
-        rangeDescription: 'Range: 1 to 6',
+        rangeDescription: 'Range: 1 to 7',
       },
     },
 
@@ -44,19 +47,25 @@ const ProgressBar = ({ TotalRevenue, RevenuePerMonth, ...props }) => {
 
     series: [{
       type: 'line',
-      name: 'Revenue',
-      data: RevenuePerMonth,
+      name: 'your forecast',
+      data: chosenForecast.forecast,
     }, {
-      type: 'spline',
-      regression: true,
-      regressionSettings: {
-        type: 'exponential',
-        color: 'rgba(45, 83, 83, .9)',
-      },
-      name: 'Trendline',
-      color: 'rgba(23, 83, 83, .5)',
-      data: RevenuePerMonth,
+    //   type: 'spline',
+    //   regression: true,
+    //   regressionSettings: {
+    //     type: 'exponential',
+    //     color: 'rgba(45, 83, 83, .9)',
+    //   },
+    //   name: 'Trendline',
+    //   color: 'rgba(23, 83, 83, .5)',
+    //   data: chosenForecast.forecast,
 
+    // }, {
+      visible: false,
+      type: 'line',
+      name: 'another forecast',
+      data: anotherForecast.forecast,
+      color: 'rgba(23, 83, 83, .5)',
     }],
 
     responsive: {

@@ -57,7 +57,14 @@ const ResultsField = ({ Error, id, ...props }) => {
         <div className={styles.appMainPartResultForm}>
           <div className={styles.appMainPartResultFormView}>
             <div className={styles.appMainPartResultFormViewForm}>
-              {isReadyToShow && <ResultsForm TotalRevenue={'-'} RevenuePerMonth={dataInfo.chosenForecast.forecast} />}
+              {
+                isReadyToShow &&
+                <ResultsForm
+                  TotalRevenue={'-'}
+                  chosenForecast={dataInfo.chosenForecast}
+                  anotherForecast={dataInfo.otherForecasts[0]}
+                />
+              }
             </div>
           </div>
         </div>
