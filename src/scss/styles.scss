@@ -84,7 +84,6 @@ button {
   height: 52px;
   border: 2px solid #357BDA;
   cursor: pointer;
-  background-color: #fcfcfc;
 }
 
 .appHeaderContact span {
@@ -154,7 +153,7 @@ button {
   padding: 10%;
 }
 
-// 
+//
 .form-field-label {
   position: -webkit-sticky;
   position: sticky;
@@ -198,7 +197,7 @@ button {
   margin-top: 9px;
   background-color: currentColor;
 }
-// 
+//
 
 .appMainPartFormAboutTitle{
   text-align:left;
@@ -266,4 +265,168 @@ button {
   align-items:center;
   justify-content: center;
   width:100%;
+}
+.InitialPageViewMain{
+  background-color:white;
+}
+.InitialPageViewInfoAbout{
+  background-color:#00244d;
+}
+.InitialPageViewCalculate{
+  background-color:#EB345E;
+}
+
+.InitialPageViewInfoAboutForm,.InitialPageViewMainForm,.InitialPageViewCalculateForm{
+  width: auto;
+  max-width: 1200px;
+  float: none;
+  display: flex;
+  margin-right: auto;
+  margin-left: auto;
+  padding:3vw;
+}
+.InitialPageViewInfoAboutForm,.InitialPageViewCalculateForm{
+  height:24vw;
+}
+
+.InitialPageViewMainForm{
+  height:40vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.InitialPageViewCalculateButton{
+  background-color:#EB345E;
+  font-color:white;
+  width:auto;
+  height:auto;
+  border: 2px solid #FFFFFF;
+}
+
+
+.InitialPageViewSelectForm{
+  margin:0px;
+  padding: 0px;
+}
+
+.InitialPageViewSelectFormView{
+  overflow: hidden;
+  display: flex;
+  margin-bottom:30px;
+}
+
+.InitialPageViewSelectFormViewButtonEasy{
+  background-color: #3C4858;
+  font-color:white;
+  margin-left: auto;
+  margin-right: auto;
+  width:100%;
+}
+
+
+.InitialPageViewSelectFormViewButtonEasy button{
+  color:white;
+  background-color: #3C4858;
+  margin-left: auto;
+  margin-right: auto;
+  width:100%;
+  border: none;
+}
+
+.InitialPageViewSelectFormViewButtonHard{
+  background-color:#EB345E;
+  font-color:white;
+  margin-left: auto;
+  margin-right: auto;
+  width:100%;
+}
+
+.InitialPageViewSelectFormViewButtonHard button{
+  background-color:#EB345E;
+  color:white;
+  margin-left: auto;
+  margin-right: auto;
+  width:100%;
+  border: none;
+}
+
+.InitialPageViewSelectFormViewButtonEasy.max,.InitialPageViewSelectFormViewButtonHard.max{
+  flex:1;
+}
+
+.InitialPageViewSelectFormViewButtonText{
+  width: auto;
+  float: none;
+  display: flex;
+  margin-right: auto;
+  margin-left: auto;
+  padding:3vw;
+  height:12vw;
+  justify-content: center;
+  align-items: center;
+}
+
+.InitialPageViewCalculateFormText{
+  color:white;
+  margin-top: 7vw;
+}
+
+.InitialPageViewCalculateFormText p{
+  font-size:30px;
+}
+
+.InitialPageViewCalculateFormButton{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.InitialPageViewCalculateFormButton button{
+  color:white;
+  background-color:#EB345E;
+  height: 7vw;
+  width: 20vw;
+  border: 2px solid #FFFFFF;
+}
+
+.InitialPageViewInfoAboutFormText1 p{
+  color:white;
+  margin-top: 5vw;
+  font-size:30px;
+}
+
+.InitialPageViewInfoAboutFormText2{
+  border-left: 2px solid #ccc;
+  padding-left: 10px;
+  color:white;
+  margin-top:5vw;
+  margin-left:30vw;
+}
+
+.InitialPageViewMainFormBoxes{
+  background-color: #f6faff;
+  height:95%;
+  width:27vw;
+  margin-right: 40px;
+}
+
+.InitialPageViewMainFormBoxesPicture{
+  height:auto;
+}
+
+.InitialPageViewMainFormBoxesPicture img{
+  max-width: 100%;
+  height: auto;
+}
+
+.InitialPageViewMainFormBoxesText{
+  padding:2vw;
+}
+
+.InitialPageViewMainFormBoxesTitle{
+  color:#0073f7;
+}
+
+.InitialPageViewCalculateFormButtonView{
+  margin-bottom:4vw;
 }

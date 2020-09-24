@@ -9,6 +9,8 @@ import MainPage from './pages/MainPage';
 import styles from './scss/styles.scss';
 import fonts from './scss/fonts.scss';
 import logo from './pics/logo.png';
+import InitialPage from './components/InitialPage';
+import ResultsForm from './components/ResultsForm';
 
 const App = () => (
   <div className={styles.body}>
@@ -35,11 +37,7 @@ const App = () => (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <MainPage />
-          {/* Route for InitialPage */}
-        </Route>
-        <Route path="/calculator">
-          {/* Route for MainPage */}
+          <InitialPage />
         </Route>
       </Switch>
     </BrowserRouter>
