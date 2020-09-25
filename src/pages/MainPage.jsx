@@ -70,7 +70,8 @@ const MainPage = () => {
                 type="button"
                 onClick={() => handleSwitchFormType('simpleForm')}
               >
-                <p className={fonts.title2}>I WANT TO KICKSTART MY GAME </p>
+                <p className={fonts.title3}>I WANT TO DECIDE ON PARAMETERS</p>
+                <p className={fonts.title3}>OF MY FUTURE GAME</p>
               </button>
             </div>
           </div>
@@ -80,7 +81,8 @@ const MainPage = () => {
                 type="button"
                 onClick={() => handleSwitchFormType('advancedForm')}
               >
-                <p className={fonts.title2}>I WANT TO BRING MY GAME TO THE NEXT LEVEL</p>
+                <p className={fonts.title3}>I WANT TO BRING MY COMPLETED GAME</p>
+                <p className={fonts.title3}>TO THE NEXT LEVEL</p>
               </button>
             </div>
           </div>

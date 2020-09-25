@@ -88,19 +88,19 @@ const ProgressBar = ({ TotalRevenue, chosenForecast, anotherForecast, ...props }
       <div className={styles.appMainPartResultFormViewFormTitle}>
         <p className={fonts.display}>RESULTS</p>
       </div>
-      <div className={styles.appMainPartResultFormViewFormResult}>
-        <div className={styles.ResultsTotal}>
+      <div className={styles.ResultForecast}>
+        <div className={styles.ForecastTotal}>
           <p>
             <p className={fonts.title}>
               Here's a forecast for your product!
               {' '}
               Based on your data we have calculated the approximate amount of money you will recieve the next month
             </p>
-            <div className={styles.totalRevenue}><p className={fonts.title2}>{`${TotalRevenue}`}</p></div>
+            <div className={styles.totalRevenue}><p className={fonts.display}>{`$${TotalRevenue}`}</p></div>
           </p>
         </div>
-        <div className={styles.ResultsChart}>
-          This number is affected by seasonal trends and other factors.
+        <div className={styles.ForecastChart}>
+          <p className={fonts.title2}>This number is affected by seasonal trends and other factors.</p>
           {'  '}
           <HighchartsReact
             highcharts={Highcharts}
