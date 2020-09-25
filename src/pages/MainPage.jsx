@@ -70,7 +70,7 @@ const MainPage = () => {
                 type="button"
                 onClick={() => handleSwitchFormType('simpleForm')}
               >
-                <p className={fonts.title2}>I WANT TO BRING MY GAME TO THE NEXT LEVEL</p>
+                <p className={fonts.title2}>I WANT TO KICKSTART MY GAME </p>
               </button>
             </div>
           </div>
@@ -80,32 +80,36 @@ const MainPage = () => {
                 type="button"
                 onClick={() => handleSwitchFormType('advancedForm')}
               >
-                <p className={fonts.title2}>I WANT TO KICKSTART MY GAME</p>
+                <p className={fonts.title2}>I WANT TO BRING MY GAME TO THE NEXT LEVEL</p>
               </button>
             </div>
           </div>
         </div>
-          {
-            !isFormHidden && (isAdvancedForm ?
-            <div className={styles.appMainPartFormViewQuestions}>  
-              <AdvancedCalculationForm
-                labels={labelsEng}
-                onChangeResponseData={handleChangeResponseData}
-                onClick={handleChangeIsClicked}
-                onChangeErrorMessage={handleChangeMessage}
-                url={'https://api-xsolla-revenue-calculator.herokuapp.com/RevenueForecast/Complex'}
-              />
-            </div> :
-            <div className={styles.appMainPartFormViewQuestions}>
-              <CalculationForm
-                labels={labelsEng}
-                onChangeResponseData={handleChangeResponseData}
-                onClick={handleChangeIsClicked}
-                onChangeErrorMessage={handleChangeMessage}
-                url={'https://api-xsolla-revenue-calculator.herokuapp.com/RevenueForecast/Simple'}
-              />
-            </div> )
-          }
+        {
+          !isFormHidden && (isAdvancedForm ?
+              <div className={styles.appMainPartFormView}>
+                <div className={styles.appMainPartFormViewQuestions}>
+                  <AdvancedCalculationForm
+                      labels={labelsEng}
+                      onChangeResponseData={handleChangeResponseData}
+                      onClick={handleChangeIsClicked}
+                      onChangeErrorMessage={handleChangeMessage}
+                      url={'https://api-xsolla-revenue-calculator.herokuapp.com/RevenueForecast/Complex'}
+                  />
+                </div>
+              </div> :
+              <div className={styles.appMainPartFormView}>
+                <div className={styles.appMainPartFormViewQuestions}>
+                  <CalculationForm
+                      labels={labelsEng}
+                      onChangeResponseData={handleChangeResponseData}
+                      onClick={handleChangeIsClicked}
+                      onChangeErrorMessage={handleChangeMessage}
+                      url={'https://api-xsolla-revenue-calculator.herokuapp.com/RevenueForecast/Simple'}
+                  />
+                </div>
+              </div>)
+        }
           { generalState.isClicked &&
             <ResultsField Error={message} id={responseData.id} /> }
       </div>

@@ -6,10 +6,6 @@ $screen-sm-max: 767px;
 $screen-md-max: 991px;
 $screen-lg-max: 1199px;
 
-$xsolla-color-fst: #3C4858;
-$xsolla-color-snd: #EB345E;
-$custom-white: #fafbfc;
-
 
 *{
   margin:0;
@@ -17,7 +13,6 @@ $custom-white: #fafbfc;
 }
 html{
   background-color: #f6faff;
-  // background-color: $custom-white;
   display:block;
 }
 
@@ -43,7 +38,7 @@ button {
 
 /*Work with app header*/
 .appHeader{
-  background-color: $custom-white;
+  background-color: #fff;
   display:flex;
   align-items: center;
   justify-content: space-between;
@@ -89,7 +84,6 @@ button {
   height: 52px;
   border: 2px solid #357BDA;
   cursor: pointer;
-  background-color: #fcfcfc;
 }
 
 .appHeaderContact span {
@@ -139,7 +133,6 @@ button {
   background-color:#00244d;
 }
 .appMainPartFormViewQuestions{
-  background-color:#00244d;
   width: auto;
   max-width: 900px;
   float: none;
@@ -179,7 +172,7 @@ button {
 }
 
 .form-field-label-text {
-  background-color: $custom-white;
+  background-color:#fafbfc;
   color: #011627;
   position: -webkit-sticky;
   position: sticky;
@@ -212,12 +205,10 @@ button {
   color:white;
 }
 .appMainPartResult{
-  // background-color:#eb002f;
-  background-color: $custom-white;
+  background-color:#eb002f;
   //display: none;
 }
 .appMainPartResultForm{
-  background-color: $custom-white;
   width: auto;
   max-width: 900px;
   float: none;
@@ -228,8 +219,7 @@ button {
   height:auto;
 }
 .appMainPartResultFormView{
-  background-color: $custom-white;
-  // background-color: $xsolla-color-snd;
+  background-color:#fafbfc;
 }
 .appMainPartResultFormViewFormTitle{
   display:flex;
@@ -238,7 +228,6 @@ button {
   width:100%;
 }
 .appMainPartResultFormViewForm{
-  // background-color: $xsolla-color-snd;
   margin-right: auto;
   margin-left: auto;
   padding:3vw;
@@ -247,17 +236,11 @@ button {
 .appMainPartResultProgressBar{
 
 }
+.appMainPartResultFormViewFormResult{
 
-
-
-
-// RESULT
-.ResultForecast{
-  background-color: $custom-white;
 }
-.ForecastTotal,.ForecastChart{
-  // background-color:#00244d;
-  background-color: $xsolla-color-snd;
+.ResultsTotal,.ResultsChart{
+  background-color:#00244d;
   border-radius: 5px;
   width: auto;
   max-width: 700px;
@@ -268,11 +251,6 @@ button {
   height:auto;
   color:white;
 }
-
-
-
-
-
 .ResultsChartView, .ResultsTotalView{
 
 }
@@ -288,17 +266,9 @@ button {
   justify-content: center;
   width:100%;
 }
-.InitialPageViewMain{
-  background-color:white;
-}
-.InitialPageViewInfoAbout{
-  background-color:#00244d;
-}
-.InitialPageViewCalculate{
-  background-color:#EB345E;
-}
 
-.InitialPageViewInfoAboutForm,.InitialPageViewMainForm,.InitialPageViewCalculateForm{
+.InitialPageViewMainForm{
+  background-color:#00244d;
   width: auto;
   max-width: 1200px;
   float: none;
@@ -306,15 +276,7 @@ button {
   margin-right: auto;
   margin-left: auto;
   padding:3vw;
-}
-.InitialPageViewInfoAboutForm,.InitialPageViewCalculateForm{
-  height:24vw;
-}
-
-.InitialPageViewMainForm{
   height:40vw;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .InitialPageViewCalculateButton{
@@ -335,14 +297,19 @@ button {
   overflow: hidden;
   display: flex;
   margin-bottom:30px;
+  height:20vw;
 }
 
 .InitialPageViewSelectFormViewButtonEasy{
-  background-color: $xsolla-color-fst;
+  background-color: #3C4858;
   font-color:white;
   margin-left: auto;
   margin-right: auto;
   width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content: center;
 }
 
 
@@ -352,15 +319,21 @@ button {
   margin-left: auto;
   margin-right: auto;
   width:100%;
+  height:100%;
   border: none;
+  margin:0px;
 }
 
-.InitialPageViewSelectFormViewButtonHard{
-  background-color: $xsolla-color-snd;
-  font-color:white;
+.InitialPageViewSelectFormViewButtonHard {
+  background-color: #EB345E;
+  font-color: white;
   margin-left: auto;
   margin-right: auto;
-  width:100%;
+  width: 100%;
+  height: 100%;
+  display:flex;
+  align-items:center;
+  justify-content: center;
 }
 
 .InitialPageViewSelectFormViewButtonHard button{
@@ -369,6 +342,7 @@ button {
   margin-left: auto;
   margin-right: auto;
   width:100%;
+  height:100%;
   border: none;
 }
 
@@ -382,8 +356,8 @@ button {
   display: flex;
   margin-right: auto;
   margin-left: auto;
-  padding:3vw;
-  height:12vw;
+  width:100%;
+  height:100%;
   justify-content: center;
   align-items: center;
 }
@@ -432,13 +406,23 @@ button {
   margin-right: 40px;
 }
 
-.InitialPageViewMainFormBoxesPicture{
-  height:auto;
+.InitialPageViewMainFormBoxesPicture1{
+  background: url(../pics/pic1.jpg) no-repeat;
+  width:  100%;
+  height: 40%;
+  background-size:cover;
 }
-
-.InitialPageViewMainFormBoxesPicture img{
-  max-width: 100%;
-  height: auto;
+.InitialPageViewMainFormBoxesPicture2{
+  background: url(../pics/pic2.jpg) no-repeat;
+  width:  100%;
+  height: 40%;
+  background-size:cover;
+}
+.InitialPageViewMainFormBoxesPicture3{
+  background: url(../pics/pic3.png) no-repeat;
+  width:  100%;
+  height: 40%;
+  background-size:cover;
 }
 
 .InitialPageViewMainFormBoxesText{
@@ -449,6 +433,32 @@ button {
   color:#0073f7;
 }
 
+.InitialPageViewCalculateFormButtonViewForm{
+  margin:4vw;
+}
+
+.InitialPageView{
+  background-color: white;
+}
+
 .InitialPageViewCalculateFormButtonView{
-  margin-bottom:4vw;
+  width: 100%;
+  max-width: 1200px;
+  float: none;
+  display: flex;
+  margin-right: auto;
+  margin-left: auto;
+  padding:3vw;
+  background: #c5d0db;
+  margin-top: 1vw;
+  align-items:center;
+  justify-content: center;
+}
+
+.totalRevenue{
+  color:#EB345E;
+}
+
+.addMainPage{
+  padding:3vw;
 }

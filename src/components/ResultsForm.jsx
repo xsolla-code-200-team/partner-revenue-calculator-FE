@@ -48,7 +48,7 @@ const ProgressBar = ({ TotalRevenue, chosenForecast, anotherForecast, ...props }
     series: [{
       type: 'line',
       name: 'your forecast',
-      data: chosenForecast.forecast.map(item => Math.round(item)),
+      data: chosenForecast.forecast,
     }, {
     //   type: 'spline',
     //   regression: true,
@@ -64,7 +64,7 @@ const ProgressBar = ({ TotalRevenue, chosenForecast, anotherForecast, ...props }
       visible: false,
       type: 'line',
       name: 'another forecast',
-      data: anotherForecast.forecast.map(item => Math.round(item)),
+      data: anotherForecast.forecast,
       color: 'rgba(23, 83, 83, .5)',
     }],
 
@@ -88,15 +88,20 @@ const ProgressBar = ({ TotalRevenue, chosenForecast, anotherForecast, ...props }
       <div className={styles.appMainPartResultFormViewFormTitle}>
         <p className={fonts.display}>RESULTS</p>
       </div>
-      <div className={styles.ResultForecast}>
-        <div className={styles.ForecastTotal}>
-          <p className={fonts.title}>
-            Your revenue gonna be:
-            &nbsp; 
-            ${TotalRevenue}
+      <div className={styles.appMainPartResultFormViewFormResult}>
+        <div className={styles.ResultsTotal}>
+          <p>
+            <p className={fonts.title}>
+              Here's a forecast for your product!
+              {' '}
+              Based on your data we have calculated the approximate amount of money you will recieve the next month
+            </p>
+            <div className={styles.totalRevenue}><p className={fonts.title2}>{`${TotalRevenue}`}</p></div>
           </p>
         </div>
-        <div className={styles.ForecastChart}>
+        <div className={styles.ResultsChart}>
+          This number is affected by seasonal trends and other factors.
+          {'  '}
           <HighchartsReact
             highcharts={Highcharts}
             options={chartOptions}
