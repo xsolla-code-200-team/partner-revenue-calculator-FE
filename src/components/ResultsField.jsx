@@ -73,8 +73,8 @@ const ResultsField = ({ Error, id, ...props }) => {
       setTotalRevenue(0);
     } else {
       const value = dataInfo.chosenForecast.forecast.reduce((acc, item) => {
-        console.log(item);
-        console.log(acc);
+        // console.log(item);
+        // console.log(acc);
         return acc + Number(item);
       }, 0);
       setTotalRevenue(Math.round(value));
