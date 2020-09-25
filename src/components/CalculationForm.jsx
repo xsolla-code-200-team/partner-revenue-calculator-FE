@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Button } from 'xsolla-uikit';
+import { Link, animateScroll as scroll, Element, scroller } from 'react-scroll';
 
 import InputField from './inputField/InputField';
 import CheckboxPlate from './checkboxPlate/CheckboxPlate';
@@ -76,6 +77,13 @@ const CalculationForm = ({
   //
   useEffect(() => {
     if (firstRender.current) {
+      scroller.scrollTo("calculationForm", {
+        // spy: true, 
+        smooth: true,
+        offset: -70,
+        duration: 500,
+        // delay: 500,
+      });
       firstRender.current = false;
       return;
     }
@@ -85,7 +93,7 @@ const CalculationForm = ({
   const valuesToLowerCase = (obj) => {
     return Object.keys(obj).reduce((acc, key) => {
       let value = obj[key];
-      if (key === 'productName' || key === 'companyName' || key === 'email') {
+      if (key === 'productName' || key === 'companyName' || key === 'email' || key === 'sales' || key === 'cost') {
         //pass
         acc[key] = value;
       } else if (Array.isArray(value)) {
@@ -275,8 +283,9 @@ const CalculationForm = ({
   };
 
   return (
+    <>
+    <Element name="calculationForm"></Element>
     <div className={styles.appMainPartFormViewQuestionsForm}>
-      
       <InputField
         name="productName"
         value={reqData.productName}
@@ -350,6 +359,7 @@ const CalculationForm = ({
         {labels.sendButton}
       </Button>
     </div>
+    </>
   );
 };
 

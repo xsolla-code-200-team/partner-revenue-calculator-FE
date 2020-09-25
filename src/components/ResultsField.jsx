@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link, animateScroll as scroll, Element, scroller } from 'react-scroll';
 
 import styles from '../scss/styles.scss';
 import ResultsForm from './ResultsForm';
@@ -9,16 +10,32 @@ const ResultsField = ({ Error, id, ...props }) => {
   const [errorName, setErrorName] = useState('');
   const [hasError, setHasError] = useState(false);
   const [isReadyToShow, setIsReadyToShow] = useState(false);
+  const [totalRevenue, setTotalRevenue] = useState(0);
 
   const firstRender = useRef(true);
+  const scrolled = useRef(false);
 
   useEffect(() => {
     if (firstRender.current) {
       firstRender.current = false;
       getResponse();
     }
-    // console.log(`произошел рендер результата, id = ${id}`);
-    // formValidation();
+    if (dataInfo.chosenForecast == null) {
+      getResponse();
+    }
+    if (dataInfo.chosenForecast != null) {
+      updateTotalRevenue();
+      setIsReadyToShow(true);
+    }
+    if (isReadyToShow) {
+      scroller.scrollTo("result", {
+        // spy: true, 
+        smooth: true,
+        offset: 0,
+        duration: 500,
+        // delay: 500,
+      });
+    }
   }, [dataInfo]);
 
   const getResponse = () => {
@@ -42,7 +59,7 @@ const ResultsField = ({ Error, id, ...props }) => {
         console.log('resData (GET id):');
         console.log(data);
         setDataInfo(data);
-        setIsReadyToShow(true);
+        // setIsReadyToShow(true);
       })
       .catch((e) => {
         console.log(e.message);
@@ -51,16 +68,30 @@ const ResultsField = ({ Error, id, ...props }) => {
       });
   };
 
+  const updateTotalRevenue = () => {
+    if (dataInfo.chosenForecast == null) {
+      setTotalRevenue(0);
+    } else {
+      const value = dataInfo.chosenForecast.forecast.reduce((acc, item) => {
+        console.log(item);
+        console.log(acc);
+        return acc + Number(item);
+      }, 0);
+      setTotalRevenue(Math.round(value));
+    }
+  }
+
   return (
     <>
       <div className={styles.appMainPartResult}>
+        <Element name="result"></Element>
         <div className={styles.appMainPartResultForm}>
           <div className={styles.appMainPartResultFormView}>
             <div className={styles.appMainPartResultFormViewForm}>
               {
                 isReadyToShow &&
                 <ResultsForm
-                  TotalRevenue={'-'}
+                  TotalRevenue={totalRevenue}
                   chosenForecast={dataInfo.chosenForecast}
                   anotherForecast={dataInfo.otherForecasts[0]}
                 />

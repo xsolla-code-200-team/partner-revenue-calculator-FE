@@ -63,19 +63,28 @@ const SelectForm = () => {
       <div className={styles.InitialPageViewSelectFormView}>
         <div className={styles.InitialPageViewSelectFormViewButtonEasy}>
           <div className={styles.InitialPageViewSelectFormViewButtonText}>
-
-            <button onClick={() => handleSwitchFormType('simpleForm')}><p className={fonts.title2}>I WANT TO BRING MY GAME TO THE NEXT LEVEL</p></button>
+            <button
+              type="button"
+              onClick={() => handleSwitchFormType('simpleForm')}
+            >
+              <p className={fonts.title2}>I WANT TO BRING MY GAME TO THE NEXT LEVEL</p>
+            </button>
           </div>
         </div>
         <div className={styles.InitialPageViewSelectFormViewButtonHard}>
           <div className={styles.InitialPageViewSelectFormViewButtonText}>
-            <button onClick={() => handleSwitchFormType('advancedForm')}><p className={fonts.title2}>I WANT TO KICKSTART MY GAME</p></button>
+            <button
+              type="button"
+              onClick={() => handleSwitchFormType('advancedForm')}
+            >
+              <p className={fonts.title2}>I WANT TO KICKSTART MY GAME</p>
+            </button>
           </div>
         </div>
       </div>
       {
         !isFormHidden && (isAdvancedForm ?
-            <div className={styles.appMainPartFormView}>
+            
               <div className={styles.appMainPartFormViewQuestions}>
                 <AdvancedCalculationForm
                     labels={labelsEng}
@@ -85,8 +94,8 @@ const SelectForm = () => {
                     url={'https://api-xsolla-revenue-calculator.herokuapp.com/RevenueForecast/Complex'}
                 />
               </div>
-            </div> :
-            <div className={styles.appMainPartFormView}>
+            :
+            
               <div className={styles.appMainPartFormViewQuestions}>
                 <CalculationForm
                     labels={labelsEng}
@@ -96,7 +105,7 @@ const SelectForm = () => {
                     url={'https://api-xsolla-revenue-calculator.herokuapp.com/RevenueForecast/Simple'}
                 />
               </div>
-            </div>)
+        )
       }
     </div>
   </>

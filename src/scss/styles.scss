@@ -6,6 +6,10 @@ $screen-sm-max: 767px;
 $screen-md-max: 991px;
 $screen-lg-max: 1199px;
 
+$xsolla-color-fst: #3C4858;
+$xsolla-color-snd: #EB345E;
+$custom-white: #fafbfc;
+
 
 *{
   margin:0;
@@ -13,6 +17,7 @@ $screen-lg-max: 1199px;
 }
 html{
   background-color: #f6faff;
+  // background-color: $custom-white;
   display:block;
 }
 
@@ -38,7 +43,7 @@ button {
 
 /*Work with app header*/
 .appHeader{
-  background-color: #fff;
+  background-color: $custom-white;
   display:flex;
   align-items: center;
   justify-content: space-between;
@@ -84,6 +89,7 @@ button {
   height: 52px;
   border: 2px solid #357BDA;
   cursor: pointer;
+  background-color: #fcfcfc;
 }
 
 .appHeaderContact span {
@@ -133,6 +139,7 @@ button {
   background-color:#00244d;
 }
 .appMainPartFormViewQuestions{
+  background-color:#00244d;
   width: auto;
   max-width: 900px;
   float: none;
@@ -172,7 +179,7 @@ button {
 }
 
 .form-field-label-text {
-  background-color:#fafbfc;
+  background-color: $custom-white;
   color: #011627;
   position: -webkit-sticky;
   position: sticky;
@@ -205,10 +212,12 @@ button {
   color:white;
 }
 .appMainPartResult{
-  background-color:#eb002f;
+  // background-color:#eb002f;
+  background-color: $custom-white;
   //display: none;
 }
 .appMainPartResultForm{
+  background-color: $custom-white;
   width: auto;
   max-width: 900px;
   float: none;
@@ -219,7 +228,8 @@ button {
   height:auto;
 }
 .appMainPartResultFormView{
-  background-color:#fafbfc;
+  background-color: $custom-white;
+  // background-color: $xsolla-color-snd;
 }
 .appMainPartResultFormViewFormTitle{
   display:flex;
@@ -228,6 +238,7 @@ button {
   width:100%;
 }
 .appMainPartResultFormViewForm{
+  // background-color: $xsolla-color-snd;
   margin-right: auto;
   margin-left: auto;
   padding:3vw;
@@ -236,11 +247,17 @@ button {
 .appMainPartResultProgressBar{
 
 }
-.appMainPartResultFormViewFormResult{
 
+
+
+
+// RESULT
+.ResultForecast{
+  background-color: $custom-white;
 }
-.ResultsTotal,.ResultsChart{
-  background-color:#00244d;
+.ForecastTotal,.ForecastChart{
+  // background-color:#00244d;
+  background-color: $xsolla-color-snd;
   border-radius: 5px;
   width: auto;
   max-width: 700px;
@@ -251,6 +268,11 @@ button {
   height:auto;
   color:white;
 }
+
+
+
+
+
 .ResultsChartView, .ResultsTotalView{
 
 }
@@ -316,7 +338,7 @@ button {
 }
 
 .InitialPageViewSelectFormViewButtonEasy{
-  background-color: #3C4858;
+  background-color: $xsolla-color-fst;
   font-color:white;
   margin-left: auto;
   margin-right: auto;
@@ -334,7 +356,7 @@ button {
 }
 
 .InitialPageViewSelectFormViewButtonHard{
-  background-color:#EB345E;
+  background-color: $xsolla-color-snd;
   font-color:white;
   margin-left: auto;
   margin-right: auto;

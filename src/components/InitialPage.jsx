@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import styles from '../scss/styles.scss';
 import fonts from '../scss/fonts.scss';
 import SelectForm from './SelectForm';
+import MainPage from '../pages/MainPage';
 
 const InitialPage = () => {
     const [isClicked, setClickedButton] = useState(false);
@@ -73,7 +74,7 @@ const InitialPage = () => {
             </div>
         </div>
         }
-        {isClicked && <SelectForm />}
+        {isClicked && <MainPage />}
     </>
     );
 };

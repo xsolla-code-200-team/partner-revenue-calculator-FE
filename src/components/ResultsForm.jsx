@@ -48,7 +48,7 @@ const ProgressBar = ({ TotalRevenue, chosenForecast, anotherForecast, ...props }
     series: [{
       type: 'line',
       name: 'your forecast',
-      data: chosenForecast.forecast,
+      data: chosenForecast.forecast.map(item => Math.round(item)),
     }, {
     //   type: 'spline',
     //   regression: true,
@@ -64,7 +64,7 @@ const ProgressBar = ({ TotalRevenue, chosenForecast, anotherForecast, ...props }
       visible: false,
       type: 'line',
       name: 'another forecast',
-      data: anotherForecast.forecast,
+      data: anotherForecast.forecast.map(item => Math.round(item)),
       color: 'rgba(23, 83, 83, .5)',
     }],
 
@@ -88,15 +88,15 @@ const ProgressBar = ({ TotalRevenue, chosenForecast, anotherForecast, ...props }
       <div className={styles.appMainPartResultFormViewFormTitle}>
         <p className={fonts.display}>RESULTS</p>
       </div>
-      <div className={styles.appMainPartResultFormViewFormResult}>
-        <div className={styles.ResultsTotal}>
+      <div className={styles.ResultForecast}>
+        <div className={styles.ForecastTotal}>
           <p className={fonts.title}>
-            Your revenue gonna be :
-            {' '}
-            {TotalRevenue}
+            Your revenue gonna be:
+            &nbsp; 
+            ${TotalRevenue}
           </p>
         </div>
-        <div className={styles.ResultsChart}>
+        <div className={styles.ForecastChart}>
           <HighchartsReact
             highcharts={Highcharts}
             options={chartOptions}

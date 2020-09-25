@@ -28,7 +28,7 @@ const InputField = ({
   };
 
   const handleChange = (e) => {
-    const value = type === 'number' ? e.target.value.replace(/[^0-9]/g, '') : e.target.value;
+    const value = type === 'number' ? Number(e.target.value.replace(/[^0-9]/g, '')) : e.target.value;
 
     if (!firstRender.current) {
       validate(name, value);
