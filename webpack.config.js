@@ -1,8 +1,9 @@
 const path = require('path');
 const HtmlPlugin = require('html-webpack-plugin');
 const MiniCssPlugin = require('mini-css-extract-plugin');
-// const isDev = process.env.NODE_ENV === 'development';
-const isDev = process.argv.mode === 'production';
+const { contains } = require('jquery');
+// console.log(process);
+const PROD_MODE = process.env.WEBPACK_DEV_SERVER === 'true' ? false : true ;
 
 module.exports = (env, argv) => ({
     entry: './src/index.jsx',
@@ -11,7 +12,7 @@ module.exports = (env, argv) => ({
         path: path.join(__dirname, 'dist'),
         publicPath: '/'
     },
-    devtool: argv.mode === "production" ? 'hidden-source-map' : 'source-map',
+    devtool: PROD_MODE ? 'hidden-source-map' : 'source-map',
     resolve: {
         extensions: ['.js', '.jsx']
     },
@@ -52,9 +53,11 @@ module.exports = (env, argv) => ({
                         options: {
                             modules: {
                                 localIdentName :
-                                    isDev ?
-                                    '[path][name]__[local]' :
-                                    '[hash:base64]'
+                                    PROD_MODE ?
+                                    // '[path][name]__[local]' :
+                                    '[hash:base64]' :
+                                    '[local]'
+                                    
                             }
                         }
                     },
@@ -69,11 +72,5 @@ module.exports = (env, argv) => ({
         contentBase: path.join(__dirname, 'dist'),
         historyApiFallback: { index: '/' },
         hot: true,
-        // headers: {
-        //     "Access-Control-Allow-Origin": "*",
-        //     "Access-Control-Allow-Credentials": "true",
-        //     "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS,POST,PUT",
-        //     "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-        // }
     }
 });

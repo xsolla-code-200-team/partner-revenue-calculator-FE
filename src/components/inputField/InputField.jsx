@@ -41,9 +41,9 @@ const InputField = ({
 
   return (
     <>
-      <div className={styles['form-field-label']}>
-        <div className={styles['form-field-label-text']}>{labelText}</div>
-        <div className={styles['form-field-label-string']} />
+      <div className={styles['mainPageFormFieldsLabel']}>
+        <div className={styles['mainPageFormFieldsLabel__text']}>{labelText}</div>
+        <div className={styles['mainPageFormFieldsLabel__line']} />
       </div>
       <div className={style.input}>
         <Input

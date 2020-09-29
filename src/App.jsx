@@ -3,35 +3,30 @@ import {
   BrowserRouter, Route, Switch, Link,
 } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
-import { Button } from 'xsolla-uikit';
 
-import MainPage from './pages/MainPage';
+import AboutUsLink from './components/AboutUsLink';
+import ContactUsButton from './components/ContactUsButton';
 import styles from './scss/styles.scss';
 import fonts from './scss/fonts.scss';
 import logo from './pics/logo.png';
-import InitialPage from './components/InitialPage';
-import ResultsForm from './components/ResultsForm';
+import InitialPage from './pages/InitialPage';
 
 const App = () => (
   <div className={styles.body}>
     <header className={styles.appHeader}>
       <div className={styles.appHeaderLogo}>
-        <div className={styles.appHeaderLogoImg}>
-          <img src={logo} style={{ width: '100px', height: '100px' }} />
+        <div className={styles.appHeaderLogo__img}>
+          <a href="https://xsolla.com/" target="_blank">
+            <img src={logo} />
+          </a>
         </div>
-        <div className={styles.appHeaderLogoText}>
-          <a className={fonts.display}>Xsolla Partner Calculator</a>
+        <div className={styles.appHeaderLogo__text}>
+          <a className={fonts.display} href="/">Xsolla Partner Calculator</a>
         </div>
       </div>
-      <div className={styles.appHeaderAbout}>
-        <a className={fonts.header} href="https://xsolla.com/about">About us</a>
-      </div>
-      <div className={styles.appHeaderContact}>
-        <button
-          type="button"
-        >
-          <a className={fonts.header} href="https://xsolla.com/contact-sales">Contact us</a>
-        </button>
+      <div className={styles.appHeaderButtons}>
+        <AboutUsLink />
+        <ContactUsButton />
       </div>
     </header>
     <BrowserRouter>

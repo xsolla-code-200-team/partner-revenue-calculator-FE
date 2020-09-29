@@ -2,32 +2,21 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, animateScroll as scroll, Element, scroller } from 'react-scroll';
 
 import styles from '../scss/styles.scss';
-import ResultsForm from './ResultsForm';
+import ForecastChart from './ForecastChart';
 // import ProgressBar from './ProgressBar';
 
-const ResultsField = ({ Error, id, ...props }) => {
-  const [dataInfo, setDataInfo] = useState({});
-  const [errorName, setErrorName] = useState('');
-  const [hasError, setHasError] = useState(false);
-  const [isReadyToShow, setIsReadyToShow] = useState(false);
+const ResultDashboard = ({ inputData, ...props }) => {
+  const [resultData, setResultData] = useState(inputData);
+  const [error, setError] = useState('');
   const [totalRevenue, setTotalRevenue] = useState(0);
 
   const firstRender = useRef(true);
-  const scrolled = useRef(false);
 
   useEffect(() => {
     if (firstRender.current) {
       firstRender.current = false;
-      getResponse();
     }
-    if (dataInfo.chosenForecast == null) {
-      getResponse();
-    }
-    if (dataInfo.chosenForecast != null) {
-      updateTotalRevenue();
-      setIsReadyToShow(true);
-    }
-    if (isReadyToShow) {
+    if (resultData.isReady) {
       scroller.scrollTo("result", {
         // spy: true, 
         smooth: true,
@@ -35,12 +24,13 @@ const ResultsField = ({ Error, id, ...props }) => {
         duration: 500,
         // delay: 500,
       });
+    } else {
+      getResponse();
     }
-  }, [dataInfo]);
+  }, [resultData]);
 
   const getResponse = () => {
-    setIsReadyToShow(false);
-    fetch(`https://api-xsolla-revenue-calculator.herokuapp.com/RevenueForecast/${id}`, {
+    fetch(`https://api-xsolla-revenue-calculator.herokuapp.com/RevenueForecast/${resultData.id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -58,42 +48,27 @@ const ResultsField = ({ Error, id, ...props }) => {
       .then((data) => {
         console.log('resData (GET id):');
         console.log(data);
-        setDataInfo(data);
-        // setIsReadyToShow(true);
+        setResultData(data);
       })
       .catch((e) => {
         console.log(e.message);
-        setErrorName(e.message);
-        setHasError(true);
+        setError(e.message);
       });
   };
 
-  const updateTotalRevenue = () => {
-    if (dataInfo.chosenForecast == null) {
-      setTotalRevenue(0);
-    } else {
-      const value = dataInfo.chosenForecast.forecast.reduce((acc, item) => {
-        // console.log(item);
-        // console.log(acc);
-        return acc + Number(item);
-      }, 0);
-      setTotalRevenue(Math.round(value));
-    }
-  }
-
   return (
     <>
-      <div className={styles.appMainPartResult}>
+      <div className={styles.resultDashboard}>
         <Element name="result"></Element>
         <div className={styles.appMainPartResultForm}>
           <div className={styles.appMainPartResultFormView}>
             <div className={styles.appMainPartResultFormViewForm}>
               {
-                isReadyToShow &&
-                <ResultsForm
+                resultData.isReady &&
+                <ForecastChart
                   TotalRevenue={totalRevenue}
-                  chosenForecast={dataInfo.chosenForecast}
-                  anotherForecast={dataInfo.otherForecasts[0]}
+                  chosenForecast={resultData.chosenForecast}
+                  anotherForecast={resultData.otherForecasts[0]}
                 />
               }
             </div>
@@ -104,4 +79,4 @@ const ResultsField = ({ Error, id, ...props }) => {
   );
 };
 
-export default ResultsField;
+export default ResultDashboard;

@@ -93,16 +93,11 @@ const CalculationForm = ({
   const valuesToLowerCase = (obj) => {
     return Object.keys(obj).reduce((acc, key) => {
       let value = obj[key];
-      if (key === 'productName' || key === 'companyName' || key === 'email' || key === 'sales' || key === 'cost') {
-        //pass
+      if (key in [ 'productName', 'companyName', 'email', 'sales', 'cost' ]) {
         acc[key] = value;
       } else if (Array.isArray(value)) {
         value = value.map(element => element.toLowerCase());
         acc[key] = value;
-      // } else if (typeof value === 'object') {
-      //   console.log(`${value} is object`);
-      //   value = valuesToLowerCase(value);
-      //   console.log(value);
       } else {
         acc[key] = value.toLowerCase();
       }
@@ -284,81 +279,81 @@ const CalculationForm = ({
 
   return (
     <>
-    <Element name="calculationForm"></Element>
-    <div className={styles.appMainPartFormViewQuestionsForm}>
-      <InputField
-        name="productName"
-        value={reqData.productName}
-        onChangeReqData={handleChangeFields}
-        labelText={labels.productName}
-        type="text"
-        placeholder="super game"
-        validation={fieldsValidation}
-      />
-      { props.isAdvanced &&
-        <CheckboxPlate
-          name="releaseDate"
+      <Element name="calculationForm"></Element>
+      <div className={styles.mainPageFormFields}>
+        <InputField
+          name="productName"
+          value={reqData.productName}
           onChangeReqData={handleChangeFields}
-          checkboxes={releaseDate}
-          labelText={labels.releaseDate}
-          multipleChoice={false}
+          labelText={labels.productName}
+          type="text"
+          placeholder="super game"
           validation={fieldsValidation}
         />
-      }
-      <CheckboxPlate name="genres" onChangeReqData={handleChangeFields} checkboxes={genres} labelText={labels.genres} multipleChoice validation={fieldsValidation} />
-      <CheckboxPlate name="monetization" onChangeReqData={handleChangeFields} checkboxes={monetization} labelText={labels.monetization} multipleChoice={false} validation={fieldsValidation} />
-      <CheckboxPlate name="platforms" onChangeReqData={handleChangeFields} checkboxes={platforms} labelText={labels.platforms} multipleChoice validation={fieldsValidation} />
-      <CheckboxPlate name="regions" onChangeReqData={handleChangeFields} checkboxes={regions} labelText={labels.regions} multipleChoice validation={fieldsValidation} />
-      { props.isAdvanced &&
-        <>
-          <InputField
-            name="sales"
-            value={reqData.sales}
+        { props.isAdvanced &&
+          <CheckboxPlate
+            name="releaseDate"
             onChangeReqData={handleChangeFields}
-            labelText={labels.sales}
-            type="number"
-            placeholder="1 000 000"
+            checkboxes={releaseDate}
+            labelText={labels.releaseDate}
+            multipleChoice={false}
             validation={fieldsValidation}
           />
-          <InputField
-            name="cost"
-            value={reqData.cost}
-            onChangeReqData={handleChangeFields}
-            labelText={labels.cost}
-            type="number"
-            placeholder="60"
-            validation={fieldsValidation}
-          />
-        </>
-      }
-      <InputField
-        name="companyName"
-        value={reqData.companyName}
-        onChangeReqData={handleChangeFields}
-        labelText={labels.companyName}
-        type="text"
-        placeholder="super company"
-        validation={fieldsValidation}
-      />
-      <InputField
-        name="email"
-        value={reqData.email}
-        onChangeReqData={handleChangeFields}
-        labelText={labels.email}
-        type="email"
-        placeholder="your@email.com"
-        validation={fieldsValidation}
-      />
-      <Button
-        type="button"
-        appearance="secondary"
-        onClick={handleClick}
-        disabled={!isValidForm}
-        fetching={generalState.isLoading}
-      >
-        {labels.sendButton}
-      </Button>
-    </div>
+        }
+        <CheckboxPlate name="genres" onChangeReqData={handleChangeFields} checkboxes={genres} labelText={labels.genres} multipleChoice validation={fieldsValidation} />
+        <CheckboxPlate name="monetization" onChangeReqData={handleChangeFields} checkboxes={monetization} labelText={labels.monetization} multipleChoice={false} validation={fieldsValidation} />
+        <CheckboxPlate name="platforms" onChangeReqData={handleChangeFields} checkboxes={platforms} labelText={labels.platforms} multipleChoice validation={fieldsValidation} />
+        <CheckboxPlate name="regions" onChangeReqData={handleChangeFields} checkboxes={regions} labelText={labels.regions} multipleChoice validation={fieldsValidation} />
+        { props.isAdvanced &&
+          <>
+            <InputField
+              name="sales"
+              value={reqData.sales}
+              onChangeReqData={handleChangeFields}
+              labelText={labels.sales}
+              type="number"
+              placeholder="1 000 000"
+              validation={fieldsValidation}
+            />
+            <InputField
+              name="cost"
+              value={reqData.cost}
+              onChangeReqData={handleChangeFields}
+              labelText={labels.cost}
+              type="number"
+              placeholder="60"
+              validation={fieldsValidation}
+            />
+          </>
+        }
+        <InputField
+          name="companyName"
+          value={reqData.companyName}
+          onChangeReqData={handleChangeFields}
+          labelText={labels.companyName}
+          type="text"
+          placeholder="super company"
+          validation={fieldsValidation}
+        />
+        <InputField
+          name="email"
+          value={reqData.email}
+          onChangeReqData={handleChangeFields}
+          labelText={labels.email}
+          type="email"
+          placeholder="your@email.com"
+          validation={fieldsValidation}
+        />
+        <Button
+          type="button"
+          appearance="secondary"
+          onClick={handleClick}
+          disabled={!isValidForm}
+          fetching={generalState.isLoading}
+        >
+          {labels.sendButton}
+        </Button>
+      </div>
     </>
   );
 };

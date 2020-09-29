@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-// import from '../components/'
 import CalculationForm from '../components/CalculationForm';
 import AdvancedCalculationForm from '../components/AdvancedCalculationForm';
-import ResultsField from '../components/ResultsField';
+import ResultDashboard from '../components/ResultDashboard';
 import fonts from '../scss/fonts.scss';
 import styles from '../scss/styles.scss';
 
@@ -24,12 +23,10 @@ const labelsEng = {
 
 const MainPage = () => {
   const [responseData, setResponseData] = useState({});
-
   const [generalState, setGeneralState] = useState({
     isClicked: false,
   });
   const [message, setMessage] = useState('');
-
   const [isAdvancedForm, setIsAdvancedForm] = useState(false);
   const [isFormHidden, setIsFormHidden] = useState(true);
 
@@ -37,18 +34,18 @@ const MainPage = () => {
     setResponseData(data);
   };
 
-  const handleChangeIsClicked = (value) => {
+  const handleFormClick = (value) => {
     setGeneralState({ ...generalState, isClicked: value });
   };
 
-  const handleSwitchFormType = (showForm) => {
+  const handleSwitchFormType = (showFormType) => {
     setIsFormHidden(false);
-    if (showForm === 'simpleForm') {
+    if (showFormType === 'simpleForm') {
       if (isAdvancedForm) {
         setGeneralState({ ...generalState, isClicked: false });
         setIsAdvancedForm(false);
       }
-    } else if (showForm === 'advancedForm') {
+    } else if (showFormType === 'advancedForm') {
       if (!isAdvancedForm) {
         setGeneralState({ ...generalState, isClicked: false });
         setIsAdvancedForm(true);
@@ -62,58 +59,50 @@ const MainPage = () => {
 
   return (
     <>
-      <div className={styles.InitialPageViewSelectForm}>
-        <div className={styles.InitialPageViewSelectFormView}>
-          <div className={styles.InitialPageViewSelectFormViewButtonEasy}>
-            <div className={styles.InitialPageViewSelectFormViewButtonText}>
-              <button
-                type="button"
-                onClick={() => handleSwitchFormType('simpleForm')}
-              >
-                <p className={fonts.title3}>I WANT TO DECIDE ON PARAMETERS</p>
-                <p className={fonts.title3}>OF MY FUTURE GAME</p>
-              </button>
-            </div>
+      <div className={styles.mainPage}>
+        <div className={styles.mainPageButtons}>
+          <div className={`${styles.mainPageButtons__button__simple} ${styles.mainPageButtons__text}`}>
+            <button
+              type="button"
+              onClick={() => handleSwitchFormType('simpleForm')}
+            >
+              <p className={fonts.title3}>I WANT TO DECIDE ON PARAMETERS</p>
+              <p className={fonts.title3}>OF MY FUTURE GAME</p>
+            </button>
           </div>
-          <div className={styles.InitialPageViewSelectFormViewButtonHard}>
-            <div className={styles.InitialPageViewSelectFormViewButtonText}>
-              <button
-                type="button"
-                onClick={() => handleSwitchFormType('advancedForm')}
-              >
-                <p className={fonts.title3}>I WANT TO BRING MY COMPLETED GAME</p>
-                <p className={fonts.title3}>TO THE NEXT LEVEL</p>
-              </button>
-            </div>
+          <div className={`${styles.mainPageButtons__button__advanced} ${styles.mainPageButtons__text}`}>
+            <button
+              type="button"
+              onClick={() => handleSwitchFormType('advancedForm')}
+            >
+              <p className={fonts.title3}>I WANT TO BRING MY COMPLETED GAME</p>
+              <p className={fonts.title3}>TO THE NEXT LEVEL</p>
+            </button>
           </div>
         </div>
         {
           !isFormHidden && (isAdvancedForm ?
-              <div className={styles.appMainPartFormView}>
-                <div className={styles.appMainPartFormViewQuestions}>
-                  <AdvancedCalculationForm
-                      labels={labelsEng}
-                      onChangeResponseData={handleChangeResponseData}
-                      onClick={handleChangeIsClicked}
-                      onChangeErrorMessage={handleChangeMessage}
-                      url={'https://api-xsolla-revenue-calculator.herokuapp.com/RevenueForecast/Complex'}
-                  />
-                </div>
+              <div className={styles.mainPageForm}>
+                <AdvancedCalculationForm
+                    labels={labelsEng}
+                    onChangeResponseData={handleChangeResponseData}
+                    onClick={handleFormClick}
+                    onChangeErrorMessage={handleChangeMessage}
+                    url={'https://api-xsolla-revenue-calculator.herokuapp.com/RevenueForecast/Complex'}
+                />
               </div> :
-              <div className={styles.appMainPartFormView}>
-                <div className={styles.appMainPartFormViewQuestions}>
-                  <CalculationForm
-                      labels={labelsEng}
-                      onChangeResponseData={handleChangeResponseData}
-                      onClick={handleChangeIsClicked}
-                      onChangeErrorMessage={handleChangeMessage}
-                      url={'https://api-xsolla-revenue-calculator.herokuapp.com/RevenueForecast/Simple'}
-                  />
-                </div>
+              <div className={styles.mainPageForm}>
+                <CalculationForm
+                    labels={labelsEng}
+                    onChangeResponseData={handleChangeResponseData}
+                    onClick={handleFormClick}
+                    onChangeErrorMessage={handleChangeMessage}
+                    url={'https://api-xsolla-revenue-calculator.herokuapp.com/RevenueForecast/Simple'}
+                />
               </div>)
         }
           { generalState.isClicked &&
-            <ResultsField Error={message} id={responseData.id} /> }
+            <ResultDashboard inputData={responseData} /> }
       </div>
     </>
   );

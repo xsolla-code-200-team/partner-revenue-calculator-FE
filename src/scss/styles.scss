@@ -8,20 +8,32 @@ $screen-lg-max: 1199px;
 
 $xsolla-color-fst: #3C4858;
 $xsolla-color-snd: #EB345E;
+
+$xsolla-magenta: #ff005b;
+$xsolla-midnight: #011627;
+$xsolla-slate: #495c6b;
+$xsolla-iron: #d6e0e7;
+$xsolla-dove: #f6faff;
+$xsolla-electric: #0076ff;
+
 $custom-white: #fafbfc;
+$custom-darkblue: #00244d;
+$custom-blue: #357BDA;
 
 *{
   margin:0;
   padding: 0;
 }
 html{
-  background-color: #f6faff;
+  background-color: $xsolla-dove;
   display:block;
 }
-
 a {
   text-decoration: none;
   color: inherit;
+}
+button {
+  outline: none !important;
 }
 
 .body{
@@ -35,10 +47,6 @@ a {
   padding-right: 40px;
 }
 
-button {
-  outline: none !important;
-}
-
 /*Work with app header*/
 .appHeader{
   background-color: $custom-white;
@@ -49,49 +57,51 @@ button {
   padding-right: 40px;
 }
 
-.appHeaderIcon{
-  display: flex;
-  margin-right: 24px;
-  height: 140px;
-}
-.appHeaderIconInfo{
-  width: 200px;
-  height: 100px;
-  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M143.383 78l-2.948-4.971L137.487 78h-4.642l5.126-8.338-4.598-7.436h4.422l2.596 4.378 2.596-4.378h4.466l-4.686 7.436L147.871 78h-4.488zm10.846.353c-3.806 0-5.874-1.672-6.292-4.62h4.136c.264 1.077 1.056 1.561 2.354 1.561 1.254 0 1.804-.417 1.804-1.121 0-.88-1.386-.99-2.97-1.189-2.2-.285-4.796-.77-4.796-3.805 0-2.487 1.958-4.225 5.566-4.225 3.828 0 5.544 1.717 5.94 4.269h-3.938c-.176-.88-.836-1.365-2.046-1.365-1.232 0-1.672.462-1.672 1.078 0 .792 1.078.924 2.97 1.166 2.2.286 4.84.836 4.84 3.806 0 2.552-1.936 4.444-5.896 4.444zm13.31-.022c-4.136 0-6.424-2.157-6.424-6.403v-.395c0-4.335 2.684-6.557 6.446-6.557 3.828 0 6.424 2.289 6.424 6.557v.395c0 4.247-2.552 6.403-6.446 6.403zm.022-3.455c1.474 0 2.442-.99 2.442-2.991v-.353c0-2.09-.88-3.167-2.42-3.167-1.496 0-2.486 1.033-2.486 3.167v.353c0 1.957.99 2.991 2.464 2.991zm12.21 3.125h-4.048V61.06h4.048V78zm6.27 0h-4.048V61.06h4.048V78zm7.348-2.597c1.606 0 2.684-1.275 2.684-2.53v-.77c-.374.287-.946.44-1.716.595-1.1.197-1.518.307-1.914.571-.352.265-.528.573-.528 1.013 0 .747.506 1.121 1.474 1.121zm3.3 2.597l-.44-2.135c-.726 1.43-2.112 2.465-4.488 2.465-2.772 0-4.114-1.32-4.114-3.433 0-1.54.638-2.53 1.672-3.167 1.012-.638 1.936-.814 4.004-1.144 1.936-.265 2.728-.485 2.728-1.299 0-.725-.44-1.231-1.804-1.231-1.408 0-2.09.66-2.134 1.847h-4.07c.198-2.97 2.222-4.927 6.204-4.927 4.224 0 5.742 1.935 5.742 4.883V78h-3.3z' fill='%23011627'/%3E%3Cpath d='M100 .021H0v99.977h100V.021z' fill='%23FF005B'/%3E%3Cpath d='M71.745 52.046c-1.638 0-3.017 1.38-3.017 3.017s1.293 2.93 3.017 2.93a2.907 2.907 0 002.93-2.93c.087-1.638-1.292-3.017-2.93-3.017zm0 9.222c-3.448 0-6.293-2.758-6.293-6.205 0-3.448 2.845-6.206 6.293-6.206a6.18 6.18 0 016.207 6.206c.086 3.447-2.759 6.205-6.207 6.205zM49.279 77.417h-3.276V66.213h3.276v11.204zM54.02 77.417h-3.276V66.213h3.276v11.204zM64.338 28.112l3.19-3.19-2.327-2.326-3.19 3.189-2.328 2.327 4.138 4.137-3.19 3.189 2.328 2.327 5.517-5.516-4.138-4.137zM28.028 55.036l1.552 2.671h-3.104l1.552-2.671zm0-6.206l-6.896 11.894h13.793L28.028 48.83zM42.406 26.13l-2.327-2.327-3.966 3.964-3.965-3.964-2.328 2.327 3.966 3.964-3.966 3.965 2.328 2.327 3.965-3.965 3.966 3.965 2.327-2.327-3.965-3.965 3.965-3.964z' fill='%23F6FAFF'/%3E%3C/svg%3E") no-repeat;
-  background-size: cover;
-}
-
 .appHeaderLogo {
   display: flex;
   align-items: inherit;
+  flex: 2;
 }
-.appHeaderLogoText {
+
+.appHeaderLogo__img {
+  img {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.appHeaderLogo__text {
   padding: 0 16px 0 16px;
 }
-.appHeaderAbout {
+
+.appHeaderButtons {
   display: flex;
-  color: #011627;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
 }
 
-.appHeaderContact {
+.appHeaderButtonsAbout {
   display: flex;
-  color: #357BDA;
+  color: $xsolla-midnight;
 }
 
-.appHeaderContact a {
-  color: #357BDA;
-}
-
-.appHeaderContact button {
-  width: 206px;
-  height: 52px;
-  border: 2px solid #357BDA;
-  cursor: pointer;
-  background-color: #fcfcfc;
-}
-
-.appHeaderContact span {
-  color: #357BDA;
+.appHeaderButtonsContact {
+  display: flex;
+  color: $custom-blue;
+  a {
+    color: $custom-blue;
+  }
+  button {
+    width: 206px;
+    height: 52px;
+    border: 2px solid $custom-blue;
+    cursor: pointer;
+    background-color: #fcfcfc;
+  }
+  span {
+    color: $custom-blue;
+  }
 }
 
 /*Working with app footer*/
@@ -104,63 +114,166 @@ button {
   display:flex;
 }
 
-.appFooterTitle{
+/*Main part*/
+
+.InitialPage {
+  background-color: $custom-darkblue;
+  width: auto;
+  max-width: 1200px;
+  float: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-right: auto;
+  margin-left: auto;
+  padding:3vw;
+  height:40vw;
+}
+
+.InitialPageCard__text_regular p {
+  color:white;
+  margin-top: 5vw;
+  font-size:30px;
+}
+
+.InitialPageCard{
+  display: flex;
+  flex-direction: column;
+  background-color: $xsolla-dove;
+  height:95%;
+  width:27vw;
+  margin: 20px;
+}
+
+.InitialPageCard__picture_1{
+  background: url(../pics/pic1.jpg) no-repeat;
+  width:  100%;
+  height: 40%;
+  background-size:cover;
+}
+.InitialPageCard__picture_2{
+  background: url(../pics/pic2.jpg) no-repeat;
+  width:  100%;
+  height: 40%;
+  background-size:cover;
+}
+.InitialPageCard__picture_3{
+  background: url(../pics/pic3.png) no-repeat;
+  width:  100%;
+  height: 40%;
+  background-size:cover;
+}
+
+.InitialPageCardTitle{
+  padding:2vw;
+}
+
+.InitialPageCard__text_main{
+  // color:#0073f7;
+  color: $xsolla-electric;
+}
+
+.mainPage {
+  padding:3vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.mainPageButtons {
+  overflow: hidden;
+  display: flex;
+  // margin-bottom:30px;
+  margin-bottom: 3vw;
+  height:10vw;
+}
+
+.mainPageButtons__button__simple {
+  // background-color: $xsolla-color-fst;
+  background-color: $xsolla-slate;
+  font-color:white;
+  margin-left: auto;
+  margin-right: auto;
+  width:100%;
+  height:100%;
   display:flex;
   align-items:center;
   justify-content: center;
-  width:100%;
+  button {
+    color: white;
+    // background-color: $xsolla-color-fst;
+    background-color: $xsolla-slate;
+
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 100%;
+    border: none;
+    margin: 0px;
+    cursor: pointer;
+  }
 }
 
-/*Working with app main part*/
-.appMainPart{
-  background-color: #fff;
-}
-.appMainPartForm{
-  width: auto;
-  max-width: 1280px;
-  float: none;
-  display: block;
-  margin-right: auto;
+.mainPageButtons__button__advanced {
+  // background-color: $xsolla-color-snd;
+  background-color: $xsolla-magenta;
+  font-color: white;
   margin-left: auto;
-  padding-left: 30px;
-  padding-right: 30px;
-}
-.appMainPartFormAbout{
-  background: url("https://cdn.xsolla.net/xsolla-com-v6/file-1440-299q3ZtE.png") 100% 100% no-repeat;
-  background-size: cover;
-  height:500px;
+  margin-right: auto;
+  width: 100%;
+  height: 100%;
   display:flex;
   align-items:center;
-  padding:3vw;
+  justify-content: center;
+  button {
+    // background-color: $xsolla-color-snd;
+    background-color: $xsolla-magenta;
+    color:white;
+    margin-left: auto;
+    margin-right: auto;
+    width:100%;
+    height:100%;
+    border: none;
+    cursor: pointer;
+  }
 }
-.appMainPartFormView{
-  background-color:#00244d;
-  margin-bottom:4vw;
+
+.mainPageButtons__button__simple.max,.mainPageButtons__button__advanced.max {
+  flex:1;
 }
-.appMainPartFormViewQuestions{
+
+.mainPageButtons__text {
   width: auto;
-  max-width: 900px;
   float: none;
-  display: block;
+  display: flex;
   margin-right: auto;
   margin-left: auto;
-  padding:3vw;
-  height:auto;
-  background-color:#00244d;
+  width:100%;
+  height:100%;
+  justify-content: center;
+  align-items: center;
 }
-.appMainPartFormViewQuestionsForm{
-  background-color:#fafbfc;
-  // margin-right: auto;
-  // margin-left: auto;
-  // padding:3vw;
+
+// Form
+.mainPageForm {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 3vw;
+  height: auto;
+  background-color: $custom-darkblue;
+  margin-bottom: 3vw;
+}
+.mainPageFormFields {
+  // max-width: 900px;
+  background-color: $custom-white;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 10%;
+  padding: 5.5vw;
+  margin: 0 10vw 0 10vw;
 }
 
-//
-.form-field-label {
+.mainPageFormFieldsLabel {
   position: -webkit-sticky;
   position: sticky;
   width: 100%;
@@ -177,9 +290,9 @@ button {
   width: 75%;
 }
 
-.form-field-label-text {
-  background-color:#fafbfc;
-  color: #011627;
+.mainPageFormFieldsLabel__text {
+  background-color: $custom-white;
+  color: $xsolla-midnight;
   position: -webkit-sticky;
   position: sticky;
   z-index: 1;
@@ -194,7 +307,7 @@ button {
   text-transform: uppercase;
 }
 
-.form-field-label-string {
+.mainPageFormFieldsLabel__line {
   // opacity: .1;
   -webkit-box-flex: 1;
   // -ms-flex: 1 1;
@@ -205,13 +318,8 @@ button {
 }
 //
 
-.appMainPartFormAboutTitle{
-  text-align:left;
-  max-width:50%;
-  color:white;
-}
-.appMainPartResult{
-  background-color:#00244d;
+.resultDashboard{
+  background-color: $custom-darkblue;
   //display: none;
 }
 .appMainPartResultForm{
@@ -225,28 +333,24 @@ button {
   height:auto;
 }
 .appMainPartResultFormView{
-  background-color:#fafbfc;
+  background-color: $custom-white;
 }
-.appMainPartResultFormViewFormTitle{
+.ResultForecastTitle{
   display:flex;
   align-items:center;
   justify-content: center;
   width:100%;
 }
+
 .appMainPartResultFormViewForm{
   margin-right: auto;
   margin-left: auto;
   padding:3vw;
   height:auto;
 }
-.appMainPartResultProgressBar{
 
-}
-.appMainPartResultFormViewFormResult{
-
-}
 .ResultsTotal,.ResultsChart{
-  background-color:#00244d;
+  background-color: $custom-darkblue;
   border-radius: 5px;
   width: auto;
   max-width: 700px;
@@ -257,15 +361,14 @@ button {
   height:auto;
   color:white;
 }
-.ResultsChartView, .ResultsTotalView{
 
-}
 .ProgressBar{
   display:flex;
   align-items:center;
   justify-content: center;
   width:100%;
 }
+
 .ProgressBarViewText{
   display:flex;
   align-items:center;
@@ -273,212 +376,19 @@ button {
   width:100%;
 }
 
-.InitialPageViewMainForm{
-  background-color:#00244d;
-  width: auto;
-  max-width: 1200px;
-  float: none;
-  display: flex;
-  margin-right: auto;
-  margin-left: auto;
-  padding:3vw;
-  height:40vw;
-}
-
-.InitialPageViewCalculateButton{
-  background-color:#EB345E;
-  font-color:white;
-  width:auto;
-  height:auto;
-  border: 2px solid #FFFFFF;
-}
-
-
-.InitialPageViewSelectForm{
-  margin:0px;
-  padding: 0px;
-}
-
-.InitialPageViewSelectFormView{
-  overflow: hidden;
-  display: flex;
-  margin-bottom:30px;
-  height:10vw;
-}
-
-.InitialPageViewSelectFormViewButtonEasy{
-  background-color: $xsolla-color-fst;
-  font-color:white;
-  margin-left: auto;
-  margin-right: auto;
-  width:100%;
-  height:100%;
-  display:flex;
-  align-items:center;
-  justify-content: center;
-}
-
-
-.InitialPageViewSelectFormViewButtonEasy button {
-  color: white;
-  background-color: #3C4858;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-  height: 100%;
-  border: none;
-  margin: 0px;
-}
-
-.InitialPageViewSelectFormViewButtonHard {
-  background-color: $xsolla-color-snd;
-  font-color: white;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-  height: 100%;
-  display:flex;
-  align-items:center;
-  justify-content: center;
-}
-
-.InitialPageViewSelectFormViewButtonHard button{
-  background-color:#EB345E;
-  color:white;
-  margin-left: auto;
-  margin-right: auto;
-  width:100%;
-  height:100%;
-  border: none;
-}
-
-.InitialPageViewSelectFormViewButtonEasy.max,.InitialPageViewSelectFormViewButtonHard.max{
-  flex:1;
-}
-
-.InitialPageViewSelectFormViewButtonText{
-  width: auto;
-  float: none;
-  display: flex;
-  margin-right: auto;
-  margin-left: auto;
-  width:100%;
-  height:100%;
-  justify-content: center;
-  align-items: center;
-}
-
-.InitialPageViewCalculateFormText{
-  color:white;
-  margin-top: 7vw;
-}
-
-.InitialPageViewCalculateFormText p{
-  font-size:30px;
-}
-
-.InitialPageViewCalculateFormButton{
-  display:flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.InitialPageViewCalculateFormButton button{
-  color:white;
-  background-color:#EB345E;
-  height: 7vw;
-  width: 20vw;
-  border: 2px solid #FFFFFF;
-}
-
-.InitialPageViewInfoAboutFormText1 p{
-  color:white;
-  margin-top: 5vw;
-  font-size:30px;
-}
-
-.InitialPageViewInfoAboutFormText2{
-  border-left: 2px solid #ccc;
-  padding-left: 10px;
-  color:white;
-  margin-top:5vw;
-  margin-left:30vw;
-}
-
-.InitialPageViewMainFormBoxes{
-  background-color: #f6faff;
-  height:95%;
-  width:27vw;
-  margin-right: 40px;
-}
-
-.InitialPageViewMainFormBoxesPicture1{
-  background: url(../pics/pic1.jpg) no-repeat;
-  width:  100%;
-  height: 40%;
-  background-size:cover;
-}
-.InitialPageViewMainFormBoxesPicture2{
-  background: url(../pics/pic2.jpg) no-repeat;
-  width:  100%;
-  height: 40%;
-  background-size:cover;
-}
-.InitialPageViewMainFormBoxesPicture3{
-  background: url(../pics/pic3.png) no-repeat;
-  width:  100%;
-  height: 40%;
-  background-size:cover;
-}
-
-.InitialPageViewMainFormBoxesText{
-  padding:2vw;
-}
-
-.InitialPageViewMainFormBoxesTitle{
-  color:#0073f7;
-}
-
-.InitialPageViewCalculateFormButtonViewForm{
-  margin:4vw;
-}
-
-.InitialPageView{
-  background-color: white;
-}
-
-.InitialPageViewCalculateFormButtonView{
-  width: 100%;
-  max-width: 1200px;
-  float: none;
-  display: flex;
-  margin-right: auto;
-  margin-left: auto;
-  padding:3vw;
-  background: #c5d0db;
-  margin-top: 1vw;
-  align-items:center;
-  justify-content: center;
-}
-
 .totalRevenue{
-  // color:#EB345E;
   color: $custom-white;
   font-size:48vw;
   text-align: center;
-}
-
-.addMainPage{
-  padding:3vw;
 }
 
 // RESULT
 .ResultForecast{
   background-color: $custom-white;
 }
+
 .ForecastTotal,.ForecastChart{
-  // background-color:#00244d;
-  background-color: $xsolla-color-snd;
+  background-color: $xsolla-magenta;
   border-radius: 5px;
   width: auto;
   max-width: 700px;

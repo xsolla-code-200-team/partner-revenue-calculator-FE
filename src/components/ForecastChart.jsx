@@ -2,14 +2,10 @@ import React, { useState } from 'react';
 
 import Highcharts from 'highcharts/highstock';
 import HighchartsReact from 'highcharts-react-official';
-import { Button } from 'xsolla-uikit';
 import styles from '../scss/styles.scss';
 import fonts from '../scss/fonts.scss';
 
-const ProgressBar = ({ TotalRevenue, chosenForecast, anotherForecast, ...props }) => {
-  const [generalState, setGeneralState] = useState({
-    isPlaced: false,
-  });
+const ForecastChart = ({ TotalRevenue, chosenForecast, anotherForecast, ...props }) => {
   const [chartOptions, setChartOptions] = useState({
     title: {
       text: 'Revenue chart of your game',
@@ -48,7 +44,7 @@ const ProgressBar = ({ TotalRevenue, chosenForecast, anotherForecast, ...props }
     series: [{
       type: 'line',
       name: 'your forecast',
-      data: chosenForecast.forecast,
+      data: chosenForecast.forecast.map(item => Math.round(item)),
     }, {
     //   type: 'spline',
     //   regression: true,
@@ -64,7 +60,7 @@ const ProgressBar = ({ TotalRevenue, chosenForecast, anotherForecast, ...props }
       visible: false,
       type: 'line',
       name: 'another forecast',
-      data: anotherForecast.forecast,
+      data: anotherForecast.forecast.map(item => Math.round(item)),
       color: 'rgba(23, 83, 83, .5)',
     }],
 
@@ -83,24 +79,25 @@ const ProgressBar = ({ TotalRevenue, chosenForecast, anotherForecast, ...props }
       }],
     },
   });
+  
   return (
     <>
-      <div className={styles.appMainPartResultFormViewFormTitle}>
+      <div className={styles.ResultForecastTitle}>
         <p className={fonts.display}>RESULTS</p>
       </div>
       <div className={styles.ResultForecast}>
         <div className={styles.ForecastTotal}>
-          <p>
+          {/* <p> */}
             <p className={fonts.title}>
               Here's a forecast for your product!
               {' '}
-              Based on your data we have calculated the approximate amount of money you will recieve the next month
+              Based on your data we have calculated the approximate amount of money you will recieve in six months
             </p>
             <div className={styles.totalRevenue}><p className={fonts.display}>{`$${TotalRevenue}`}</p></div>
-          </p>
+          {/* </p> */}
         </div>
         <div className={styles.ForecastChart}>
-          <p className={fonts.title2}>This number is affected by seasonal trends and other factors.</p>
+          <p className={fonts.title2} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} >This number is affected by seasonal trends and other factors.</p>
           {'  '}
           <HighchartsReact
             highcharts={Highcharts}
@@ -112,4 +109,4 @@ const ProgressBar = ({ TotalRevenue, chosenForecast, anotherForecast, ...props }
   );
 };
 
-export default ProgressBar;
+export default ForecastChart;
