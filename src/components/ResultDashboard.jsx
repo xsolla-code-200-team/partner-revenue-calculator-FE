@@ -46,8 +46,11 @@ const ResultDashboard = ({ inputData, ...props }) => {
       })
       .then((response) => response.json())
       .then((data) => {
-        console.log('resData (GET id):');
-        console.log(data);
+        // need to put a delay in ?? seconds
+        if (data.isReady) {
+          console.log('resData (GET id):');
+          console.log(data);
+        }
         setResultData(data);
       })
       .catch((e) => {

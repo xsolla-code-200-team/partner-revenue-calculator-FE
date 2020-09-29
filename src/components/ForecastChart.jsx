@@ -44,7 +44,7 @@ const ForecastChart = ({ TotalRevenue, chosenForecast, anotherForecast, ...props
     series: [{
       type: 'line',
       name: 'your forecast',
-      data: chosenForecast.forecast.map(item => Math.round(item)),
+      data: chosenForecast.tendencyForecast.map(item => Math.round(item)),
     }, {
     //   type: 'spline',
     //   regression: true,
@@ -60,7 +60,7 @@ const ForecastChart = ({ TotalRevenue, chosenForecast, anotherForecast, ...props
       visible: false,
       type: 'line',
       name: 'another forecast',
-      data: anotherForecast.forecast.map(item => Math.round(item)),
+      data: anotherForecast.tendencyForecast.map(item => Math.round(item)),
       color: 'rgba(23, 83, 83, .5)',
     }],
 
