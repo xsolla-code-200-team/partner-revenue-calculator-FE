@@ -12,8 +12,8 @@ const releaseDate = [
 const AdvancedCalculationForm = (props) => {
     const [reqData, setReqData] = useState({
         releaseDate: releaseDate[0],
-        sales: '',
-        cost: '',
+        isReleased: false,
+        initialRevenue: ''
     });
 
     return (

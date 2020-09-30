@@ -20,11 +20,11 @@ $custom-white: #fafbfc;
 $custom-darkblue: #00244d;
 $custom-blue: #357BDA;
 
-*{
+* {
   margin:0;
   padding: 0;
 }
-html{
+html {
   background-color: $xsolla-dove;
   display:block;
 }
@@ -60,7 +60,7 @@ button {
 .appHeaderLogo {
   display: flex;
   align-items: inherit;
-  flex: 2;
+  flex: 3;
 }
 
 .appHeaderLogo__img {
@@ -83,25 +83,50 @@ button {
 
 .appHeaderButtonsAbout {
   display: flex;
-  color: $xsolla-midnight;
-}
-
-.appHeaderButtonsContact {
-  display: flex;
-  color: $custom-blue;
-  a {
-    color: $custom-blue;
-  }
   button {
     width: 206px;
     height: 52px;
-    border: 2px solid $custom-blue;
+    border: none;
     cursor: pointer;
-    background-color: #fcfcfc;
+    background-color: $xsolla-dove;
+    color: $xsolla-midnight;
   }
-  span {
-    color: $custom-blue;
+}
+
+.appHeaderButtonsAbout:hover {
+  button {
+    color: $xsolla-electric;
   }
+}
+
+.publisherAccountButton, .appHeaderButtonsContact {
+  display: flex;
+  color: $xsolla-electric;
+  // a {
+  //   color: $xsolla-electric
+  // }
+  button {
+    width: 206px;
+    height: 52px;
+    border: 2px solid $xsolla-electric;
+    cursor: pointer;
+    background-color: $xsolla-dove;
+    color: $xsolla-electric
+  }
+  // span {
+  //   color: $xsolla-electric;
+  // }
+}
+
+.appHeaderButtonsContact:hover, .publisherAccountButton:hover {
+  button {
+    background-color: $xsolla-electric;
+    color: $xsolla-dove;
+  }
+}
+
+.button_transition {
+  transition: 0.3s;
 }
 
 /*Working with app footer*/
@@ -187,25 +212,25 @@ button {
   height:10vw;
 }
 
-.mainPageButtons__button__simple__chosen button,
-.mainPageButtons__button__advanced__chosen button{
+.mainPageButtons__button_simple_chosen button,
+.mainPageButtons__button_advanced_chosen button{
   border:7px solid $custom-darkblue;
 }
 
-.mainPageButtons__button__simple button,
-.mainPageButtons__button__advanced button{
+.mainPageButtons__button_simple button,
+.mainPageButtons__button_advanced button{
   border:7px solid $xsolla-dove;
 }
 
-.mainPageButtons__button__simple :hover{
+.mainPageButtons__button_simple :hover{
   background-color: $xsolla-color-fst;
 }
 
-.mainPageButtons__button__advanced :hover{
+.mainPageButtons__button_advanced :hover{
   background-color: $xsolla-color-snd;
 }
 
-.mainPageButtons__button__simple,.mainPageButtons__button__simple__chosen,{
+.mainPageButtons__button_simple,.mainPageButtons__button_simple_chosen,{
   // background-color: $xsolla-color-fst;
   background-color: $xsolla-slate;
   border:7px solid $xsolla-dove;
@@ -230,7 +255,7 @@ button {
   }
 }
 
-.mainPageButtons__button__advanced,.mainPageButtons__button__advanced__chosen{
+.mainPageButtons__button_advanced,.mainPageButtons__button_advanced_chosen{
   // background-color: $xsolla-color-snd;
   background-color: $xsolla-magenta;
   border:7px solid $xsolla-dove;
@@ -254,7 +279,7 @@ button {
   }
 }
 
-.mainPageButtons__button__simple.max,.mainPageButtons__button__advanced.max {
+.mainPageButtons__button_simple.max,.mainPageButtons__button_advanced.max {
   flex:1;
 }
 
@@ -324,6 +349,19 @@ button {
   text-transform: uppercase;
 }
 
+.mainPageFormFieldsLabel__text_small {
+  background-color: $custom-white;
+  color: $xsolla-midnight;
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 1;
+  left: 0;
+  margin-right: 0;
+  padding-right: 8px;
+  font-family: Graphiklcg,sans-serif;
+  font-weight: bold;
+}
+
 .mainPageFormFieldsLabel__line {
   // opacity: .1;
   -webkit-box-flex: 1;
@@ -333,12 +371,42 @@ button {
   margin-top: 9px;
   background-color: currentColor;
 }
+
+.mainPageFormFields__checkbox {
+  margin-bottom: 24px;
+}
 //
 
 .resultDashboard{
   background-color: $custom-darkblue;
   //display: none;
+  display: flex;
 }
+
+.resultDashboardButtons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3vw;
+}
+
+.resultDashboardButtons_email {
+  display: flex;
+  flex: 2;
+}
+
+.resultDashboardButtons_other {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: row;
+  button {
+    margin: 0 3vw 0 3vw;
+  }
+}
+
 .appMainPartResultForm{
   width: auto;
   max-width: 900px;
@@ -351,6 +419,9 @@ button {
 }
 .appMainPartResultFormView{
   background-color: $custom-white;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 .ResultForecastTitle{
   display:flex;

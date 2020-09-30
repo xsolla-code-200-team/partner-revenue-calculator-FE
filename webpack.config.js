@@ -1,7 +1,6 @@
 const path = require('path');
 const HtmlPlugin = require('html-webpack-plugin');
 const MiniCssPlugin = require('mini-css-extract-plugin');
-const { contains } = require('jquery');
 // console.log(process);
 const PROD_MODE = process.env.WEBPACK_DEV_SERVER === 'true' ? false : true ;
 
@@ -46,9 +45,9 @@ module.exports = (env, argv) => ({
             {
                 test: /\.(s*)css$/i,
                 use: [
-                    MiniCssPlugin.loader,
-                    // Translates CSS into CommonJS
+                    MiniCssPlugin.loader,        
                     {
+                        // Translates CSS into CommonJS
                         loader: 'css-loader',
                         options: {
                             modules: {
@@ -57,14 +56,13 @@ module.exports = (env, argv) => ({
                                     // '[path][name]__[local]' :
                                     '[hash:base64]' :
                                     '[local]'
-                                    
                             }
                         }
                     },
                     // Compiles Sass to CSS
                     'sass-loader'
                 ]
-            }
+            },
         ]
     },
     devServer: {

@@ -43,15 +43,20 @@ const CheckboxPlate = ({
 
     if (multipleChoice) {
       const obj = { ...group, [newName]: value };
-      const arr = Object.keys(obj).reduce((acc, item) => {
-        if (obj[`${item}`]) {
-          return [...acc, `${item}`];
-        }
-        return [...acc];
-      }, []);
-      validate(name, arr);
-      onChangeReqData(name, arr);
-      setGroup({ ...group, [newName]: value });
+      // genres limitation (3 max)
+      if (name === 'genres' && Object.keys(obj).filter(key => obj[key] === true).length > 3) {
+        console.log('too many choices');
+      } else {
+        const arr = Object.keys(obj).reduce((acc, item) => {
+          if (obj[`${item}`]) {
+            return [...acc, `${item}`];
+          }
+          return [...acc];
+        }, []);
+        validate(name, arr);
+        onChangeReqData(name, arr);
+        setGroup({ ...group, [newName]: value });
+      }
     } else {
       const obj = checkboxes.reduce((obj, item) => {
         obj[`${item}`] = false;

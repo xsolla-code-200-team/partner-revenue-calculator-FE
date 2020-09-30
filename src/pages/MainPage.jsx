@@ -1,4 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
+// import { renderToStaticMarkup, renderToString } from 'react-dom/server';
+// import { hydrate } from 'react-dom';
+// var juice = require('juice');
+// import juice from 'juice';
+// import fs from 'fs';
 
 import CalculationForm from '../components/CalculationForm';
 import AdvancedCalculationForm from '../components/AdvancedCalculationForm';
@@ -10,15 +15,14 @@ const labelsEng = {
   email: 'email',
   companyName: 'company or individual name',
   productName: 'product name',
-  genres: 'genres',
+  genres: 'genres (at most three)',
   monetization: 'monetization',
   platforms: 'platforms',
   regions: 'distribution regions',
-  sales: 'average first month sales',
-  sales2: 'first month expected sales',
-  cost: 'average product cost',
+  initialRevenue: 'initial revenue for the 1st month',
   sendButton: 'calculate',
   releaseDate: 'date of release',
+  isReleased: 'my game has already released',
 };
 
 const MainPage = () => {
@@ -57,11 +61,63 @@ const MainPage = () => {
     setMessage(message);
   };
 
+  // const handleGetHtml = () => {
+  //   // const styleString = require('../scss/styles.scss').toString();
+  //   // console.log(styleString);
+  //   const styleString = require('css-to-string-loader!css-loader!../../dist/main.css').toString();
+  //   const juiceOpts = {
+  //     preserveMediaQueries: true,
+  //     removeStyleTags: true,
+  //     webResources: {
+  //       images: false
+  //     }
+  //   };
+
+  //   const doc =
+  //     <CalculationForm
+  //       labels={labelsEng}
+  //       onChangeResponseData={handleChangeResponseData}
+  //       onClick={handleFormClick}
+  //       onChangeErrorMessage={handleChangeMessage}
+  //       url={'https://api-xsolla-revenue-calculator.herokuapp.com/RevenueForecast/Simple'}
+  //     />;
+  //   const new_doc = juice.inlineContent(renderToStaticMarkup(doc), styles, juiceOpts);
+  //   // console.log(styles);
+  //   // setHasSent({has: true, sent: JSON.stringify(new_doc)});
+  //   setHasSent({has: true, sent: JSON.stringify(styleString)});
+
+  //   // fetch('https://api-xsolla-revenue-calculator.herokuapp.com/RevenueForecast/Export', {
+  //   //   method: 'POST',
+  //   //   body: JSON.stringify({ email: "test@mail.com", content: new_doc }),
+  //   //   headers: {
+  //   //     'Content-Type': 'application/json',
+  //   //   },
+  //   // })
+  //   //   .then((res) => {
+  //   //     if (res.status >= 200 && res.status < 300) {
+  //   //       return res;
+  //   //     }
+  //   //     const error = new Error(res.statusText);
+  //   //     error.response = res;
+  //   //     throw error;
+  //   //   })
+  //   //   .then((res) => res.json())
+  //   //   .then((data) => {
+  //   //     console.log('resData (POST):');
+  //   //     console.log(data);
+  //   //   })
+  //   //   .catch((e) => {
+  //   //     console.log(e.message);
+  //   //   });
+  // }
+
+  // const [hasSent, setHasSent] = useState({ has: false, sent: '' });
+
   return (
     <>
       <div className={styles.mainPage}>
         <div className={styles.mainPageButtons}>
-          <div className={`${styles.mainPageButtons__button__simple} ${styles.mainPageButtons__text}`}>
+          <div className={`${styles.mainPageButtons__button_simple} ${styles.mainPageButtons__text}`}>
             <button
               type="button"
               onClick={() => handleSwitchFormType('simpleForm')}
@@ -70,7 +126,7 @@ const MainPage = () => {
               <p className={fonts.title3}>OF MY FUTURE GAME</p>
             </button>
           </div>
-          <div className={`${styles.mainPageButtons__button__advanced} ${styles.mainPageButtons__text}`}>
+          <div className={`${styles.mainPageButtons__button_advanced} ${styles.mainPageButtons__text}`}>
             <button
               type="button"
               onClick={() => handleSwitchFormType('advancedForm')}
@@ -103,6 +159,8 @@ const MainPage = () => {
         }
           { generalState.isClicked &&
             <ResultDashboard inputData={responseData} /> }
+        {/* <button type="button" onClick={() => handleGetHtml()}>get html</button>
+          { hasSent.has && <p>{hasSent.sent}</p> } */}
       </div>
     </>
   );

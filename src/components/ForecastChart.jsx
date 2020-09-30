@@ -116,7 +116,7 @@ const ForecastChart = ({
             <p className={fonts.title}>Here is a forecast for your product! Based on your data we have calculated the approximate amount of money you will receive in {chosenForecast.tendencyForecast.length} months</p>
           </div>
           {'  '}
-          <div className={styles.totalRevenue}><p className={fonts.display}>{(forecastUnit === '%') ? `${forecastUnit} ${TotalRevenue}` : `${forecastUnit} ${TotalRevenue / 1000} k`}</p></div>
+          <div className={styles.totalRevenue}><p className={fonts.display}>{(forecastUnit === '%') ? `${TotalRevenue}${forecastUnit}` : `${forecastUnit} ${TotalRevenue / 1000} k`}</p></div>
           {/* </p> */}
         </div>
         <div className={styles.ForecastChart}>

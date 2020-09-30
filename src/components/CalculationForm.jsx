@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Button } from 'xsolla-uikit';
 import { Link, animateScroll as scroll, Element, scroller } from 'react-scroll';
 
+import FormCheckbox from './FormCheckbox';
 import InputField from './inputField/InputField';
 import CheckboxPlate from './checkboxPlate/CheckboxPlate';
 import styles from '../scss/styles.scss';
@@ -93,7 +94,7 @@ const CalculationForm = ({
   const valuesToLowerCase = (obj) => {
     return Object.keys(obj).reduce((acc, key) => {
       let value = obj[key];
-      if (key in [ 'productName', 'companyName', 'email', 'sales', 'cost' ]) {
+      if (key === 'productName' || key === 'companyName' || key === 'email' || key === 'initialRevenue' || key === 'isReleased') {
         acc[key] = value;
       } else if (Array.isArray(value)) {
         value = value.map(element => element.toLowerCase());
@@ -149,6 +150,12 @@ const CalculationForm = ({
           errorMessage = 'monetization is required';
         }
         break;
+      case 'isReleased':
+        if (inputValue != true && inputName != false) {
+          hasError = true;
+          errorMessage = 'release checkbox is required';
+        }
+        break;
       case 'releaseDate':
         if (!inputValue) {
           hasError = true;
@@ -167,22 +174,13 @@ const CalculationForm = ({
           errorMessage = 'choose at least one region';
         }
         break;
-      case 'sales':
-        if (!inputValue) {
+      case 'initialRevenue':
+        if (!inputValue && inputValue != '0') {
           hasError = true;
-          errorMessage = "'sales' field is required";
+          errorMessage = "'initial revenue' is required";
         } else if (Number(inputValue) < 1) {
           hasError = true;
-          errorMessage = 'sales must be positive';
-        }
-        break;
-      case 'cost':
-        if (!inputValue) {
-          hasError = true;
-          errorMessage = "'cost' field is required";
-        } else if (Number(inputValue) < 1) {
-          hasError = true;
-          errorMessage = 'cost must be positive';
+          errorMessage = "initial revenue must be positive";
         }
         break;
       case 'email':
@@ -204,7 +202,6 @@ const CalculationForm = ({
     };
 
     errors[inputName] = errorMessage;
-    // console.log(errors);
     setFormErrors(errors);
 
     return OutputError;
@@ -216,6 +213,7 @@ const CalculationForm = ({
       hasError: false,
     });
     updateIsClicked(false);
+    updateResponseData({});
 
     fetch(url, {
       method: 'POST',
@@ -232,14 +230,6 @@ const CalculationForm = ({
         error.response = res;
         throw error;
       })
-    // .then((res) => {
-    //   if (res.headers['content-type'] !== 'application/json') {
-    //     const error = new Error('Incorrect server response.');
-    //     error.response = res;
-    //     throw error;
-    //   }
-    //   return res;
-    // })
       .then((res) => {
         setGeneralState({ ...generalState, isLoading: false });
         return res;
@@ -262,6 +252,7 @@ const CalculationForm = ({
   };
 
   const handleChangeFields = (name, value) => {
+    // console.log(`${name} has changed to ${value}`);
     setReqData({ ...reqData, [name]: value });
   };
 
@@ -291,14 +282,24 @@ const CalculationForm = ({
           validation={fieldsValidation}
         />
         { props.isAdvanced &&
-          <CheckboxPlate
-            name="releaseDate"
-            onChangeReqData={handleChangeFields}
-            checkboxes={releaseDate}
-            labelText={labels.releaseDate}
-            multipleChoice={false}
-            validation={fieldsValidation}
-          />
+          <>
+            <CheckboxPlate
+              name="releaseDate"
+              onChangeReqData={handleChangeFields}
+              checkboxes={releaseDate}
+              labelText={labels.releaseDate}
+              multipleChoice={false}
+              validation={fieldsValidation}
+            />
+            <FormCheckbox
+              name="isReleased"
+              value={reqData.isReleased}
+              onChangeReqData={handleChangeFields}
+              labelText={labels.isReleased}
+              validation={fieldsValidation}
+            />
+          </>
+          
         }
         <CheckboxPlate name="genres" onChangeReqData={handleChangeFields} checkboxes={genres} labelText={labels.genres} multipleChoice validation={fieldsValidation} />
         <CheckboxPlate name="monetization" onChangeReqData={handleChangeFields} checkboxes={monetization} labelText={labels.monetization} multipleChoice={false} validation={fieldsValidation} />
@@ -307,21 +308,12 @@ const CalculationForm = ({
         { props.isAdvanced &&
           <>
             <InputField
-              name="sales"
-              value={reqData.sales}
+              name="initialRevenue"
+              value={reqData.initialRevenue}
               onChangeReqData={handleChangeFields}
-              labelText={labels.sales}
+              labelText={labels.initialRevenue}
               type="number"
-              placeholder="1 000 000"
-              validation={fieldsValidation}
-            />
-            <InputField
-              name="cost"
-              value={reqData.cost}
-              onChangeReqData={handleChangeFields}
-              labelText={labels.cost}
-              type="number"
-              placeholder="60"
+              placeholder="322"
               validation={fieldsValidation}
             />
           </>

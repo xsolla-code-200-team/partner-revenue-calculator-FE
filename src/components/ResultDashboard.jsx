@@ -3,12 +3,18 @@ import { Link, animateScroll as scroll, Element, scroller } from 'react-scroll';
 
 import styles from '../scss/styles.scss';
 import ForecastChart from './ForecastChart';
+import ContactUsButton from './ContactUsButton';
+import PublisherAccountButton from './PublisherAccountButton';
 // import ProgressBar from './ProgressBar';
 
 const ResultDashboard = ({ inputData, ...props }) => {
   const [resultData, setResultData] = useState(inputData);
   const [error, setError] = useState('');
-  const [totalRevenue, setTotalRevenue] = useState(0);
+  const [totalRevenue, setTotalRevenue] = useState((
+    inputData.isReady ?
+    Math.round(inputData.chosenForecast.tendencyForecast.reduce((acc, value) => acc + value)) :
+    0
+  ));
 
   const firstRender = useRef(true);
 
@@ -18,7 +24,6 @@ const ResultDashboard = ({ inputData, ...props }) => {
     }
     if (resultData.isReady) {
       scroller.scrollTo("result", {
-        // spy: true, 
         smooth: true,
         offset: 0,
         duration: 500,
@@ -50,6 +55,7 @@ const ResultDashboard = ({ inputData, ...props }) => {
         if (data.isReady) {
           console.log('resData (GET id):');
           console.log(data);
+          setTotalRevenue(Math.round(data.chosenForecast.tendencyForecast.reduce((acc, value) => acc + value)))
         }
         setResultData(data);
       })
@@ -60,10 +66,11 @@ const ResultDashboard = ({ inputData, ...props }) => {
   };
 
   return (
-    <>
-      <div className={styles.resultDashboard}>
-        <Element name="result"></Element>
-        <div className={styles.appMainPartResultForm}>
+    <div className={styles.resultDashboard}>
+      <Element name="result"></Element>
+      <div className={styles.appMainPartResultForm}>
+        {
+          resultData.isReady &&
           <div className={styles.appMainPartResultFormView}>
             <div className={styles.appMainPartResultFormViewForm}>
               {
@@ -76,10 +83,17 @@ const ResultDashboard = ({ inputData, ...props }) => {
                 />
               }
             </div>
+            <div className={styles.resultDashboardButtons}>
+              {/* place for Sending Email */}
+              <div className={styles.resultDashboardButtons_other}>
+                <PublisherAccountButton />
+                <ContactUsButton />
+              </div>
+            </div>
           </div>
-        </div>
+        }
       </div>
-    </>
+    </div>
   );
 };
 
