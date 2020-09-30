@@ -4,8 +4,7 @@ import {
 } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 
-import AboutUsButton from './components/AboutUsButton';
-import ContactUsButton from './components/ContactUsButton';
+import LinkButton from './components/LinkButton';
 import styles from './scss/styles.scss';
 import fonts from './scss/fonts.scss';
 import logo from './pics/logo.png';
@@ -25,8 +24,18 @@ const App = () => (
         </div>
       </div>
       <div className={styles.appHeaderButtons}>
-        <AboutUsButton />
-        <ContactUsButton />
+        <LinkButton
+          link="https://xsolla.com/about"
+          text="About us"
+          customStyle={styles.appHeaderButtonsAbout}
+        />
+        <LinkButton
+          link="https://xsolla.com/contact-sales"
+          text="Contact us"
+          customStyle={styles.appHeaderButtonsContact}
+        />
+        {/* <AboutUsButton />
+        <ContactUsButton /> */}
       </div>
     </header>
     <BrowserRouter>

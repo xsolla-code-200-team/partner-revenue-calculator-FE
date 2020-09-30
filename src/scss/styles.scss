@@ -83,6 +83,7 @@ button {
 
 .appHeaderButtonsAbout {
   display: flex;
+  color: $xsolla-midnight;
   button {
     width: 206px;
     height: 52px;
@@ -102,9 +103,6 @@ button {
 .publisherAccountButton, .appHeaderButtonsContact {
   display: flex;
   color: $xsolla-electric;
-  // a {
-  //   color: $xsolla-electric
-  // }
   button {
     width: 206px;
     height: 52px;
@@ -113,9 +111,6 @@ button {
     background-color: $xsolla-dove;
     color: $xsolla-electric
   }
-  // span {
-  //   color: $xsolla-electric;
-  // }
 }
 
 .appHeaderButtonsContact:hover, .publisherAccountButton:hover {
@@ -312,7 +307,7 @@ button {
   flex-direction: column;
   align-items: flex-start;
   padding: 5.5vw;
-  margin: 0 10vw 0 10vw;
+  margin: 0 6vw 0 6vw;
 }
 
 .mainPageFormFieldsLabel {

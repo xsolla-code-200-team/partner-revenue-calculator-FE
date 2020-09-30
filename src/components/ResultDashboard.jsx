@@ -3,8 +3,7 @@ import { Link, animateScroll as scroll, Element, scroller } from 'react-scroll';
 
 import styles from '../scss/styles.scss';
 import ForecastChart from './ForecastChart';
-import ContactUsButton from './ContactUsButton';
-import PublisherAccountButton from './PublisherAccountButton';
+import LinkButton from './LinkButton';
 // import ProgressBar from './ProgressBar';
 
 const ResultDashboard = ({ inputData, ...props }) => {
@@ -86,8 +85,16 @@ const ResultDashboard = ({ inputData, ...props }) => {
             <div className={styles.resultDashboardButtons}>
               {/* place for Sending Email */}
               <div className={styles.resultDashboardButtons_other}>
-                <PublisherAccountButton />
-                <ContactUsButton />
+                <LinkButton
+                  link="https://publisher.xsolla.com/"
+                  text="Get started"
+                  customStyle={styles.publisherAccountButton}
+                />
+                <LinkButton
+                  link="https://xsolla.com/contact-sales"
+                  text="Contact us"
+                  customStyle={styles.appHeaderButtonsContact}
+                />
               </div>
             </div>
           </div>
