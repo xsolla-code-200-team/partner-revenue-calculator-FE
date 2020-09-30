@@ -72,6 +72,7 @@ const ResultDashboard = ({ inputData, ...props }) => {
                   TotalRevenue={totalRevenue}
                   chosenForecast={resultData.chosenForecast}
                   anotherForecast={resultData.otherForecasts[0]}
+                  forecastType={resultData.forecastType}
                 />
               }
             </div>
