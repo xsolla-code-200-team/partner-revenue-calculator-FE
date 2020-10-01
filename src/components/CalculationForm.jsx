@@ -151,7 +151,7 @@ const CalculationForm = ({
         }
         break;
       case 'isReleased':
-        if (inputValue != true && inputName != false) {
+        if (inputValue != true && inputValue != false) {
           hasError = true;
           errorMessage = 'release checkbox is required';
         }
