@@ -117,7 +117,7 @@ const MainPage = () => {
     <>
       <div className={styles.mainPage}>
         <div className={styles.mainPageButtons}>
-          <div className={`${styles.mainPageButtons__button_simple} ${styles.mainPageButtons__text}`}>
+          <div className={(!isFormHidden && !isAdvancedForm) ? `${styles.mainPageButtons__button_simple_chosen} ${styles.mainPageButtons__text}` : `${styles.mainPageButtons__button_simple} ${styles.mainPageButtons__text}`}>
             <button
               type="button"
               onClick={() => handleSwitchFormType('simpleForm')}
@@ -126,7 +126,7 @@ const MainPage = () => {
               <p className={fonts.title3}>OF MY FUTURE GAME</p>
             </button>
           </div>
-          <div className={`${styles.mainPageButtons__button_advanced} ${styles.mainPageButtons__text}`}>
+          <div className={(!isFormHidden && isAdvancedForm) ? `${styles.mainPageButtons__button_advanced_chosen} ${styles.mainPageButtons__text}` : `${styles.mainPageButtons__button_advanced} ${styles.mainPageButtons__text}`}>
             <button
               type="button"
               onClick={() => handleSwitchFormType('advancedForm')}

@@ -200,16 +200,19 @@ button {
 }
 
 .mainPageButtons {
-  overflow: hidden;
+  //overflow: hidden;
   display: flex;
   // margin-bottom:30px;
   margin-bottom: 3vw;
   height:10vw;
 }
 
-.mainPageButtons__button_simple_chosen button,
+.mainPageButtons__button_simple_chosen button{
+  border:7px solid $xsolla-magenta;
+}
+
 .mainPageButtons__button_advanced_chosen button{
-  border:7px solid $custom-darkblue;
+  border:7px solid $xsolla-slate;
 }
 
 .mainPageButtons__button_simple button,

@@ -9,9 +9,7 @@ const ForecastChart = ({
   TotalRevenue, chosenForecast, anotherForecast, forecastType, ...props
 }) => {
   const [forecastUnit, setForecastUnit] = useState((forecastType === 'Percentage') ? '%' : '$');
-  const [chosenChartType, setChosenChartType] = useState(chosenForecast.tendencyForecast);
-  const [anotherChartType, setAnotherChartType] = useState(anotherForecast.tendencyForecast);
-  const [chartType, setChartType] = useState('Tendency');
+  const [isTendencyType, setChartType] = useState(true);
   const [chartOptions, setChartOptions] = useState({
     title: {
       text: 'Revenue chart of your game',
@@ -56,7 +54,7 @@ const ForecastChart = ({
     series: [{
       type: 'line',
       name: 'your forecast',
-      data: chosenChartType.map((item) => Math.round(item)),
+      data: chosenForecast.tendencyForecast.map((item) => Math.round(item)),
       color: 'rgb(0, 118, 255)',
     }, {
     //   type: 'spline',
@@ -73,7 +71,7 @@ const ForecastChart = ({
       visible: false,
       type: 'line',
       name: 'another forecast',
-      data: anotherChartType.map((item) => Math.round(item)),
+      data: anotherForecast.tendencyForecast.map((item) => Math.round(item)),
       color: 'rgb(255, 0, 91)',
     }],
 
@@ -95,12 +93,15 @@ const ForecastChart = ({
 
   const handleClick = (sender) => {
     if (sender === 'Tendency') {
-      setChosenChartType(chosenForecast.cumulativeForecast);
-      setAnotherChartType(anotherForecast.cumulativeForecast);
-    }
-    if (sender === 'Cumulative') {
-      setChosenChartType(chosenForecast.tendencyForecast);
-      setAnotherChartType(anotherForecast.tendencyForecast);
+      if (!isTendencyType) {
+        setChartOptions({series: [{data: chosenForecast.tendencyForecast.map((item) => Math.round(item))},{data: anotherForecast.tendencyForecast.map((item) => Math.round(item))}]});
+        setChartType(true);
+      }
+    } else if (sender === 'Cumulative') {
+      if (isTendencyType) {
+        setChartOptions({series: [{data: chosenForecast.cumulativeForecast.map((item) => Math.round(item))},{data: anotherForecast.cumulativeForecast.map((item) => Math.round(item))}]});
+        setChartType(false);
+      }
     }
   };
 
@@ -113,7 +114,12 @@ const ForecastChart = ({
         <div className={styles.ForecastTotal}>
           {/* <p> */}
           <div className={styles.ForecastTitle}>
-            <p className={fonts.title}>Here is a forecast for your product! Based on your data we have calculated the approximate amount of money you will receive in {chosenForecast.tendencyForecast.length} months</p>
+            <p className={fonts.title}>
+              Here is a forecast for your product! Based on your data we have calculated the approximate amount of money you will receive in
+              {chosenForecast.tendencyForecast.length}
+              {' '}
+              months
+            </p>
           </div>
           {'  '}
           <div className={styles.totalRevenue}><p className={fonts.display}>{(forecastUnit === '%') ? `${TotalRevenue}${forecastUnit}` : `${forecastUnit} ${TotalRevenue / 1000} k`}</p></div>
@@ -127,10 +133,11 @@ const ForecastChart = ({
           <HighchartsReact
             highcharts={Highcharts}
             options={chartOptions}
+            allowChartUpdate={true}
           />
           <div className={styles.ForecastButton}>
-            <button className={(chartType === 'Tendency') ? styles.chosenChartType : styles.chooseChartType}><p className={fonts.title2}>Tendency forecast</p></button>
-            <button className={(chartType === 'Cumulative') ? styles.chosenChartType : styles.chooseChartType}><p className={fonts.title2}>Cumulative forecast</p></button>
+            <button className={isTendencyType ? styles.chosenChartType : styles.chooseChartType} onClick={() => { handleClick('Tendency'); }}><p className={fonts.title2}>Tendency forecast</p></button>
+            <button className={!isTendencyType ? styles.chosenChartType : styles.chooseChartType} onClick={() => { handleClick('Cumulative'); }}><p className={fonts.title2}>Cumulative forecast</p></button>
           </div>
         </div>
       </div>
