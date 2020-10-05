@@ -20,6 +20,7 @@ const AdvancedCalculationForm = (props) => {
         <CalculationForm
           labels={props.labels}
           onChangeResponseData={props.onChangeResponseData}
+          onChangeGenresInfo={props.onChangeGenresInfo}
           onClick={props.onClick}
           onChangeErrorMessage={props.onChangeErrorMessage}
           additionalState={reqData}

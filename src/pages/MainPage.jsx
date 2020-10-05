@@ -10,6 +10,7 @@ import AdvancedCalculationForm from '../components/AdvancedCalculationForm';
 import ResultDashboard from '../components/ResultDashboard';
 import fonts from '../scss/fonts.scss';
 import styles from '../scss/styles.scss';
+import {Popup} from "semantic-ui-react";
 
 const labelsEng = {
   email: 'email',
@@ -22,11 +23,12 @@ const labelsEng = {
   initialRevenue: 'initial revenue for the 1st month',
   sendButton: 'calculate',
   releaseDate: 'date of release',
-  isReleased: 'my game has already released',
+  isReleased: 'my game has already been released',
 };
 
 const MainPage = () => {
   const [responseData, setResponseData] = useState({});
+  const [genresInfo, setGenresInfo] = useState({});
   const [generalState, setGeneralState] = useState({
     isClicked: false,
   });
@@ -36,6 +38,10 @@ const MainPage = () => {
 
   const handleChangeResponseData = (data) => {
     setResponseData(data);
+  };
+
+  const handleChangeGenresInfo = (data) => {
+    setGenresInfo(data);
   };
 
   const handleFormClick = (value) => {
@@ -142,6 +148,7 @@ const MainPage = () => {
                 <AdvancedCalculationForm
                     labels={labelsEng}
                     onChangeResponseData={handleChangeResponseData}
+                    onChangeGenresInfo={handleChangeGenresInfo}
                     onClick={handleFormClick}
                     onChangeErrorMessage={handleChangeMessage}
                     url={'https://api-xsolla-revenue-calculator.herokuapp.com/RevenueForecast/Complex'}
@@ -151,6 +158,7 @@ const MainPage = () => {
                 <CalculationForm
                     labels={labelsEng}
                     onChangeResponseData={handleChangeResponseData}
+                    onChangeGenresInfo={handleChangeGenresInfo}
                     onClick={handleFormClick}
                     onChangeErrorMessage={handleChangeMessage}
                     url={'https://api-xsolla-revenue-calculator.herokuapp.com/RevenueForecast/Simple'}
@@ -158,7 +166,7 @@ const MainPage = () => {
               </div>)
         }
           { generalState.isClicked &&
-            <ResultDashboard inputData={responseData} /> }
+            <ResultDashboard inputData={responseData} genresInfo={genresInfo} /> }
         {/* <button type="button" onClick={() => handleGetHtml()}>get html</button>
           { hasSent.has && <p>{hasSent.sent}</p> } */}
       </div>

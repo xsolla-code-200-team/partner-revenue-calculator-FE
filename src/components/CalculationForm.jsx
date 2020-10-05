@@ -44,7 +44,7 @@ const releaseDate = [
 ];
 
 const CalculationForm = ({
-  labels, onChangeResponseData, onClick, onChangeErrorMessage, url,  ...props
+  labels, onChangeResponseData, onChangeGenresInfo, onClick, onChangeErrorMessage, url,  ...props
 }) => {
   const [generalState, setGeneralState] = useState({
     isLoading: false,
@@ -214,6 +214,7 @@ const CalculationForm = ({
     });
     updateIsClicked(false);
     updateResponseData({});
+    updateGenresInfo(reqData.genres);
 
     fetch(url, {
       method: 'POST',
@@ -258,6 +259,10 @@ const CalculationForm = ({
 
   const updateResponseData = (data) => {
     onChangeResponseData(data);
+  };
+
+  const updateGenresInfo = (data) => {
+    onChangeGenresInfo(data);
   };
 
   const updateErrorMessage = (message) => {

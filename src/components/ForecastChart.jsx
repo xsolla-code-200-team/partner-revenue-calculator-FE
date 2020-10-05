@@ -10,6 +10,7 @@ const ForecastChart = ({
 }) => {
   const [forecastUnit, setForecastUnit] = useState((forecastType === 'Percentage') ? '%' : '$');
   const [isTendencyType, setChartType] = useState(true);
+  const [newTotalRevenue,setNewTotalRevenue] = useState(TotalRevenue);
   const [chartOptions, setChartOptions] = useState({
     title: {
       text: 'Revenue chart of your game',
@@ -53,7 +54,7 @@ const ForecastChart = ({
 
     series: [{
       type: 'line',
-      name: 'your forecast',
+      name: chosenForecast.monetization +'(your type)',
       data: chosenForecast.tendencyForecast.map((item) => Math.round(item)),
       color: 'rgb(0, 118, 255)',
     }, {
@@ -70,7 +71,7 @@ const ForecastChart = ({
       // }, {
       visible: false,
       type: 'line',
-      name: 'another forecast',
+      name: anotherForecast.monetization + '(another type)',
       data: anotherForecast.tendencyForecast.map((item) => Math.round(item)),
       color: 'rgb(255, 0, 91)',
     }],
@@ -95,11 +96,13 @@ const ForecastChart = ({
     if (sender === 'Tendency') {
       if (!isTendencyType) {
         setChartOptions({series: [{data: chosenForecast.tendencyForecast.map((item) => Math.round(item))},{data: anotherForecast.tendencyForecast.map((item) => Math.round(item))}]});
+        setNewTotalRevenue(TotalRevenue);
         setChartType(true);
       }
     } else if (sender === 'Cumulative') {
       if (isTendencyType) {
         setChartOptions({series: [{data: chosenForecast.cumulativeForecast.map((item) => Math.round(item))},{data: anotherForecast.cumulativeForecast.map((item) => Math.round(item))}]});
+        setNewTotalRevenue(Math.round(chosenForecast.cumulativeForecast[chosenForecast.cumulativeForecast.length-1]));
         setChartType(false);
       }
     }
@@ -116,18 +119,19 @@ const ForecastChart = ({
           <div className={styles.ForecastTitle}>
             <p className={fonts.title}>
               Here is a forecast for your product! Based on your data we have calculated the approximate amount of money you will receive in
+              {' '}
               {chosenForecast.tendencyForecast.length}
               {' '}
-              months
+              months.
             </p>
           </div>
           {'  '}
-          <div className={styles.totalRevenue}><p className={fonts.display}>{(forecastUnit === '%') ? `${TotalRevenue}${forecastUnit}` : `${forecastUnit} ${TotalRevenue / 1000} k`}</p></div>
+          <div className={styles.totalRevenue}><p className={fonts.display}>{(newTotalRevenue < 1000000) ? `${newTotalRevenue} ${forecastUnit}` : `${forecastUnit} ${Math.round(newTotalRevenue / 1000)} k`}</p></div>
           {/* </p> */}
         </div>
         <div className={styles.ForecastChart}>
           <div className={styles.ForecastTitle}>
-            <p className={fonts.title2}>This number is affected by seasonal trends and other factors.</p>
+            <p className={fonts.title2}>This number is affected by seasonal trends and other factors. The graph below shows your revenue depending on the type of monetization model you have. The “another forecast” curve shows revenue calculated for the type of monetization model you don’t use to demonstrate the difference between two.</p>
           </div>
           {'  '}
           <HighchartsReact

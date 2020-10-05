@@ -13,7 +13,7 @@ const InitialPage = () => {
                 </div>
                 <div className={styles.InitialPageCardTitle}>
                     <p className={`${fonts.title2} ${styles.InitialPageCard__text_main}`}>START EARNING MORE</p>
-                    <p className={`${fonts.title} ${styles.InitialPageCard__text_regular}`}>With our calculator you can consider different business plans for your product and choose the best for you and your partners</p>
+                    <p className={`${fonts.title} ${styles.InitialPageCard__text_regular}`}>Are you a game developer? Xsolla Partner Calculator is a new instrument that will help you forecast your revenue from partnership with Xsolla. All you have to do is fill in a short form.</p>
                 </div>
             </div>
             <div className={styles.InitialPageCard}>
@@ -21,15 +21,14 @@ const InitialPage = () => {
                 </div>
                 <div className={styles.InitialPageCardTitle}>
                     <p className={`${fonts.title2} ${styles.InitialPageCard__text_main}`}>SELL IN MORE COUNTRIES</p>
-                    <p className={`${fonts.title} ${styles.InitialPageCard__text_regular}`}>Use our calculator to compare different distribution options and choose the best one for you</p>
+                    <p className={`${fonts.title} ${styles.InitialPageCard__text_regular}`}>Has your game been released? Hit the pink button to answer some questions and get our expert advice.</p>
                 </div>
             </div>
             <div className={styles.InitialPageCard}>
-                <div className={styles.InitialPageCard__picture_3}>
-                </div>
+                <div className={styles.InitialPageCard__picture_3}></div>
                 <div className={styles.InitialPageCardTitle}>
                     <p className={`${fonts.title2} ${styles.InitialPageCard__text_main}`}>BOOST YOUR REVENUE</p>
-                    <p className={`${fonts.title} ${styles.InitialPageCard__text_regular}`}>Using our calculator you can boost your revenue and make your company successful</p>
+                    <p className={`${fonts.title} ${styles.InitialPageCard__text_regular}`}>Still working on your game? Hit the gray button to answer some questions and see an insightful action plan.</p>
                 </div>
             </div>
         </div>

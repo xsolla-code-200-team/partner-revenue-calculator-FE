@@ -5,6 +5,7 @@ $screen-xl: 1200px;
 $screen-sm-max: 767px;
 $screen-md-max: 991px;
 $screen-lg-max: 1199px;
+$screen-xl-max: 1440px;
 
 $xsolla-color-fst: #3C4858;
 $xsolla-color-snd: #EB345E;
@@ -19,6 +20,30 @@ $xsolla-electric: #0076ff;
 $custom-white: #fafbfc;
 $custom-darkblue: #00244d;
 $custom-blue: #357BDA;
+
+@media only screen and (max-width: $screen-sm-max) {
+  .body{
+    width:$screen-sm;
+  }
+}
+
+@media only screen and (max-width: $screen-md-max) {
+  .body{
+    width:$screen-md;
+  }
+}
+
+@media only screen and (max-width: $screen-lg-max) {
+  .body{
+    width:$screen-lg;
+  }
+}
+
+@media only screen and (min-width: $screen-xl-max) {
+  .body{
+    width:$screen-xl;
+  }
+}
 
 * {
   margin:0;
@@ -37,14 +62,14 @@ button {
 }
 
 .body{
-  width: auto;
-  max-width: 1440px;
+  //width: 100%;
+  //max-width: 90rem;
   float: none;
   display: block;
   margin-right: auto;
   margin-left: auto;
-  padding-left: 40px;
-  padding-right: 40px;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
 }
 
 /*Work with app header*/
@@ -53,8 +78,8 @@ button {
   display:flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 32px;
-  padding-right: 40px;
+  padding-bottom: 2rem;
+  padding-right: 2.5rem;
 }
 
 .appHeaderLogo {
@@ -65,13 +90,13 @@ button {
 
 .appHeaderLogo__img {
   img {
-    width: 100px;
-    height: 100px;
+    width: 6.25rem;
+    height: 6.25rem;
   }
 }
 
 .appHeaderLogo__text {
-  padding: 0 16px 0 16px;
+  padding: 0 1rem 0 1rem;
 }
 
 .appHeaderButtons {
@@ -85,8 +110,8 @@ button {
   display: flex;
   color: $xsolla-midnight;
   button {
-    width: 206px;
-    height: 52px;
+    width: 12.875rem;
+    height: 3.25rem;
     border: none;
     cursor: pointer;
     background-color: $xsolla-dove;
@@ -104,9 +129,9 @@ button {
   display: flex;
   color: $xsolla-electric;
   button {
-    width: 206px;
-    height: 52px;
-    border: 2px solid $xsolla-electric;
+    width: 12.875rem;
+    height: 3.25rem;
+    border: 0.125rem solid $xsolla-electric;
     cursor: pointer;
     background-color: $xsolla-dove;
     color: $xsolla-electric
@@ -126,11 +151,11 @@ button {
 
 /*Working with app footer*/
 .appFooter{
-  margin-top:10px;
+  margin-top:0.625rem;
   background-color: inherit;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  max-width:1330px;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  max-width:83.125rem;
   display:flex;
 }
 
@@ -139,85 +164,88 @@ button {
 .InitialPage {
   background-color: $custom-darkblue;
   width: auto;
-  max-width: 1200px;
+  max-width: 75rem;
   float: none;
   display: flex;
   justify-content: space-around;
-  align-items: center;
   margin-right: auto;
   margin-left: auto;
-  padding:3vw;
-  height:40vw;
+  padding:2.7rem;
+  height:auto;
 }
 
 .InitialPageCard__text_regular p {
   color:white;
-  margin-top: 5vw;
-  font-size:30px;
+  margin-top: 4.5rem;
+  font-size:1.875rem;
 }
 
 .InitialPageCard{
   display: flex;
   flex-direction: column;
   background-color: $xsolla-dove;
-  height:95%;
-  width:27vw;
-  margin: 20px;
+  width:calc(100%/3);
+  margin: 1.25rem;
+  min-height:100%;
 }
 
 .InitialPageCard__picture_1{
   background: url(../pics/pic1.jpg) no-repeat;
-  width:  100%;
-  height: 40%;
-  background-size:cover;
+  width: 100%;
+  max-width: 100%;
+  height:10rem;
+  background-size:100% 100%;
 }
 .InitialPageCard__picture_2{
   background: url(../pics/pic2.jpg) no-repeat;
-  width:  100%;
-  height: 40%;
-  background-size:cover;
+  width: 100%;
+  max-width: 100%;
+  height:10rem;
+  background-size:100% 100%;
 }
+
 .InitialPageCard__picture_3{
   background: url(../pics/pic3.png) no-repeat;
-  width:  100%;
-  height: 40%;
-  background-size:cover;
+  width: 100%;
+  max-width: 100%;
+  height:10rem;
+  background-size:100% 100%;
 }
 
 .InitialPageCardTitle{
-  padding:2vw;
+  padding:1.8rem;
 }
 
 .InitialPageCard__text_main{
-  // color:#0073f7;
   color: $xsolla-electric;
 }
 
 .mainPage {
-  padding:3vw;
+  padding:2.7rem;
   display: flex;
   flex-direction: column;
+  width:auto;
 }
 
 .mainPageButtons {
   //overflow: hidden;
   display: flex;
   // margin-bottom:30px;
-  margin-bottom: 3vw;
-  height:10vw;
+  margin-bottom: 2.7rem;
+  height:9rem;
 }
 
 .mainPageButtons__button_simple_chosen button{
-  border:7px solid $xsolla-magenta;
+  border:0.4375rem solid $xsolla-magenta;
 }
 
 .mainPageButtons__button_advanced_chosen button{
-  border:7px solid $xsolla-slate;
+  border:0.4375rem solid $xsolla-slate;
 }
 
 .mainPageButtons__button_simple button,
 .mainPageButtons__button_advanced button{
-  border:7px solid $xsolla-dove;
+  border:0.4375rem solid $xsolla-dove;
 }
 
 .mainPageButtons__button_simple :hover{
@@ -231,8 +259,8 @@ button {
 .mainPageButtons__button_simple,.mainPageButtons__button_simple_chosen,{
   // background-color: $xsolla-color-fst;
   background-color: $xsolla-slate;
-  border:7px solid $xsolla-dove;
-  font-color:white;
+  border:0.4375rem solid $xsolla-dove;
+  font-color: white;
   margin-left: auto;
   margin-right: auto;
   width:100%;
@@ -256,7 +284,7 @@ button {
 .mainPageButtons__button_advanced,.mainPageButtons__button_advanced_chosen{
   // background-color: $xsolla-color-snd;
   background-color: $xsolla-magenta;
-  border:7px solid $xsolla-dove;
+  border:0.4375rem solid $xsolla-dove;
   font-color: white;
   margin-left: auto;
   margin-right: auto;
@@ -298,10 +326,10 @@ button {
   display: flex;
   margin-left: auto;
   margin-right: auto;
-  padding: 3vw;
+  padding: 2.7rem;
   height: auto;
   background-color: $custom-darkblue;
-  margin-bottom: 3vw;
+  margin-bottom: 2.7rem;
 }
 .mainPageFormFields {
   // max-width: 900px;
@@ -309,17 +337,17 @@ button {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 5.5vw;
-  margin: 0 6vw 0 6vw;
+  padding: 4.95rem;
+  margin: 0 5.4rem 0 5.4rem;
 }
 
 .mainPageFormFieldsLabel {
   position: -webkit-sticky;
   position: sticky;
   width: 100%;
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
 
-  font-size: 14px;
+  font-size: 0.875rem;
   font-family: SpaceMono,Arial,Helvetica Neue,Helvetica,sans-serif;
   text-transform: uppercase;
   position: relative;
@@ -338,12 +366,12 @@ button {
   z-index: 1;
   left: 0;
   margin-right: 0;
-  padding-right: 8px;
+  padding-right: 0.5rem;
   font-family: Graphiklcg,sans-serif;
   // font-family: Roboto;
   // font-weight: 600;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 1.25rem;
   text-transform: uppercase;
 }
 
@@ -355,7 +383,7 @@ button {
   z-index: 1;
   left: 0;
   margin-right: 0;
-  padding-right: 8px;
+  padding-right: 0.5rem;
   font-family: Graphiklcg,sans-serif;
   font-weight: bold;
 }
@@ -365,20 +393,23 @@ button {
   -webkit-box-flex: 1;
   // -ms-flex: 1 1;
   flex: 1 1;
-  height: 1px;
-  margin-top: 9px;
+  height: 0.0625rem;
+  margin-top: 0.5625rem;
   background-color: currentColor;
 }
 
 .mainPageFormFields__checkbox {
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
 }
 //
 
 .resultDashboard{
-  background-color: $custom-darkblue;
-  //display: none;
   display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2.7rem;
+  height: auto;
+  background-color: $custom-darkblue;
 }
 
 .resultDashboardButtons {
@@ -386,7 +417,7 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 3vw;
+  margin-bottom: 2.7rem;
 }
 
 .resultDashboardButtons_email {
@@ -401,25 +432,24 @@ button {
   align-items: center;
   flex-direction: row;
   button {
-    margin: 0 3vw 0 3vw;
+    margin: 0 2.7rem 0 2.7rem;
   }
 }
 
 .appMainPartResultForm{
-  width: auto;
-  max-width: 900px;
-  float: none;
-  display: block;
-  margin-right: auto;
-  margin-left: auto;
-  padding:3vw;
-  height:auto;
-}
-.appMainPartResultFormView{
   background-color: $custom-white;
   display: flex;
-  align-items: center;
   flex-direction: column;
+  align-items: flex-start;
+}
+
+.appMainPartResultFormView{
+  //background-color: $custom-white;
+  //display: flex;
+  //align-items: center;
+  //flex-direction: column;
+  //padding: 2.475rem;
+  //margin: 0 2.7rem 0 2.7rem;
 }
 .ResultForecastTitle{
   display:flex;
@@ -431,19 +461,19 @@ button {
 .appMainPartResultFormViewForm{
   margin-right: auto;
   margin-left: auto;
-  padding:3vw;
+  padding:2.7rem;
   height:auto;
 }
 
 .ResultsTotal,.ResultsChart{
   background-color: $custom-darkblue;
-  border-radius: 5px;
+  border-radius: 0.3125rem;
   width: auto;
-  max-width: 700px;
+  max-width: 43.75rem;
   float: none;
   display: block;
-  margin: 5px auto 5px auto;
-  padding:3vw;
+  margin: 0.3125rem auto 0.3125rem auto;
+  padding:2.7rem;
   height:auto;
   color:white;
 }
@@ -464,7 +494,7 @@ button {
 
 .totalRevenue{
   color: $xsolla-dove;
-  font-size:54vw;
+  font-size:4.5rem;
   display:flex;
   align-items: center;
   justify-content: center;
@@ -477,37 +507,35 @@ button {
 // RESULT
 .ResultForecast{
   background-color: $custom-white;
+  width:100%;
 }
 
-.ForecastTotal,.ForecastChart{
+.ForecastTotal,.ForecastChart,.GenresInfo{
   background-color: $xsolla-magenta;
-  border-radius: 5px;
-  width: auto;
-  max-width: 700px;
+  border-radius: 0.3125rem;
   float: none;
-  margin: 5px auto 5px auto;
-  padding:3vw;
+  margin: 0.3125rem auto 0.3125rem auto;
+  padding:2.7rem;
   height:auto;
-  color:white;
 }
 
 .chooseChartType, .chosenChartType{
-  margin: 3vw 3vw 0 3vw;
-  border-radius: 5px;
+  margin: 2.7rem 2.7rem 0 2.7rem;
+  border-radius: 0.3125rem;
   background-color:$xsolla-iron;
   color:$xsolla-slate;
   cursor: pointer;
   p{
-    margin:1vw;
+    margin:0.9rem;
   }
 }
 
 .chooseChartType{
-  border: 7px solid $xsolla-magenta;
+  border: 0.4375rem solid $xsolla-magenta;
 }
 
 .chosenChartType{
-  border: 7px solid $xsolla-electric;
+  border: 0.4375rem solid $xsolla-electric;
 }
 
 .ForecastButton{
@@ -521,10 +549,45 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  border : 1px solid $xsolla-dove;
-  padding:1vw;
-  margin-bottom: 5px;
+  border : 0.0625rem solid $xsolla-dove;
+  color:$xsolla-dove;
+  padding:0.9rem;
+  margin-bottom: 0.3125rem;
   p{
     text-align:center;
+  }
+}
+
+.GenresInfo__item{
+  border-radius: 0.3125rem;
+  width: auto;
+  max-width: 43.75rem;
+  float: none;
+  margin: 0.3125rem auto 0.3125rem auto;
+  height:auto;
+  color:$xsolla-slate;
+  display: flex;
+}
+
+.GenresInfo__item__title{
+  width:auto;
+  background-color: $xsolla-slate;
+  color:white;
+  writing-mode: tb-rl;
+  transform:rotate(180deg);
+  border-radius: 0 0.3125rem 0.3125rem 0;
+  text-align: center;
+  padding: 0.9rem 0 0.9rem 0;
+}
+
+.GenresInfo__item__text{
+  display:flex;
+  width:100%;
+  background-color: $xsolla-dove;
+  border-radius: 0 0.3125rem 0.3125rem 0;
+  align-items: center;
+  justify-content: center;
+  p{
+    text-align: center;
   }
 }
