@@ -41,11 +41,14 @@ const InputField = ({
 
   return (
     <>
+    {
+      labelText &&
       <div className={styles.mainPageFormFieldsLabel}>
         <div className={styles.mainPageFormFieldsLabel__text}>{labelText}</div>
         <div className={styles.mainPageFormFieldsLabel__line} />
       </div>
-      <div className={style.input}>
+    }
+      <div className={style.input} style={{ ...props.customStyle }}>
         <Input
           name={name}
           size="sm"

@@ -20,12 +20,14 @@ const AdvancedCalculationForm = (props) => {
         <CalculationForm
           labels={props.labels}
           onChangeResponseData={props.onChangeResponseData}
-          onChangeGenresInfo={props.onChangeGenresInfo}
           onClick={props.onClick}
           onChangeErrorMessage={props.onChangeErrorMessage}
           additionalState={reqData}
           isAdvanced={true}
           url={props.url}
+          isLoading={props.isLoading}
+          onChangeIsLoading={props.onChangeIsLoading}
+          onChangeUserData={props.onChangeUserData}
         />
     );
 }

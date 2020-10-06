@@ -44,7 +44,7 @@ const releaseDate = [
 ];
 
 const CalculationForm = ({
-  labels, onChangeResponseData, onChangeGenresInfo, onClick, onChangeErrorMessage, url,  ...props
+  labels, onChangeResponseData, onClick, onChangeErrorMessage, url, isLoading, onChangeIsLoading, onChangeUserData, ...props
 }) => {
   const [generalState, setGeneralState] = useState({
     isLoading: false,
@@ -209,12 +209,12 @@ const CalculationForm = ({
 
   const handleClick = () => {
     setGeneralState({
-      isLoading: true,
       hasError: false,
     });
     updateIsClicked(false);
     updateResponseData({});
-    updateGenresInfo(reqData.genres);
+    // updateGenresInfo(reqData.genres);
+    onChangeIsLoading(true)
 
     fetch(url, {
       method: 'POST',
@@ -232,23 +232,28 @@ const CalculationForm = ({
         throw error;
       })
       .then((res) => {
-        setGeneralState({ ...generalState, isLoading: false });
+        // setGeneralState({ ...generalState, isLoading: false });
         return res;
       })
       .then((res) => res.json())
       .then((data) => {
         // console.log(JSON.stringify({ ...reqData }));
+        onChangeUserData({ email: reqData.email, genres: reqData.genres });
         updateResponseData(data);
         console.log('reqData:');
         console.log(valuesToLowerCase(reqData));
         console.log('resData (POST):');
         console.log(data);
+        if (data.isReady) {
+          onChangeIsLoading(false);  
+        }
         updateIsClicked(true);
       })
       .catch((e) => {
         console.log(e.message);
         updateErrorMessage(e.message);
-        setGeneralState({ ...generalState, isLoading: false, hasError: true });
+        setGeneralState({ ...generalState, hasError: true });
+        onChangeIsLoading(false);
       });
   };
 
@@ -304,7 +309,6 @@ const CalculationForm = ({
               validation={fieldsValidation}
             />
           </>
-          
         }
         <CheckboxPlate name="genres" onChangeReqData={handleChangeFields} checkboxes={genres} labelText={labels.genres} multipleChoice validation={fieldsValidation} />
         <CheckboxPlate name="monetization" onChangeReqData={handleChangeFields} checkboxes={monetization} labelText={labels.monetization} multipleChoice={false} validation={fieldsValidation} />
@@ -316,7 +320,7 @@ const CalculationForm = ({
               name="initialRevenue"
               value={reqData.initialRevenue}
               onChangeReqData={handleChangeFields}
-              labelText={labels.initialRevenue}
+              labelText={ reqData.isReleased ? labels.initialRevenue_isReleased : labels.initialRevenue }
               type="number"
               placeholder="322"
               validation={fieldsValidation}
@@ -346,7 +350,7 @@ const CalculationForm = ({
           appearance="secondary"
           onClick={handleClick}
           disabled={!isValidForm}
-          fetching={generalState.isLoading}
+          fetching={isLoading}
         >
           {labels.sendButton}
         </Button>
