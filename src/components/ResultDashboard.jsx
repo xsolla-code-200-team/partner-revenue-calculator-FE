@@ -19,6 +19,17 @@ const ResultDashboard = ({ inputData, onChangeIsLoading, userData, ...props }) =
     Math.round(inputData.chosenForecast.tendencyForecast.reduce((acc, value) => acc + value)) :
     0
   ));
+  const [halfRevenue, setHalfRevenue] = useState(
+    inputData.isReady ?
+    Math.round(
+      inputData.chosenForecast.tendencyForecast[0] +
+      inputData.chosenForecast.tendencyForecast[1] +
+      inputData.chosenForecast.tendencyForecast[2] +
+      inputData.chosenForecast.tendencyForecast[3] +
+      inputData.chosenForecast.tendencyForecast[4] +
+      inputData.chosenForecast.tendencyForecast[5]
+    ) : 0
+  )
   const [sumUp, setSumUp] = useState((
     inputData.isReady ? (
       inputData.chosenForecast.tendencyForecast.reduce((acc, value) => acc + value) >
@@ -26,6 +37,8 @@ const ResultDashboard = ({ inputData, onChangeIsLoading, userData, ...props }) =
       'good' : 'bad'
     ) : ''
   ));
+  const [topMarket, setTopMarket] = useState('');
+  const [isMarketReady, setIsMarketReady] = useState(false);
 
   const firstRender = useRef(true);
 
@@ -70,41 +83,22 @@ const ResultDashboard = ({ inputData, onChangeIsLoading, userData, ...props }) =
         return { genre: item.genre, region: sortedRegions[0].region, regionsInfo: sortedRegions };
       });
       console.log(outputData);
+      const sortedGenres = outputData.sort(function(a, b) {
+        if (a.regionsInfo[0].revenue > b.regionsInfo[0].revenue) {
+          return -1;
+        }
+        if (a.regionsInfo[0].revenue < b.regionsInfo[0].revenue) {
+          return 1;
+        }
+        return 0;
+      })
+      console.log('REGION:');
+      console.log(sortedGenres[0].regionsInfo[0].region);
+      setTopMarket(`Region ${sortedGenres[0].regionsInfo[0].region}`);
+      setIsMarketReady(true);
       setGenresData(outputData);
     });
   }
-
-  // const getStatistics = () => {
-  //   let genres_Info = [];
-  //   for(let i = 0; i < userData.genres.length; i += 1) {
-  //       fetch(`https://api-xsolla-revenue-calculator.herokuapp.com/StaticAnalytics/${userData.genres[i]}`, {
-  //           method: 'GET',
-  //           headers: {
-  //               'Content-Type': 'application/json',
-  //           },
-  //       })
-  //           .then((res) => {
-  //               if (res.status >= 200 && res.status < 300) {
-  //                   return res;
-  //               }
-  //               const error = new Error(res.statusText);
-  //               error.response = res;
-  //               throw error;
-  //           })
-  //           .then((response) => response.json())
-  //           .then((data) => {
-  //               console.log('getGenresInfo (GET id):');
-  //               console.log(data);
-  //               console.log(data);
-  //               genres_Info.push(data);
-  //               if (genres_Info.length === userData.genres.length) { setGenres(genres_Info); setGenresReady(true); genres.filter((a,b) => a.regionsInfo.revenue/a.regionsInfo.price - b.regionsInfo.revenue/b.regionsInfo.price).splice(2,10);}
-  //           })
-  //           .catch((e) => {
-  //               console.log(e.message);
-  //               setError(e.message);
-  //           });
-  //   }
-  // }
 
   const getResponse = () => {
     setTimeout(() => {
@@ -129,6 +123,14 @@ const ResultDashboard = ({ inputData, onChangeIsLoading, userData, ...props }) =
             console.log('resData (GET id):');
             console.log(data);
             setTotalRevenue(Math.round(data.chosenForecast.tendencyForecast.reduce((acc, value) => acc + value)));
+            setHalfRevenue(Math.round(
+              data.chosenForecast.tendencyForecast[0] +
+              data.chosenForecast.tendencyForecast[1] +
+              data.chosenForecast.tendencyForecast[2] +
+              data.chosenForecast.tendencyForecast[3] +
+              data.chosenForecast.tendencyForecast[4] +
+              data.chosenForecast.tendencyForecast[5]
+            ))
             setSumUp(data.chosenForecast.tendencyForecast.reduce((acc, value) => acc + value) >
               data.otherForecasts[0].tendencyForecast.reduce((acc, value) => acc + value) ?
             'good' : 'bad');
@@ -228,10 +230,22 @@ const ResultDashboard = ({ inputData, onChangeIsLoading, userData, ...props }) =
                   forecastType={resultData.forecastType}
                 />
               <GenresText data={genresData} />
-              <EmailSendingForm
-                cachedEmail={userData.email}
-                forecastId={resultData.id}
-              />
+              {
+                isMarketReady &&
+                <EmailSendingForm
+                  cachedEmail={userData.email}
+                  forecastId={resultData.id}
+                  revenueString={`With Xsolla you can earn ${resultData.forecastType === 'Percentage' ?
+                    `${totalRevenue}%` :
+                    (totalRevenue > 1000000 ?
+                      `$${Math.round(parseFloat(totalRevenue / 1000000) * 100) / 100} kk` :
+                      `$${totalRevenue}`)} in 12 months.`}
+                  monetizationString={ sumUp === 'good' ?
+                  `The ${resultData.chosenForecast.monetization} monetization model perfectly suits the concepts of your game. Sticking to it might gradually increase your revenue by ${halfRevenue} within 6 months.` :
+                  `The ${resultData.chosenForecast.monetization} monetization model can't really meet the needs of your game. We suggest you try another approach. Monetization model "${resultData.otherForecasts[0].monetization}" is a better option which might make your revenue grow by ${halfRevenue} within 6 months` }
+                  topMarket={topMarket}
+                />
+                }
               </div>
             </div>
           </div>
@@ -240,6 +254,7 @@ const ResultDashboard = ({ inputData, onChangeIsLoading, userData, ...props }) =
             forecastData={resultData}
             toSumUp={sumUp}
             revenue={totalRevenue}
+            halfRevenue={halfRevenue}
           />
         </div>
       }

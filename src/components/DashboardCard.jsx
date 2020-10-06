@@ -5,7 +5,7 @@ import styles from '../scss/styles.scss';
 import fonts from '../scss/fonts.scss';
 import dashboard from '../pics/dashboard.jpg';
 
-const DashboardCard = ({ genres, forecastData, toSumUp, revenue, ...props }) => {
+const DashboardCard = ({ genres, forecastData, toSumUp, revenue, halfRevenue, ...props }) => {
   const firstRender = useRef(true);
 
   useEffect(() => {
@@ -32,10 +32,10 @@ const DashboardCard = ({ genres, forecastData, toSumUp, revenue, ...props }) => 
                   &bull; {
                     toSumUp === 'good' ? 
                     `The "${forecastData.chosenForecast.monetization}" monetization model perfectly suits the concepts of your game. Sticking 
-                    to it might gradually increase your revenue by ????? within 6 months.` :
+                    to it might gradually increase your revenue by ${halfRevenue} within 6 months.` :
                     `The "${forecastData.chosenForecast.monetization}" monetization model can't really meet the needs of your game. We suggest 
                     you try another approach. Monetization model "${forecastData.otherForecasts[0].monetization}" is a better option which 
-                    might make your revenue grow by ????? within 6 months`
+                    might make your revenue grow by ${halfRevenue} within 6 months`
                   }
                 </p>
                 <p className={fonts.title}>&bull; You can expand your game coverage by releasing in these Top-3 markets:</p>

@@ -3,12 +3,21 @@ import { Button } from 'xsolla-uikit';
 
 import InputField from './inputField/InputField';
 import styles from '../scss/styles.scss';
+import fonts from '../scss/fonts.scss';
 
 
-const EmailSendingForm = ({ cachedEmail, forecastId, ...props }) => {
+const EmailSendingForm = ({ cachedEmail, forecastId, revenueString, monetizationString, topMarket, ...props }) => {
     const [email, setEmail] = useState(cachedEmail);
     const [isLoading, setIsLoading] = useState(false);
     const [isValidForm, setIsValidForm] = useState(false);
+    const [textContent, setTextContent] = useState({
+        revenueForecastId: forecastId,
+        email: cachedEmail,
+        revenue: revenueString,
+        monetization: monetizationString,
+        topMarket: topMarket
+    });
+    const [isOk, setIsOk] = useState(false);
 
     const firstRender = useRef(true);
 
@@ -55,10 +64,12 @@ const EmailSendingForm = ({ cachedEmail, forecastId, ...props }) => {
 
     const handleClick = () => {
         const url = 'https://api-xsolla-revenue-calculator.herokuapp.com/RevenueForecast/Export';
+        console.log(JSON.stringify({ ...textContent }));
         setIsLoading(true);
+        setIsOk(false);
         fetch(url, {
             method: 'POST',
-            body: JSON.stringify({ revenueForecastId: forecastId, email: email }),
+            body: JSON.stringify({ ...textContent }),
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -76,6 +87,7 @@ const EmailSendingForm = ({ cachedEmail, forecastId, ...props }) => {
             console.log('response data (/Export):');
             console.log(data);
             setIsLoading(false);
+            setIsOk(true);
         })
         .catch((e) => {
             console.log(e.message);
@@ -104,6 +116,9 @@ const EmailSendingForm = ({ cachedEmail, forecastId, ...props }) => {
             >
             Send to Email!
             </Button>
+            {
+                isOk && <p className={fonts.title}>OK</p>
+            }
         </div>
     );
 }
