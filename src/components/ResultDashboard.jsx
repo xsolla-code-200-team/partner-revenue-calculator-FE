@@ -67,8 +67,8 @@ const ResultDashboard = ({ inputData, onChangeIsLoading, userData, ...props }) =
     )
     .then(allResponses => Promise.all(allResponses.map(res => res.json())))
     .then(allResponses => {
-      console.log('ALL RESPONSES:');
-      console.log(allResponses);
+      // console.log('ALL RESPONSES:');
+      // console.log(allResponses);
       const outputData = allResponses.map(function(item) {
         const sortedRegions = item.regionsInfo.sort(function(a, b) {
           if (a.revenue > b.revenue) {
@@ -79,10 +79,10 @@ const ResultDashboard = ({ inputData, onChangeIsLoading, userData, ...props }) =
           }
           return 0;
         });
-        console.log({ genre: item.genre, region: sortedRegions[0].region, regionsInfo: sortedRegions });
+        // console.log({ genre: item.genre, region: sortedRegions[0].region, regionsInfo: sortedRegions });
         return { genre: item.genre, region: sortedRegions[0].region, regionsInfo: sortedRegions };
       });
-      console.log(outputData);
+      // console.log(outputData);
       const sortedGenres = outputData.sort(function(a, b) {
         if (a.regionsInfo[0].revenue > b.regionsInfo[0].revenue) {
           return -1;
@@ -92,8 +92,8 @@ const ResultDashboard = ({ inputData, onChangeIsLoading, userData, ...props }) =
         }
         return 0;
       })
-      console.log('REGION:');
-      console.log(sortedGenres[0].regionsInfo[0].region);
+      // console.log('REGION:');
+      // console.log(sortedGenres[0].regionsInfo[0].region);
       setTopMarket(`Region ${sortedGenres[0].regionsInfo[0].region}`);
       setIsMarketReady(true);
       setGenresData(outputData);
@@ -229,7 +229,10 @@ const ResultDashboard = ({ inputData, onChangeIsLoading, userData, ...props }) =
                   anotherForecast={resultData.otherForecasts[0]}
                   forecastType={resultData.forecastType}
                 />
-              <GenresText data={genresData} />
+                {
+                  isMarketReady &&
+                  <GenresText data={genresData} />
+                }
               {
                 isMarketReady &&
                 <EmailSendingForm

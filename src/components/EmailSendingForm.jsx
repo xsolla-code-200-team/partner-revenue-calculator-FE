@@ -12,7 +12,7 @@ const EmailSendingForm = ({ cachedEmail, forecastId, revenueString, monetization
     const [isValidForm, setIsValidForm] = useState(false);
     const [textContent, setTextContent] = useState({
         revenueForecastId: forecastId,
-        email: cachedEmail,
+        email: email,
         revenue: revenueString,
         monetization: monetizationString,
         topMarket: topMarket
@@ -60,11 +60,13 @@ const EmailSendingForm = ({ cachedEmail, forecastId, revenueString, monetization
 
     const handleChangeEmail = (name, value) => {
         setEmail(value);
+        setTextContent({ ...textContent, email: value });
     }
 
     const handleClick = () => {
         const url = 'https://api-xsolla-revenue-calculator.herokuapp.com/RevenueForecast/Export';
-        console.log(JSON.stringify({ ...textContent }));
+        // console.log(JSON.stringify({ ...textContent }));
+        // console.log(textContent.email);
         setIsLoading(true);
         setIsOk(false);
         fetch(url, {
@@ -82,10 +84,11 @@ const EmailSendingForm = ({ cachedEmail, forecastId, revenueString, monetization
             error.response = res;
             throw error;
         })
-        .then(res => res.json())
+        // .then(res => res.json())
         .then(data => {
             console.log('response data (/Export):');
-            console.log(data);
+            // console.log(data);
+            console.log('OK');
             setIsLoading(false);
             setIsOk(true);
         })
@@ -117,7 +120,7 @@ const EmailSendingForm = ({ cachedEmail, forecastId, revenueString, monetization
             Send to Email!
             </Button>
             {
-                isOk && <p className={fonts.title}>OK</p>
+                isOk && <p style={{marginLeft: '10px'}} className={fonts.title}>OK</p>
             }
         </div>
     );
