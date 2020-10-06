@@ -423,7 +423,7 @@ button {
   flex-direction: column;
   background-color: $xsolla-dove;
   margin: 5% auto 5% auto ;
-  max-width: 808px;
+  max-width: 50.5rem;
 }
 
 .dashboardCard__image {
@@ -440,7 +440,7 @@ button {
 }
 
 .dashboardCard__text {
-  padding: 14px 28px 42px 28px;
+  padding: 0.875rem 1.75rem 2.625rem 1.75rem;
 }
 
 .dashboardCardButtons {
@@ -448,14 +448,14 @@ button {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  padding: 0 0 42px 0;
+  padding: 0 0 2.625rem 0;
 }
 
 .emailSendingForm {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 22px;
+  margin-top: 1.375rem;
 }
 
 // .resultDashboardButtons_other {
@@ -594,7 +594,6 @@ button {
 .GenresInfo__item{
   border-radius: 0.3125rem;
   width: auto;
-  max-width: 43.75rem;
   float: none;
   margin: 0.3125rem auto 0.3125rem auto;
   height:auto;
@@ -620,7 +619,33 @@ button {
   border-radius: 0 0.3125rem 0.3125rem 0;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   p{
     text-align: center;
+    display: flex;
+    flex-direction: row;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
   }
+}
+
+
+.PopupText{
+  text-align: left;
+}
+
+.PopupTextLine{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  p{
+    margin-left: 0.25rem;
+  }
+}
+.PopupCursor{
+  cursor: pointer;
+  color:$xsolla-electric;
+}
+.PopupInfo{
+  color:$xsolla-electric;
 }

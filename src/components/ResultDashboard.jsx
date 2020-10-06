@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, animateScroll as scroll, Element, scroller } from 'react-scroll';
-import { Popup } from 'semantic-ui-react';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 import styles from '../scss/styles.scss';
 import ForecastChart from './ForecastChart';
@@ -156,9 +157,53 @@ const ResultDashboard = ({ inputData, onChangeIsLoading, userData, ...props }) =
                               <p className={fonts.display}>{genre.genre}</p>
                           </div>
                           <div className={styles.GenresInfo__item__text}>
-                              {/*<p className={fonts.title2}>Games of this genre are more popular in regions <Popup content={`Average game price ${Math.round(genre.regionsInfo[0].price)} ` + `Average sales ${Math.round(genre.regionsInfo[0].revenue)}`} trigger={<p>{genre.regionsInfo[0].region}</p>} position='top center'/>,*/}
-                              {/*    <Popup content={`Average game price ${Math.round(genre.regionsInfo[1].price)} ` + `Average sales ${Math.round(genre.regionsInfo[1].revenue)}`} trigger={<p>{genre.regionsInfo[1].region}</p>} position='top center'/>*/}
-                              {/*    and <Popup content={`Average game price ${Math.round(genre.regionsInfo[2].price)} ` + `Average sales ${Math.round(genre.regionsInfo[2].revenue)}`} trigger={<p>{genre.regionsInfo[2].region}</p>} position='top center'/>. Explore these opportunities with the help of Xsolla. </p>*/}
+                            <p className={fonts.display}>
+                              Games of this genre are more popular in regions
+                              {' '}
+                              <Popup on="hover" trigger={<p className={styles.PopupCursor}>{genre.regionsInfo[0].region}</p>} position="top center">
+                                <div className={styles.PopupText}>
+                                  <div className={styles.PopupTextLine}>
+                                    <p className={fonts.label}>Average game price: </p>
+                                    <p className={`${fonts.title2} ${styles.PopupInfo}`}>${Math.round(genre.regionsInfo[0].price)}</p>
+                                  </div>
+                                  <div className={styles.PopupTextLine}>
+                                    <p className={fonts.label}>Average sales: </p>
+                                    <p className={`${fonts.title2} ${styles.PopupInfo}`}>{Math.round(genre.regionsInfo[0].revenue)}</p>
+                                  </div>
+                                </div>
+                              </Popup>
+                              ,
+                              {' '}
+                              <Popup on="hover" trigger={<p className={styles.PopupCursor}>{genre.regionsInfo[1].region}</p>} position="top center">
+                                <div className={styles.PopupText}>
+                                  <div className={styles.PopupTextLine}>
+                                    <p className={fonts.label}>Average game price: </p>
+                                    <p className={`${fonts.title2} ${styles.PopupInfo}`}>${Math.round(genre.regionsInfo[1].price)}</p>
+                                  </div>
+                                  <div className={styles.PopupTextLine}>
+                                    <p className={fonts.label}>Average sales: </p>
+                                    <p className={`${fonts.title2} ${styles.PopupInfo}`}>{Math.round(genre.regionsInfo[1].revenue)}</p>
+                                  </div>
+                                </div>
+                              </Popup>
+                              {' '}
+                              and
+                              {' '}
+                              <Popup on="hover" trigger={<p className={styles.PopupCursor}>{genre.regionsInfo[2].region}</p>} position="top center">
+                                <div className={styles.PopupText}>
+                                  <div className={styles.PopupTextLine}>
+                                    <p className={fonts.label}>Average game price: </p>
+                                    <p className={`${fonts.title2} ${styles.PopupInfo}`}>${Math.round(genre.regionsInfo[2].price)}</p>
+                                  </div>
+                                  <div className={styles.PopupTextLine}>
+                                    <p className={fonts.label}>Average sales: </p>
+                                    <p className={`${fonts.title2} ${styles.PopupInfo}`}>{Math.round(genre.regionsInfo[2].revenue)}</p>
+                                  </div>
+                                </div>
+                              </Popup>
+                              .</p>
+                              <p className={fonts.title2}>Explore these opportunities with the help of Xsolla.</p>
+
                           </div>
                       </div>
                   )

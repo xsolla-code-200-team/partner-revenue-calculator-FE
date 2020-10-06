@@ -27,7 +27,7 @@ const DashboardCard = ({ genres, forecastData, toSumUp, revenue, ...props }) => 
                     `${revenue}%` :
                     (revenue > 1000000 ?
                       `$${Math.round(parseFloat(revenue / 1000000) * 100) / 100} kk` :
-                      `$${revenue}`)} in 12months.</p>
+                      `$${revenue}`)} in 12 months.</p>
                 <p className={fonts.title}>
                   &bull; {
                     toSumUp === 'good' ? 
